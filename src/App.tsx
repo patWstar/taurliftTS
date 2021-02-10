@@ -1,22 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
+import styled from "styled-components";
 
+import Navbar from "components/Navbar";
+//Basic CSS, Resets etc. are in index.css
+const Wrapper = styled.div`
+  .App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+`;
 
-import './App.css';
-import { Counter } from './components/Counter';
-
-function App() {
+const App = () => {
 
   return (
-    <div className="App">
-      <Counter>
-        {({ count, setCount }) => (<div>{count}
-          <button onClick={() => setCount(count + 1)}>+</button>
-          <button onClick={() => setCount(count - 1)}>-</button>
-        </div>)}
-      </Counter>
-    </div>
+    <Wrapper>
+      <Navbar />
+    </Wrapper>
   );
 }
 
-export default App;
+export default App
