@@ -7,6 +7,13 @@
   font-family: inherit;
   text-decoration: none;
 }
+button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  color: inherit;
+  cursor: pointer;
+}
 html {
   background: linear-gradient(to right, #005aa7, #fffde4);
   background-repeat: no-repeat;
@@ -30,8 +37,8 @@ html {
 body {
   box-sizing: border-box;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
-  "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-  "Helvetica Neue", sans-serif;
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
