@@ -13,8 +13,26 @@ const Wrapper = styled.div`
   flex-direction: column;
   height: 100vh;
   width: 100vw;
-  overflow: hidden;
+  overflow: auto;
   background: linear-gradient(to right, #005aa7, #fffde4);
+
+  scroll-behavior: smooth;
+  &::-webkit-scrollbar {
+    width: 1rem;
+    scroll-behavior: smooth;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #555;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #f1f1f1;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #f1f1f1;
+  }
 `;
 
 const App = (): JSX.Element => {

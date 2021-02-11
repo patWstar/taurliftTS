@@ -1,11 +1,15 @@
+//Fundamentals
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import styled from "styled-components";
+//Components
 import Spinner from "components/shared/components/Spinner";
 import WorkoutDetailsModal from "components/WorkoutDetailsModal";
-import styled from "styled-components";
+//Redux
 import { selectUserID } from "redux/Slices/UserSlice";
 import { useSelector } from "react-redux";
-import { finished } from "stream";
+//Util
+import refreshLocalToken from "util/refreshLocalToken";
 //~~~~~~~~~~~~~~~~~~~Interfaces & Types
 type RowProps = {
   isOdd: boolean;
@@ -40,7 +44,7 @@ const Wrapper = styled.div`
   align-items: center;
   flex-direction: column;
   color: ${({ theme }) => theme.textColor};
-  overflow: auto;
+
   gap: 3rem;
 `;
 
@@ -96,6 +100,7 @@ const OptionButton = styled.button<ButtonProps>`
     filter: brightness(1.2);
   }
 `;
+//~~~~~~~~~~~~~~~~~~~Component
 const WorkoutDiary = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState<Boolean>(true);
   const [finishedWorkouts, setFinishedWorkouts] = useState<FinishedWorkout[]>(
@@ -118,6 +123,7 @@ const WorkoutDiary = (): JSX.Element => {
       .then(({ data }) => {
         setFinishedWorkouts(data);
         setIsLoading(false);
+        refreshLocalToken();
       })
       .catch((err) => {
         setIsLoading(false);
@@ -140,6 +146,8 @@ const WorkoutDiary = (): JSX.Element => {
     );
     setDetailModalVisible(true);
   };
+
+  //~~~~~~~~~~~~~~~~~~~Render
   return (
     <Wrapper>
       <Header>

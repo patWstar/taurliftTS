@@ -96,6 +96,7 @@ const LinkElement = styled(Link)`
     letter-spacing: 2px;
   }
 `;
+//~~~~~~~~~~~~~~~~~~~Component
 const Login = (): JSX.Element => {
   //state
   const [errors, setErrors] = useState<string[]>([]);
@@ -154,7 +155,7 @@ const Login = (): JSX.Element => {
         });
     }
   };
-  //~~~~~~~~~~~~~~~~~~~Component
+  //~~~~~~~~~~~~~~~~~~~Render
   return (
     <Wrapper>
       {authenticated ? (

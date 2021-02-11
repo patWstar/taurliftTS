@@ -1,11 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { Router } from "react-router-dom";
 import cardImageDiary from "assets/cardImageDiary.jpg";
 import cardImageCustomWorkout from "assets/cardImageCustomWorkout.jpg";
 import cardImageWorkoutAssistant from "assets/cardImageWorkoutAssistant.jpg";
 import WorkoutCard from "./shared/components/WorkoutCard";
-//~~~~~~~~~~~~~~~~~~~Interfaces & types
 
 //~~~~~~~~~~~~~~~~~~~Styled Components
 const Wrapper = styled.main`
@@ -16,7 +14,7 @@ const Wrapper = styled.main`
   width: 100%;
   height: 100%;
 `;
-
+//~~~~~~~~~~~~~~~~~~~Component
 const WorkoutCrossroads = (): JSX.Element => {
   return (
     <Wrapper>
