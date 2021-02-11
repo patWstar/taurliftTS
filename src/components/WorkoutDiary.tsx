@@ -36,7 +36,7 @@ interface FinishedWorkout {
 //~~~~~~~~~~~~~~~~~~~Styled Components
 
 const Wrapper = styled.div`
-  height: 100%;
+  flex: 1;
   background: ${({ theme }) => theme.containerBackgroundPrimary};
   width: 55vw;
   margin: 0 auto;

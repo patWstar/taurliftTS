@@ -119,49 +119,47 @@ const Signup = (): JSX.Element => {
     event.preventDefault();
 
     //~~~~~~~~~~~~~~~~~~~Check for nulls or else typescript will scream at me
-    const email: string =
-      emailRef.current !== null ? emailRef.current.value : "";
-    const password: string =
-      passwordRef.current !== null ? passwordRef.current.value : "";
-    const confirmPassword: string =
-      confirmPasswordRef.current !== null
-        ? confirmPasswordRef.current.value
-        : "";
-    //~~~~~~~~~~~~~~~~~~~Validate
-    const newUserCredentials: NewUserCredentials = {
-      email,
-      password,
-      confirmPassword,
-    };
+    if (emailRef.current && passwordRef.current && confirmPasswordRef.current) {
+      const email: string = emailRef.current.value;
+      const password: string = passwordRef.current.value;
+      const confirmPassword: string = confirmPasswordRef.current.value;
 
-    const validationErrors: string[] = validateSignupCredentials(
-      newUserCredentials
-    );
+      //~~~~~~~~~~~~~~~~~~~Validate
+      const newUserCredentials: NewUserCredentials = {
+        email,
+        password,
+        confirmPassword,
+      };
 
-    if (validationErrors.length !== 0) {
-      setErrors(validationErrors);
-    } else if (validationErrors.length === 0) {
-      setErrors([]);
-      setIsLoading(true);
-      axios
-        .post("/signup", newUserCredentials)
-        .then(({ data }) => {
-          const token: string = data.token;
-          const refreshToken: string = data.refreshToken;
+      const validationErrors: string[] = validateSignupCredentials(
+        newUserCredentials
+      );
 
-          tokenHandler({ token, refreshToken });
-        })
-        .then(() => {
-          dispatch(login(newUserCredentials.email));
-          setIsLoading(false);
-        })
-        .then(() => {
-          history.push("/");
-        })
-        .catch((err) => {
-          setErrors([err.response.data]);
-          setIsLoading(false);
-        });
+      if (validationErrors.length !== 0) {
+        setErrors(validationErrors);
+      } else if (validationErrors.length === 0) {
+        setErrors([]);
+        setIsLoading(true);
+        axios
+          .post("/signup", newUserCredentials)
+          .then(({ data }) => {
+            const token: string = data.token;
+            const refreshToken: string = data.refreshToken;
+
+            tokenHandler({ token, refreshToken });
+          })
+          .then(() => {
+            dispatch(login(newUserCredentials.email));
+            setIsLoading(false);
+          })
+          .then(() => {
+            history.push("/");
+          })
+          .catch((err) => {
+            setErrors([err.response.data]);
+            setIsLoading(false);
+          });
+      }
     }
   };
   return (

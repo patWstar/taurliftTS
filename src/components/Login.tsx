@@ -116,46 +116,45 @@ const Login = (): JSX.Element => {
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     //Check for nulls or else typescript will scream at me
-    const email: string =
-      emailRef.current !== null ? emailRef.current.value : "";
-    const password: string =
-      passwordRef.current !== null ? passwordRef.current.value : "";
+    if (emailRef.current && passwordRef.current) {
+      const email: string = emailRef.current.value;
+      const password: string = passwordRef.current.value;
+      //~~~~~~~~~~~~~~~~~~~Validate
+      const userCredentials: UserCredentials = {
+        email,
+        password,
+      };
 
-    //~~~~~~~~~~~~~~~~~~~Validate
-    const userCredentials: UserCredentials = {
-      email,
-      password,
-    };
+      const validationErrors: string[] = validateLogin(userCredentials);
 
-    const validationErrors: string[] = validateLogin(userCredentials);
+      if (validationErrors.length !== 0) {
+        setErrors(validationErrors);
+      } else if (validationErrors.length === 0) {
+        setErrors([]);
+        setIsLoading(true);
+        axios
+          .post("/login", userCredentials)
+          .then(({ data }) => {
+            const token: string = data.token;
+            const refreshToken: string = data.refreshToken;
 
-    if (validationErrors.length !== 0) {
-      setErrors(validationErrors);
-    } else if (validationErrors.length === 0) {
-      setErrors([]);
-      setIsLoading(true);
-      axios
-        .post("/login", userCredentials)
-        .then(({ data }) => {
-          const token: string = data.token;
-          const refreshToken: string = data.refreshToken;
-
-          tokenHandler({ token, refreshToken });
-        })
-        .then(() => {
-          dispatch(login(userCredentials.email));
-          setIsLoading(false);
-        })
-        .then(() => {
-          history.push("/");
-        })
-        .catch((err) => {
-          setErrors([err.response.data]);
-          setIsLoading(false);
-        });
+            tokenHandler({ token, refreshToken });
+          })
+          .then(() => {
+            dispatch(login(userCredentials.email));
+            setIsLoading(false);
+          })
+          .then(() => {
+            history.push("/");
+          })
+          .catch((err) => {
+            setErrors([err.response.data]);
+            setIsLoading(false);
+          });
+      }
     }
   };
-  //~~~~~~~~~~~~~~~~~~~Render
+  //~~~~~~~~~~~~~~~~~~~Component
   return (
     <Wrapper>
       {authenticated ? (

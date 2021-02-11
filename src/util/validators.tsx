@@ -65,21 +65,22 @@ export const validateSignupCredentials = (
   return errors;
 };
 
-// const validateName = ({ name, nameCriteria }: NameProps): boolean => {
-//   return name.length >= nameCriteria.min && name.length <= nameCriteria.max
-//     ? true
-//     : false;
-// };
+const validateName = ({ name, nameCriteria }: NameProps): boolean => {
+  return name.length >= nameCriteria.min && name.length <= nameCriteria.max
+    ? true
+    : false;
+};
 
-// const validateNumericValue = ({
-//   value,
-//   valueCriteria,
-// }: NumericValueProps): boolean => {
-//   return value >= valueCriteria.min && value <= valueCriteria.max
-//     ? true
-//     : false;
-// };
-//Basic login check. Rest of the responses are created by the server
+const validateNumericValue = ({
+  value,
+  valueCriteria,
+}: NumericValueProps): boolean => {
+  return value >= valueCriteria.min && value <= valueCriteria.max
+    ? true
+    : false;
+};
+
+// Basic login check. Rest of the responses are created by the server
 
 export const validateLogin = (userCredentials: UserCredentials): string[] => {
   const errors: string[] = [];
@@ -90,7 +91,7 @@ export const validateLogin = (userCredentials: UserCredentials): string[] => {
   return errors;
 };
 
-// //Create Workout validator.
+//Create Workout validator.
 // export const validateExercise = (createdWorkout, validCriteria) => {
 //   const errors = [];
 
@@ -119,7 +120,6 @@ export const validateLogin = (userCredentials: UserCredentials): string[] => {
 
 //   return errors;
 // };
-// //CustomWorkouts as a whole are validated on the server
 
 // //Calculator validators
 
