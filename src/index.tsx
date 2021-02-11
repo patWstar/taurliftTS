@@ -6,8 +6,12 @@ import { ThemeProvider } from "styled-components";
 import { theme } from "theme/theme";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
+import findToken from "util/findToken";
 import store from "redux/store";
 import axios from "axios";
+
+//Check for existing tokens
+findToken();
 
 axios.defaults.baseURL =
   "https://europe-west1-portfolio-taurlift.cloudfunctions.net/api";

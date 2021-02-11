@@ -65,7 +65,8 @@ const Nav = styled(NavLink)<NavProps>`
   }
   &:hover {
     letter-spacing: 1px;
-    color: ${({ danger }) => danger && "lightcoral"};
+    color: ${({ danger, theme }) =>
+      danger ? "lightcoral" : theme.secondaryColorDark};
   }
 
   &.${({ activeClassName }) => activeClassName} {
@@ -75,7 +76,7 @@ const Nav = styled(NavLink)<NavProps>`
   }
 `;
 //~~~~~~~~~~~~~~~~~~~Component
-const Navbar = () => {
+const Navbar = (): JSX.Element => {
   const dispatch = useDispatch();
   const authenticated: boolean = useSelector(selectAuthenticated);
 

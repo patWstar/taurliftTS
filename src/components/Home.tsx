@@ -125,7 +125,7 @@ const NavButton = styled(Link)<NavButtonProps>`
   }
 `;
 //~~~~~~~~~~~~~~~~~~~Component
-const Home = () => {
+const Home = (): JSX.Element => {
   const authenticated: boolean = useSelector(selectAuthenticated);
 
   return (
