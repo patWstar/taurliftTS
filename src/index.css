@@ -14,6 +14,7 @@ button {
   color: inherit;
   cursor: pointer;
 }
+
 html {
   background: linear-gradient(to right, #005aa7, #fffde4);
   background-repeat: no-repeat;

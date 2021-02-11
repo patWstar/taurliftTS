@@ -13,7 +13,7 @@ type NavsProps = {
 };
 type NavProps = {
   activeClassName?: string;
-  danger?: boolean;
+  danger?: string;
 };
 //~~~~~~~~~~~~~~~~~~~Styled Components
 const Container = styled.div`
@@ -115,7 +115,7 @@ const Navbar = (): JSX.Element => {
               </svg>
               Workouts
             </Nav>
-            <Nav to="/" danger={true} onClick={logoutHandler}>
+            <Nav to="/" danger="danger" onClick={logoutHandler}>
               Logout
             </Nav>
           </Navs>

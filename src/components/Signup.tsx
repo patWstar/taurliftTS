@@ -5,9 +5,9 @@ import axios from "axios";
 import { Link, useHistory, Redirect } from "react-router-dom";
 //Components
 import fadeInAnimation from "components/shared/animations/fadeIn";
-import TextInput from "components/shared/components/formTextInput";
+import TextInput from "components/shared/components/FormTextInput";
 import SubmitButton from "components/shared/components/SubmitButton";
-import ErrorList from "components/shared/components/errorList";
+import ErrorList from "components/shared/components/ErrorList";
 import Spinner from "components/shared/components/Spinner";
 //Redux
 import { useSelector, useDispatch } from "react-redux";

@@ -1,15 +1,16 @@
 import jwtDecode from "jwt-decode";
 import store from "redux/store";
-
 import { login, logout } from "redux/Slices/UserSlice";
 import tokenHandler from "util/tokenHandler";
+import refreshLocalToken from "util/refreshLocalToken";
+
 interface DecodedToken {
   exp: number;
   email: string;
 }
 const findToken = (): void => {
-  const token = localStorage.token;
-  const refreshToken = localStorage.refreshToken;
+  const token: string = localStorage.token;
+  const refreshToken: string = localStorage.refreshToken;
 
   if (token) {
     const decodedToken: DecodedToken = jwtDecode(token);
@@ -20,6 +21,7 @@ const findToken = (): void => {
       } else {
         store.dispatch(login(decodedToken.email));
         tokenHandler({ token, refreshToken });
+        refreshLocalToken();
       }
     }
   }
