@@ -10,6 +10,7 @@ import { selectUserID } from "redux/Slices/UserSlice";
 import { useSelector } from "react-redux";
 //Util
 import refreshLocalToken from "util/refreshLocalToken";
+import { current } from "@reduxjs/toolkit";
 //~~~~~~~~~~~~~~~~~~~Interfaces & Types
 type RowProps = {
   isOdd: boolean;
@@ -75,6 +76,13 @@ const SelectorButton = styled.button<SelectorProps>`
   &:hover {
     letter-spacing: 2px;
     font-weight: 600;
+  }
+`;
+
+const WorkoutHeader = styled.header`
+  text-align: center;
+  & > h2 {
+    font-size: 2.6rem;
   }
 `;
 const TableWrapper = styled.span`
@@ -218,6 +226,9 @@ const MyWorkouts = (): JSX.Element => {
               Next
             </SelectorButton>
           </SelectorsWrapper>
+          <WorkoutHeader>
+            <h2>{workouts[currentIndex].name}</h2>
+          </WorkoutHeader>
           <TableWrapper>
             <TableContent>
               <thead>
