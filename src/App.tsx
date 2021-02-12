@@ -7,6 +7,7 @@ import Login from "components/Login";
 import Signup from "components/Signup";
 import Workouts from "components/Workouts";
 import WorkoutDiary from "components/WorkoutDiary";
+import ModalConfirmation from "components/shared/components/ModalConfirmation";
 
 //Basic CSS, Resets etc. are in index.css
 const Wrapper = styled.div`
