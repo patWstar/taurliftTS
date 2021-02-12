@@ -65,15 +65,16 @@ const SelectorsWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 3vh;
+  width: 100%;
+  height: fit-content;
 `;
 
 const SelectorButton = styled.button<SelectorProps>`
-  width: 30rem;
-  height: 10rem;
+  width: 30%;
   background-color: inherit;
   color: ${({ theme, disable }) =>
     disable ? "grey" : theme.secondaryColorLight};
-  font-size: 3rem;
+  font-size: 3.2vmin;
   transition: 0.4s;
   &:hover {
     letter-spacing: 2px;
@@ -84,7 +85,7 @@ const SelectorButton = styled.button<SelectorProps>`
 const WorkoutHeader = styled.header`
   text-align: center;
   & > h2 {
-    font-size: 2.6rem;
+    font-size: 2.6vmin;
   }
 `;
 const TableWrapper = styled.span`
@@ -115,16 +116,16 @@ const TableContent = styled.table`
   table-layout: fixed;
   text-align: left;
   & th {
-    font-size: 2.4rem;
+    font-size: 2.4vmin;
   }
 `;
 
 const Row = styled.tr<RowProps>`
-  font-size: 2rem;
+  font-size: 2vmin;
   background-color: ${({ theme, isOdd }) =>
     isOdd ? theme.containerBackgroundSecondary : "transparent"};
   & > td {
-    padding: 1rem;
+    padding: 1vh 1vmin;
   }
 `;
 const Footer = styled.footer`

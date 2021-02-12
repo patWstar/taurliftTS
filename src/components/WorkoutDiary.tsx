@@ -54,13 +54,13 @@ const Header = styled.header`
   text-align: center;
 
   & > h1 {
-    padding: 5rem 0;
-    font-size: 6rem;
+    padding: 5vh 0;
+    font-size: 6vmin;
     font-weight: 400;
     letter-spacing: 4px;
   }
   & > h2 {
-    font-size: 3rem;
+    font-size: 3vmin;
     font-weight: 300;
   }
 `;
@@ -71,16 +71,16 @@ const Content = styled.table`
   text-align: left;
 
   & > thead {
-    font-size: 3rem;
+    font-size: 3vmin;
   }
 `;
 
 const Row = styled.tr<RowProps>`
-  font-size: 2.4rem;
+  font-size: 2.4vmin;
   background-color: ${({ theme, isOdd }) =>
     isOdd ? theme.containerBackgroundSecondary : "transparent"};
   & > td {
-    padding: 1.5rem;
+    padding: 1.5vmin;
   }
 `;
 
@@ -92,7 +92,7 @@ const ButtonTD = styled.td`
   align-items: center;
 `;
 const OptionButton = styled.button<ButtonProps>`
-  font-size: 2rem;
+  font-size: 2vmin;
   font-weight: 600;
   transition: all 0.2s;
   color: ${({ theme, erase }) =>

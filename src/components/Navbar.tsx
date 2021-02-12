@@ -30,15 +30,17 @@ const Container = styled.div`
 `;
 const Logo = styled(NavLink)`
   & > img {
-    width: 6rem;
-    height: 6rem;
+    height: 100%;
   }
 `;
 const Navs = styled.nav<NavsProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 50%;
+  width: 60%;
+  @media only screen and (max-width: 75em) {
+    width: 80%;
+  }
   & > * {
     width: ${({ logged }) => (logged ? "calc(100% / 5)" : "calc(100% / 3)")};
   }
@@ -61,10 +63,9 @@ const Nav = styled(NavLink)<NavProps>`
   font-weight: 700;
   transition: 0.4s;
   height: 100%;
-  font-size: 2rem;
+  font-size: 1.5vmin;
   & > svg {
-    height: 2.5rem;
-    width: 2.5rem;
+    height: 40%;
     fill: ${({ theme }) => theme.textColor};
   }
   &:hover {
@@ -88,7 +89,7 @@ const LogoutButton = styled.button`
   font-weight: 700;
   transition: 0.4s;
   height: 100%;
-  font-size: 2rem;
+  font-size: 2vmin;
 
   &:hover {
     letter-spacing: 1px;
@@ -132,13 +133,13 @@ const Navbar = (): JSX.Element => {
               </svg>
               Diary
             </Nav>
-            <Nav to="/calculators" exact activeClassName="active">
+            <Nav to="/calculators" activeClassName="active">
               <svg className="nav__icon">
                 <use xlinkHref={`${Icons}#icon-stats-dots`} />
               </svg>
               Calculate
             </Nav>
-            <Nav to="/workouts" exact activeClassName="active">
+            <Nav to="/workouts" activeClassName="active">
               <svg className="nav__icon">
                 <use xlinkHref={`${Icons}#icon-fire`} />
               </svg>

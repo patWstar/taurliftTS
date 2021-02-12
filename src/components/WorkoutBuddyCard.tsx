@@ -38,9 +38,9 @@ const Wrapper = styled.div`
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-between;
-  font-size: 2.4rem;
+  font-size: 2.4vmin;
   overflow: hidden;
-  padding: 0 3rem;
+  padding: 0 2vw;
 `;
 const CardWrapper = styled.div`
   border-radius: 15px;
@@ -52,7 +52,7 @@ const CardWrapper = styled.div`
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
-  font-size: 2.4rem;
+  font-size: 2.4vmin;
 `;
 const InfoText = styled.div`
   display: flex;
@@ -157,12 +157,12 @@ const Footer = styled.footer`
 `;
 
 const FooterButton = styled.button`
-  width: 30rem;
+  width: 40%;
   background-color: rgba(0, 0, 0, 0.2);
   color: inherit;
-  font-size: 3rem;
+  font-size: 3vmin;
   border-radius: 5px;
-  height: 8rem;
+  height: 8vh;
 
   &:hover {
     transform: scaleY(-2px);

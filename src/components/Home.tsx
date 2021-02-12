@@ -36,14 +36,14 @@ const Header = styled.header`
     -webkit-background-clip: text;
     background-clip: text;
     letter-spacing: 0.6rem;
-    font-size: 9rem;
+    font-size: 9vmin;
     font-weight: 500;
     animation: ${fadeInAnimation} 1s linear 1;
   }
 `;
 const HeaderLink = styled(Link)`
   color: inherit;
-  font-size: 7.5rem;
+  font-size: 7.5vmin;
   transition: 0.4s;
   width: fit-content;
   &:hover,
@@ -53,7 +53,7 @@ const HeaderLink = styled(Link)`
   }
 `;
 const HeaderText = styled.p`
-  font-size: 2.4rem;
+  font-size: 2.4vmin;
 `;
 const shakeButton = keyframes`
   0% {
@@ -82,7 +82,7 @@ const HeaderButton = styled(Link)`
   height: 6rem;
   width: 30rem;
   background-color: ${({ theme }) => theme.primaryColor};
-  font-size: 2.4rem;
+  font-size: 2.4vmin;
   border-radius: 30px;
   transition: 0.4s;
   animation: ${shakeButton} 1s ease-out 1;
@@ -111,7 +111,7 @@ const NavButton = styled(Link)<NavButtonProps>`
   flex-direction: column;
   background-color: ${(props) => props.color};
   transition: 0.4s;
-  font-size: 2.5rem;
+  font-size: 2.5vmin;
   color: inherit;
   &:hover,
   &:focus {

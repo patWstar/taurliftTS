@@ -143,92 +143,176 @@ export const validateExercise = (
   return errors;
 };
 
-// //Calculator validators
+//Calculator validators
+interface CalorieValidatorProps {
+  inputs: { userHeight: number; userWeight: number; userAge: number };
+  inputsCriteria: {
+    userHeightCriteria: {
+      min: number;
+      max: number;
+    };
+    userWeightCriteria: {
+      min: number;
+      max: number;
+    };
+    userAgeCriteria: {
+      min: number;
+      max: number;
+    };
+  };
+}
 
-// //Calories
-// export const calorieValidator = (inputs, inputsCriteria) => {
-//   const errors = [];
+//Calories
+export const calorieValidator = ({
+  inputs,
+  inputsCriteria,
+}: CalorieValidatorProps) => {
+  const errors = [];
 
-//   const { userAge, userHeight, userWeight } = inputs;
+  const { userAge, userHeight, userWeight } = inputs;
 
-//   const {
-//     userAge: userAgeCriteria,
-//     userHeight: userHeightCriteria,
-//     userWeight: userWeightCriteria,
-//   } = inputsCriteria;
+  const {
+    userAgeCriteria,
+    userHeightCriteria,
+    userWeightCriteria,
+  } = inputsCriteria;
 
-//   !validateNumericValue(userAge, userAgeCriteria) &&
-//     errors.push(
-//       `Age must be between ${userAgeCriteria.min} and ${userAgeCriteria.max}`
-//     );
-//   !validateNumericValue(userHeight, userHeightCriteria) &&
-//     errors.push(
-//       `Height must be between ${userHeightCriteria.min} and ${userHeightCriteria.max}`
-//     );
-//   !validateNumericValue(userWeight, userWeightCriteria) &&
-//     errors.push(
-//       `Weight must be between ${userWeightCriteria.min} and ${userWeightCriteria.max}`
-//     );
+  !validateNumericValue({ value: userAge, valueCriteria: userAgeCriteria }) &&
+    errors.push(
+      `Age must be between ${userAgeCriteria.min} and ${userAgeCriteria.max}`
+    );
+  !validateNumericValue({
+    value: userHeight,
+    valueCriteria: userHeightCriteria,
+  }) &&
+    errors.push(
+      `Height must be between ${userHeightCriteria.min} and ${userHeightCriteria.max}`
+    );
+  !validateNumericValue({
+    value: userWeight,
+    valueCriteria: userWeightCriteria,
+  }) &&
+    errors.push(
+      `Weight must be between ${userWeightCriteria.min} and ${userWeightCriteria.max}`
+    );
 
-//   return errors;
-// };
+  return errors;
+};
 
-// //Macros
-// export const macronutrientValidator = (inputs, inputsCriteria) => {
-//   const errors = [];
+interface MacroValidatorProps {
+  inputs: {
+    userCalories: number;
+    userProtein: number;
+    userCarbs: number;
+    userFats: number;
+  };
+  inputsCriteria: {
+    userCaloriesCriteria: {
+      min: number;
+      max: number;
+    };
+    userProteinCriteria: {
+      min: number;
+      max: number;
+    };
+    userCarbsCriteria: {
+      min: number;
+      max: number;
+    };
+    userFatsCriteria: {
+      min: number;
+      max: number;
+    };
+    percentSum: number;
+  };
+}
+//Macros
+export const macronutrientValidator = ({
+  inputs,
+  inputsCriteria,
+}: MacroValidatorProps): string[] => {
+  const errors = [];
 
-//   const { userCalories, userProtein, userCarbs, userFats } = inputs;
+  const { userCalories, userProtein, userCarbs, userFats } = inputs;
 
-//   const {
-//     userCalories: userCaloriesCriteria,
-//     userProtein: userProteinCriteria,
-//     userCarbs: userCarbsCriteria,
-//     userFats: userFatsCriteria,
-//     percentSum,
-//   } = inputsCriteria;
+  const {
+    userCaloriesCriteria,
+    userProteinCriteria,
+    userCarbsCriteria,
+    userFatsCriteria,
+    percentSum,
+  } = inputsCriteria;
 
-//   !validateNumericValue(userCalories, userCaloriesCriteria) &&
-//     errors.push(
-//       `Calories must be between ${userCaloriesCriteria.min} and ${userCaloriesCriteria.max}`
-//     );
-//   !validateNumericValue(userProtein, userProteinCriteria) &&
-//     errors.push(
-//       `Proteins must be between ${userProteinCriteria.min} and ${userProteinCriteria.max}`
-//     );
-//   !validateNumericValue(userCarbs, userCarbsCriteria) &&
-//     errors.push(
-//       `Carbs must be between ${userCarbsCriteria.min} and ${userCarbsCriteria.max}`
-//     );
-//   !validateNumericValue(userFats, userFatsCriteria) &&
-//     errors.push(
-//       `Fats must be between ${userFatsCriteria.min} and ${userFatsCriteria.max}`
-//     );
-//   Number(userProtein) + Number(userCarbs) + Number(userFats) !==
-//     Number(percentSum) && errors.push("Percentages must add up to a full 100%");
+  !validateNumericValue({
+    value: userCalories,
+    valueCriteria: userCaloriesCriteria,
+  }) &&
+    errors.push(
+      `Calories must be between ${userCaloriesCriteria.min} and ${userCaloriesCriteria.max}`
+    );
+  !validateNumericValue({
+    value: userProtein,
+    valueCriteria: userProteinCriteria,
+  }) &&
+    errors.push(
+      `Proteins must be between ${userProteinCriteria.min} and ${userProteinCriteria.max}`
+    );
+  !validateNumericValue({
+    value: userCarbs,
+    valueCriteria: userCarbsCriteria,
+  }) &&
+    errors.push(
+      `Carbs must be between ${userCarbsCriteria.min} and ${userCarbsCriteria.max}`
+    );
+  !validateNumericValue({ value: userFats, valueCriteria: userFatsCriteria }) &&
+    errors.push(
+      `Fats must be between ${userFatsCriteria.min} and ${userFatsCriteria.max}`
+    );
+  Number(userProtein) + Number(userCarbs) + Number(userFats) !==
+    Number(percentSum) && errors.push("Percentages must add up to a full 100%");
 
-//   return errors;
-// };
+  return errors;
+};
 
-// //BMI
+interface BMIValidatorProps {
+  inputs: { userHeight: number; userWeight: number };
+  inputsCriteria: {
+    userHeightCriteria: {
+      min: number;
+      max: number;
+    };
+    userWeightCriteria: {
+      min: number;
+      max: number;
+    };
+  };
+}
+//BMI
 
-// export const BMIValidator = (inputs, inputsCriteria) => {
-//   const errors = [];
+export const BMIValidator = ({
+  inputs,
+  inputsCriteria,
+}: BMIValidatorProps): string[] => {
+  const errors = [];
 
-//   const { userHeight, userWeight } = inputs;
+  const { userHeight, userWeight } = inputs;
 
-//   const {
-//     userHeight: userHeightCriteria,
-//     userWeight: userWeightCriteria,
-//   } = inputsCriteria;
+  const { userHeightCriteria, userWeightCriteria } = inputsCriteria;
 
-//   !validateNumericValue(userHeight, userHeightCriteria) &&
-//     errors.push(
-//       `Height must be between ${userHeightCriteria.min} and ${userHeightCriteria.max}`
-//     );
-//   !validateNumericValue(userWeight, userWeightCriteria) &&
-//     errors.push(
-//       `Weight must be between ${userWeightCriteria.min} and ${userWeightCriteria.max}`
-//     );
+  !validateNumericValue({
+    value: userHeight,
+    valueCriteria: userHeightCriteria,
+  }) &&
+    errors.push(
+      `Height must be between ${userHeightCriteria.min} and ${userHeightCriteria.max}`
+    );
+  !validateNumericValue({
+    value: userWeight,
+    valueCriteria: userWeightCriteria,
+  }) &&
+    errors.push(
+      `Weight must be between ${userWeightCriteria.min} and ${userWeightCriteria.max}`
+    );
 
-//   return errors;
-// };
+  return errors;
+};

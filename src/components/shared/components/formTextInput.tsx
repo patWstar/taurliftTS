@@ -21,8 +21,8 @@ const Input = styled.input<InputProps>`
   color: inherit;
   border-radius: 28px;
   transition: 0.4s;
-  font-size: 1.6rem;
   text-align: center;
+  font-size: 2vmin;
   &:focus {
     transform: scaleX(1.2) scaleY(1.1);
     border-color: ${({ theme }) => theme.secondaryColorLight};

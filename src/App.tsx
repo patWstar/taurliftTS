@@ -7,6 +7,7 @@ import Login from "components/Login";
 import Signup from "components/Signup";
 import Workouts from "components/Workouts";
 import WorkoutDiary from "components/WorkoutDiary";
+import Calculators from "components/Calculators";
 
 //Basic CSS, Resets etc. are in index.css
 const Wrapper = styled.div`
@@ -45,7 +46,8 @@ const App = (): JSX.Element => {
         <Route path="/login" exact component={Login} />
         <Route path="/signup" exact component={Signup} />
         <Route path="/workouts" component={Workouts} />
-        <Route path="/Diary" component={WorkoutDiary} />
+        <Route path="/diary" component={WorkoutDiary} />
+        <Route path="/calculators" component={Calculators} />
       </Switch>
     </Wrapper>
   );

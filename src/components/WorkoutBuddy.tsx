@@ -77,7 +77,7 @@ const ContentHeader = styled.header`
   align-items: center;
   width: 100%;
   & > h1 {
-    font-size: 2.6rem;
+    font-size: 2.6vmin;
   }
 `;
 
@@ -119,9 +119,9 @@ const SelectWorkoutHeader = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: 2vmin;
   & > h2 {
-    font-size: 2rem;
+    font-size: 2vmin;
   }
 `;
 
@@ -138,7 +138,7 @@ const SelectWorkoutButton = styled.button`
   background: ${({ theme }) => theme.primaryColor};
   width: 100%;
   color: inherit;
-  font-size: 2rem;
+  font-size: 2vmin;
   padding: 1rem;
   border-bottom: 1px solid black;
   transition: 0.4s;
@@ -187,7 +187,6 @@ const FinishedSetItem = styled.div`
   border: ${({ theme }) => theme.primaryColor} 1px solid;
   width: 100%;
   color: inherit;
-  font-size: 2rem;
   padding: 1rem;
   font-size: 2vmin;
   display: flex;

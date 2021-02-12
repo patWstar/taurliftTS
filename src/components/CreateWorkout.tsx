@@ -68,7 +68,7 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 const InputLabel = styled.label`
-  font-size: 2rem;
+  font-size: 2vmin;
 `;
 const Content = styled.main`
   display: flex;
@@ -110,12 +110,12 @@ const TableContent = styled.table`
   table-layout: fixed;
   text-align: left;
   & th {
-    font-size: 2.4rem;
+    font-size: 2.4vmin;
   }
 `;
 
 const Row = styled.tr<RowProps>`
-  font-size: 2rem;
+  font-size: 2vmin;
   background-color: ${({ theme, isOdd }) =>
     isOdd ? theme.containerBackgroundSecondary : "transparent"};
   & > td {

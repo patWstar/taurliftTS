@@ -53,14 +53,14 @@ const Header = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 3vh;
-  gap: 2rem;
+  gap: 2vmin;
   & > h2 {
-    font-size: 3rem;
+    font-size: 3vmin;
     font-weight: 600;
   }
 
   & > h1 {
-    font-size: 3.2rem;
+    font-size: 3.2vmin;
     letter-spacing: 2px;
   }
 `;
@@ -73,6 +73,7 @@ const Form = styled.form`
   justify-content: center;
   align-items: center;
   gap: 1.5rem;
+  font-size: 2vmin;
 `;
 
 const BottomTextWrapper = styled.span`
@@ -83,12 +84,12 @@ const BottomTextWrapper = styled.span`
 `;
 const SmallText = styled.aside`
   display: inline-block;
-  font-size: 1.6rem;
-  padding: 1rem;
+  font-size: 1.6vmin;
+  padding: 1vmin;
 `;
 
 const LinkElement = styled(Link)`
-  font-size: 2.4rem;
+  font-size: 2.4vmin;
   color: ${({ theme }) => theme.primaryColor};
   transition: 0.4s;
   &:hover {
@@ -169,24 +170,24 @@ const Login = (): JSX.Element => {
             <Spinner height="6.5rem" width="5rem" />
           ) : (
             <Form onSubmit={submitHandler}>
-              <label htmlFor="email" />
+              <label htmlFor="email">Email</label>
               <TextInput
                 name="Email"
                 placeholder="E-mail"
-                width="20rem"
+                width="40%"
                 reactRef={emailRef}
               />
-              <label htmlFor="password" />
+              <label htmlFor="password">Password</label>
               <TextInput
                 name="password"
                 placeholder="Password"
-                width="20rem"
+                width="40%"
                 type="password"
                 reactRef={passwordRef}
               />
               <label htmlFor="confirmPassword" />
 
-              <SubmitButton value="Log In" width="15rem" />
+              <SubmitButton value="Log In" width="30%" />
               {!isErrorsEmpty && <ErrorList width="90%" errors={errors} />}
             </Form>
           )}

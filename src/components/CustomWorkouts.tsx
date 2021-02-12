@@ -7,7 +7,6 @@ import CreateWorkout from "components/CreateWorkout";
 import MyWorkouts from "./MyWorkouts";
 // import { validateExercise } from "../util/validators";
 //~~~~~~~~~~~~~~~~~~~Interfaces & Types
-interface CreateCustomWorkoutProps {}
 type NavButtonProps = {
   activeClassName: string;
 };
@@ -41,7 +40,7 @@ const NavButton = styled(NavLink)<NavButtonProps>`
   padding: 2.5rem;
   border-radius: 24px;
   transition: 0.4s;
-  font-size: 2.5rem;
+  font-size: 2.5vmin;
 
   &:hover {
     background-color: ${({ theme }) => theme.primaryColor};
@@ -51,7 +50,7 @@ const NavButton = styled(NavLink)<NavButtonProps>`
   }
 `;
 //~~~~~~~~~~~~~~~~~~~Component
-const CreateCustomWorkout = ({}: CreateCustomWorkoutProps): JSX.Element => {
+const CreateCustomWorkout = (): JSX.Element => {
   //~~~~~~~~~~~~~~~~~~~Render
   return (
     <Wrapper>

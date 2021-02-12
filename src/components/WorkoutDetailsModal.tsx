@@ -36,13 +36,13 @@ const Wrapper = styled.div`
   width: 50vw;
   border: ${({ theme }) => theme.primaryColor} 1px solid;
   border-radius: 30px;
-  padding: 3rem;
+  padding: 2.5vmin;
   background-color: rgb(0, 0, 0);
   z-index: 4;
   overflow: auto;
   scroll-behavior: smooth;
   &::-webkit-scrollbar {
-    width: 1rem;
+    width: 1vmin;
     scroll-behavior: smooth;
   }
 
@@ -62,7 +62,7 @@ const Wrapper = styled.div`
 const Header = styled.header`
   height: 15%;
   & > h1 {
-    font-size: 5rem;
+    font-size: 5vmin;
     letter-spacing: 4px;
     text-align: left;
     font-weight: 400;
@@ -76,17 +76,17 @@ const Content = styled.table`
   text-align: left;
 
   & th {
-    font-size: 2rem;
+    font-size: 2vmin;
   }
 `;
 
 const Row = styled.tr<RowProps>`
-  font-size: 2.4rem;
+  font-size: 2.4vmin;
   background-color: ${({ theme, isOdd }) =>
     isOdd ? theme.containerBackgroundSecondary : "transparent"};
 
   & td {
-    padding: 1rem;
+    padding: 1vmin;
   }
 `;
 

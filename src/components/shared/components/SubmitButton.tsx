@@ -29,7 +29,7 @@ const Submit = styled.button<SubmitButtonProps>`
   transition: 0.4s;
   color: ${({ theme }) => theme.textColor};
   font-weight: 600;
-  font-size: ${({ fontSize }) => fontSize};
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : "2vmin")};
   &:hover {
     background-color: ${({ theme, borderColor, danger }) =>
       danger
