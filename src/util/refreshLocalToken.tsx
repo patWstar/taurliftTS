@@ -16,9 +16,9 @@ const refreshLocalToken = (): void => {
       tokenHandler({ token, refreshToken });
     })
     .then(() => {
-      console.log(
-        new Date().toLocaleTimeString() + " token refreshed for the next hour"
-      );
+      // console.log(
+      //   new Date().toLocaleTimeString() + " token refreshed for the next hour"
+      // );
     })
     .catch((err) => {
       console.error(err);

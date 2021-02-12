@@ -6,8 +6,8 @@ import FormTextInput from "components/shared/components/FormTextInput";
 import SubmitButton from "components/shared/components/SubmitButton";
 //Redux
 //Util
+import refreshLocalToken from "util/refreshLocalToken";
 //~~~~~~~~~~~~~~~~~~~Interfaces & Types
-interface CreateWorkoutProps {}
 type RowProps = {
   isOdd: boolean;
   index: number;

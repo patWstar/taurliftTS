@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { NavLink, Route } from "react-router-dom";
 //Components
 import CreateWorkout from "components/CreateWorkout";
+import MyWorkouts from "./MyWorkouts";
 // import { validateExercise } from "../util/validators";
 //~~~~~~~~~~~~~~~~~~~Interfaces & Types
 interface CreateCustomWorkoutProps {}
@@ -14,7 +15,6 @@ type NavButtonProps = {
 //~~~~~~~~~~~~~~~~~~~Styled Components
 const Wrapper = styled.div`
   height: 100%;
-  border: 1px solid green;
   background: ${({ theme }) => theme.containerBackgroundPrimary};
   width: 55vw;
   margin: 0 auto;
@@ -73,6 +73,11 @@ const CreateCustomWorkout = ({}: CreateCustomWorkoutProps): JSX.Element => {
       <Route
         path="/workouts/CustomWorkouts/CreateWorkout"
         component={CreateWorkout}
+        exact
+      />
+      <Route
+        path="/workouts/CustomWorkouts/MyWorkouts"
+        component={MyWorkouts}
         exact
       />
     </Wrapper>

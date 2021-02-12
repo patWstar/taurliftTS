@@ -7,6 +7,7 @@ interface SubmitButtonProps {
   width: string;
   height?: string;
   fontSize?: string;
+  onClick?: () => void;
 }
 
 const Submit = styled.button<SubmitButtonProps>`
@@ -32,8 +33,15 @@ const SubmitButton = ({
   width,
   height,
   fontSize,
+  onClick,
 }: SubmitButtonProps): JSX.Element => (
-  <Submit value={value} width={width} height={height} fontSize={fontSize}>
+  <Submit
+    value={value}
+    width={width}
+    height={height}
+    fontSize={fontSize}
+    onClick={onClick}
+  >
     {value}
   </Submit>
 );
