@@ -7,13 +7,18 @@ interface SubmitButtonProps {
   width: string;
   height?: string;
   fontSize?: string;
+  borderColor?: string;
   onClick?: () => void;
 }
 
 const Submit = styled.button<SubmitButtonProps>`
   background: none;
   text-align: center;
-  border: 2px solid ${({ theme }) => theme.secondaryColorLight};
+  border: 2px solid
+    ${({ theme, borderColor }) =>
+      borderColor === "primary"
+        ? theme.primaryColor
+        : theme.secondaryColorLight};
   padding: 1.4rem 1rem;
   height: ${({ height }) => height};
   width: ${({ width }) => width};
@@ -24,7 +29,10 @@ const Submit = styled.button<SubmitButtonProps>`
   font-weight: 600;
   font-size: ${({ fontSize }) => fontSize};
   &:hover {
-    background-color: ${({ theme }) => theme.secondaryColorLight};
+    background-color: ${({ theme, borderColor }) =>
+      borderColor === "primary"
+        ? theme.primaryColor
+        : theme.secondaryColorLight};
   }
 `;
 
@@ -33,6 +41,7 @@ const SubmitButton = ({
   width,
   height,
   fontSize,
+  borderColor,
   onClick,
 }: SubmitButtonProps): JSX.Element => (
   <Submit
@@ -41,6 +50,7 @@ const SubmitButton = ({
     height={height}
     fontSize={fontSize}
     onClick={onClick}
+    borderColor={borderColor}
   >
     {value}
   </Submit>

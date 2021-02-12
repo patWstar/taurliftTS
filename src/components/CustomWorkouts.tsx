@@ -32,7 +32,7 @@ const ButtonRow = styled.nav`
   gap: 5vw;
 `;
 
-const NavButton = styled(NavLink)`
+const NavButton = styled(NavLink)<NavButtonProps>`
   width: 40%;
   color: inherit;
   text-align: center;

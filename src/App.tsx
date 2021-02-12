@@ -5,9 +5,9 @@ import Home from "components/Home";
 import { Route, Switch } from "react-router-dom";
 import Login from "components/Login";
 import Signup from "components/Signup";
-import WorkoutCrossroads from "components/WorkoutCrossroads";
+import Workouts from "components/Workouts";
 import WorkoutDiary from "components/WorkoutDiary";
-import CustomWorkouts from "components/CustomWorkouts";
+
 //Basic CSS, Resets etc. are in index.css
 const Wrapper = styled.div`
   display: flex;
@@ -44,8 +44,7 @@ const App = (): JSX.Element => {
         <Route path="/" exact component={Home} />
         <Route path="/login" exact component={Login} />
         <Route path="/signup" exact component={Signup} />
-        <Route path="/workouts" component={WorkoutCrossroads} exact />
-        <Route path="/workouts/CustomWorkouts" component={CustomWorkouts} />
+        <Route path="/workouts" component={Workouts} />
         <Route path="/Diary" component={WorkoutDiary} />
       </Switch>
     </Wrapper>

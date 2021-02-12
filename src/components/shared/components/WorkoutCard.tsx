@@ -39,6 +39,7 @@ const CardTitle = styled.header`
   height: 15%;
   border-bottom: solid ${({ theme }) => theme.primaryColor} 2px;
   border-radius: 50%;
+  font-size: 2rem;
 `;
 
 const CardDescription = styled.p`
