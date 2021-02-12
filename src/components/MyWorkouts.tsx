@@ -5,6 +5,7 @@ import axios from "axios";
 //Components
 import SubmitButton from "components/shared/components/SubmitButton";
 import Spinner from "components/shared/components/Spinner";
+import ModalInformation from "components/shared/components/ModalInformation";
 //Redux
 import { selectUserID } from "redux/Slices/UserSlice";
 import { useSelector } from "react-redux";
@@ -140,6 +141,9 @@ const MyWorkouts = (): JSX.Element => {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const userID = useSelector(selectUserID);
+  const [infoModalVisible, setInfoModalVisible] = React.useState<boolean>(
+    false
+  );
 
   useEffect(() => {
     let source = axios.CancelToken.source();
@@ -202,6 +206,10 @@ const MyWorkouts = (): JSX.Element => {
             (workout) => workout.createdAt !== workouts[currentIndex].createdAt
           )
         );
+      })
+      .then(() => {
+        setInfoModalVisible(true);
+        setTimeout(() => setInfoModalVisible(false), 2000);
       })
       .catch((err) => console.error(err));
   };
@@ -273,6 +281,7 @@ const MyWorkouts = (): JSX.Element => {
           </Footer>
         </>
       )}
+      {infoModalVisible && <ModalInformation text="Custom Workout Deleted" />}
     </Wrapper>
   );
 };

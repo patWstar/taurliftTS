@@ -368,7 +368,7 @@ const WorkoutBuddy = (): JSX.Element => {
         </>
       )}
       {infoModalVisible && (
-        <ModalInformation text="Custom Workout added!" linkTo="/" />
+        <ModalInformation text="Great job! Workout added." />
       )}
     </Wrapper>
   );

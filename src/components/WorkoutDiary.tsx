@@ -5,6 +5,7 @@ import styled from "styled-components";
 //Components
 import Spinner from "components/shared/components/Spinner";
 import WorkoutDetailsModal from "components/WorkoutDetailsModal";
+import ModalInformation from "components/shared/components/ModalInformation";
 //Redux
 import { selectUserID } from "redux/Slices/UserSlice";
 import { useSelector } from "react-redux";
@@ -108,6 +109,9 @@ const WorkoutDiary = (): JSX.Element => {
   );
   const [detailModal, setDetailModal] = useState<JSX.Element | null>(null);
   const [detailModalVisible, setDetailModalVisible] = useState<boolean>(false);
+  const [infoModalVisible, setInfoModalVisible] = React.useState<boolean>(
+    false
+  );
 
   const userID = useSelector(selectUserID);
 
@@ -147,6 +151,27 @@ const WorkoutDiary = (): JSX.Element => {
     setDetailModalVisible(true);
   };
 
+  const handleDelete = (index: number): void => {
+    axios
+      .delete("/workouts", {
+        headers: {
+          workoutID: finishedWorkouts[index].createdAt,
+          userID: userID,
+        },
+      })
+      .then(() => {
+        setFinishedWorkouts(
+          finishedWorkouts.filter(
+            (workout) => workout.createdAt !== finishedWorkouts[index].createdAt
+          )
+        );
+      })
+      .then(() => {
+        setInfoModalVisible(true);
+        setTimeout(() => setInfoModalVisible(false), 2000);
+      })
+      .catch((err) => console.error(err));
+  };
   //~~~~~~~~~~~~~~~~~~~Render
   return (
     <Wrapper>
@@ -186,7 +211,12 @@ const WorkoutDiary = (): JSX.Element => {
                     >
                       Details
                     </OptionButton>
-                    <OptionButton erase={true}>Erase</OptionButton>
+                    <OptionButton
+                      erase={true}
+                      onClick={() => handleDelete(index)}
+                    >
+                      Erase
+                    </OptionButton>
                   </ButtonTD>
                 </Row>
               );
@@ -195,6 +225,7 @@ const WorkoutDiary = (): JSX.Element => {
           {detailModalVisible && detailModal}
         </Content>
       )}
+      {infoModalVisible && <ModalInformation text="Workout Entry Erased" />}
     </Wrapper>
   );
 };

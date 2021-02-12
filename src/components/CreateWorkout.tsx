@@ -314,9 +314,7 @@ const CreateWorkout = (): JSX.Element => {
           </Footer>
         </>
       )}
-      {infoModalVisible && (
-        <ModalInformation text="Custom Workout added!" linkTo="/" />
-      )}
+      {infoModalVisible && <ModalInformation text="Custom Workout added!" />}
     </Wrapper>
   );
 };
