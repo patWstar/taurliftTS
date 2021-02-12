@@ -92,34 +92,56 @@ export const validateLogin = (userCredentials: UserCredentials): string[] => {
 };
 
 //Create Workout validator.
-// export const validateExercise = (createdWorkout, validCriteria) => {
-//   const errors = [];
 
-//   const {
-//     workoutName: workoutNameCriteria,
-//     exerciseName: exerciseNameCriteria,
-//     setGoal: setGoalCriteria,
-//   } = validCriteria;
+interface Exercise {
+  workoutName: string;
+  exerciseName: string;
+  setGoal: number;
+}
+interface Criteria {
+  min: number;
+  max: number;
+}
+interface ValidCriteria {
+  workoutName: Criteria;
+  exerciseName: Criteria;
+  setGoal: Criteria;
+}
 
-//   const { exerciseName, workoutName, setGoal } = createdWorkout;
+export const validateExercise = (
+  createdExercise: Exercise,
+  validCriteria: ValidCriteria
+): string[] => {
+  const errors: string[] = [];
 
-//   !validateName(workoutName, workoutNameCriteria) &&
-//     errors.push(
-//       `Workout Name must be between ${workoutNameCriteria.min} and ${workoutNameCriteria.max} letters.`
-//     );
+  const { exerciseName, workoutName, setGoal } = createdExercise;
 
-//   !validateName(exerciseName, exerciseNameCriteria) &&
-//     errors.push(
-//       `Exercise Name must be between ${workoutNameCriteria.min} and ${workoutNameCriteria.max} letters.`
-//     );
+  !validateName({
+    name: workoutName,
+    nameCriteria: validCriteria.workoutName,
+  }) &&
+    errors.push(
+      `Workout Name must be between ${validCriteria.workoutName.min} and ${validCriteria.workoutName.max} letters.`
+    );
 
-//   !validateNumericValue(setGoal, setGoalCriteria) &&
-//     errors.push(
-//       `Set number must be between ${setGoalCriteria.min} and ${setGoalCriteria.max}`
-//     );
+  !validateName({
+    name: exerciseName,
+    nameCriteria: validCriteria.exerciseName,
+  }) &&
+    errors.push(
+      `Exercise Name must be between ${validCriteria.exerciseName.min} and ${validCriteria.exerciseName.max} letters.`
+    );
 
-//   return errors;
-// };
+  !validateNumericValue({
+    value: setGoal,
+    valueCriteria: validCriteria.setGoal,
+  }) &&
+    errors.push(
+      `Set number must be between ${validCriteria.setGoal.min} and ${validCriteria.setGoal.max}`
+    );
+
+  return errors;
+};
 
 // //Calculator validators
 

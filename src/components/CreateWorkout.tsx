@@ -6,11 +6,13 @@ import axios from "axios";
 import FormTextInput from "components/shared/components/FormTextInput";
 import SubmitButton from "components/shared/components/SubmitButton";
 import Spinner from "components/shared/components/Spinner";
+import ErrorList from "components/shared/components/ErrorList";
 //Redux
 import { useSelector } from "react-redux";
 import { selectUserID } from "redux/Slices/UserSlice";
 //Util
 import refreshLocalToken from "util/refreshLocalToken";
+import { validateExercise } from "util/validators";
 
 //Criteria
 const validCriteria: ValidCriteria = {
@@ -36,7 +38,7 @@ type RowProps = {
 interface Exercise {
   workoutName: string;
   exerciseName: string;
-  setAmount: number;
+  setGoal: number;
 }
 interface Criteria {
   min: number;
@@ -135,14 +137,14 @@ const CreateWorkout = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const workoutNameRef = useRef<HTMLInputElement>(null);
   const exerciseNameRef = useRef<HTMLInputElement>(null);
-  const setAmountRef = useRef<HTMLInputElement>(null);
+  const setGoalRef = useRef<HTMLInputElement>(null);
 
   const userID = useSelector(selectUserID);
 
   const clearSubInputs = (): void => {
-    if (exerciseNameRef.current && setAmountRef.current) {
+    if (exerciseNameRef.current && setGoalRef.current) {
       exerciseNameRef.current.value = "";
-      setAmountRef.current.value = "";
+      setGoalRef.current.value = "";
       exerciseNameRef.current.focus();
     }
   };
@@ -151,35 +153,43 @@ const CreateWorkout = (): JSX.Element => {
     if (
       workoutNameRef.current &&
       exerciseNameRef.current &&
-      setAmountRef.current
+      setGoalRef.current
     ) {
       workoutNameRef.current.value = "";
       exerciseNameRef.current.value = "";
-      setAmountRef.current.value = "";
+      setGoalRef.current.value = "";
       setCreatedExercises([]);
     }
   };
   const handleLocalSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-
     if (
       workoutNameRef.current &&
       exerciseNameRef.current &&
-      setAmountRef.current
+      setGoalRef.current
     ) {
       const workoutName: string = workoutNameRef.current.value;
       const exerciseName: string = exerciseNameRef.current.value;
-      const setAmount: number = Number(setAmountRef.current.value);
+      const setGoal: number = Number(setGoalRef.current.value);
 
       const newExercise: Exercise = {
         workoutName,
         exerciseName,
-        setAmount,
+        setGoal,
       };
 
-      setCreatedExercises([...createdExercises, newExercise]);
+      const validationErrors: string[] = validateExercise(
+        newExercise,
+        validCriteria
+      );
 
-      clearSubInputs();
+      if (validationErrors.length !== 0) {
+        setErrors(validationErrors);
+      } else if (validationErrors.length === 0) {
+        setCreatedExercises([...createdExercises, newExercise]);
+        clearSubInputs();
+        setErrors([]);
+      }
     }
   };
 
@@ -207,6 +217,7 @@ const CreateWorkout = (): JSX.Element => {
         })
         .then(() => {
           fullReset();
+          refreshLocalToken();
         })
         .catch((err) => {
           alert(err.response.data);
@@ -243,13 +254,14 @@ const CreateWorkout = (): JSX.Element => {
                 placeholder="Set Amount"
                 type="number"
                 width="50%"
-                reactRef={setAmountRef}
+                reactRef={setGoalRef}
               />
               <SubmitButton
                 value="Add Exercise"
                 width="45%"
                 fontSize="1.6rem"
               />
+              {errors.length > 0 && <ErrorList width="100%" errors={errors} />}
             </FormContent>
             <TableWrapper>
               <TableContent>
@@ -270,7 +282,7 @@ const CreateWorkout = (): JSX.Element => {
                         key={index}
                       >
                         <td colSpan={2}>{exercise.exerciseName}</td>
-                        <td>{exercise.setAmount}</td>
+                        <td>{exercise.setGoal}</td>
                       </Row>
                     );
                   })}
