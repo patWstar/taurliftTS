@@ -8,6 +8,7 @@ import WorkoutBuddyCard from "components/WorkoutBuddyCard";
 import Spinner from "components/shared/components/Spinner";
 import DarkBackground from "components/shared/components/DarkBackground";
 import SubmitButton from "components/shared/components/SubmitButton";
+import ModalInformation from "components/shared/components/ModalInformation";
 //Redux
 import { useSelector } from "react-redux";
 import { selectUserID } from "redux/Slices/UserSlice";
@@ -205,6 +206,9 @@ const WorkoutBuddy = (): JSX.Element => {
   const [finishedSetsVisible, setFinishedSetsVisible] = useState<boolean>(
     false
   );
+  const [infoModalVisible, setInfoModalVisible] = React.useState<boolean>(
+    false
+  );
 
   const userID = useSelector(selectUserID);
 
@@ -266,8 +270,12 @@ const WorkoutBuddy = (): JSX.Element => {
         .post("/workouts", newFinishedWorkout)
         .then(() => {
           setIsLoading(false);
-
           refreshLocalToken();
+          setInfoModalVisible(true);
+          setTimeout(() => setInfoModalVisible(false), 2000);
+        })
+        .then(() => {
+          setFinishedSets([]);
         })
         .catch((err) => {
           console.error(err);
@@ -358,6 +366,9 @@ const WorkoutBuddy = (): JSX.Element => {
             </SelectWorkoutContent>
           </SelectWorkoutWrapper>
         </>
+      )}
+      {infoModalVisible && (
+        <ModalInformation text="Custom Workout added!" linkTo="/" />
       )}
     </Wrapper>
   );

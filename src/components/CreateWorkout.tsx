@@ -7,6 +7,7 @@ import FormTextInput from "components/shared/components/FormTextInput";
 import SubmitButton from "components/shared/components/SubmitButton";
 import Spinner from "components/shared/components/Spinner";
 import ErrorList from "components/shared/components/ErrorList";
+import ModalInformation from "components/shared/components/ModalInformation";
 //Redux
 import { useSelector } from "react-redux";
 import { selectUserID } from "redux/Slices/UserSlice";
@@ -138,6 +139,9 @@ const CreateWorkout = (): JSX.Element => {
   const workoutNameRef = useRef<HTMLInputElement>(null);
   const exerciseNameRef = useRef<HTMLInputElement>(null);
   const setGoalRef = useRef<HTMLInputElement>(null);
+  const [infoModalVisible, setInfoModalVisible] = React.useState<boolean>(
+    false
+  );
 
   const userID = useSelector(selectUserID);
 
@@ -218,6 +222,8 @@ const CreateWorkout = (): JSX.Element => {
         .then(() => {
           fullReset();
           refreshLocalToken();
+          setInfoModalVisible(true);
+          setTimeout(() => setInfoModalVisible(false), 2000);
         })
         .catch((err) => {
           alert(err.response.data);
@@ -307,6 +313,9 @@ const CreateWorkout = (): JSX.Element => {
             />
           </Footer>
         </>
+      )}
+      {infoModalVisible && (
+        <ModalInformation text="Custom Workout added!" linkTo="/" />
       )}
     </Wrapper>
   );
