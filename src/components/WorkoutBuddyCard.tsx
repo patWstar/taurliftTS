@@ -224,8 +224,6 @@ const WorkoutBuddyCard = ({
 
   const handleSetCurrentExerciseIndex = (action: string): void => {
     setTimerCount("0:00");
-    console.log(currentExerciseIndex);
-    console.log(exercisesInWorkout);
     switch (action) {
       case "Increment": {
         currentExerciseIndex + 1 < exercisesInWorkout.length &&

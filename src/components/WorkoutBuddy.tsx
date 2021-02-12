@@ -235,7 +235,6 @@ const WorkoutBuddy = (): JSX.Element => {
   }, [userID]);
 
   const shareFinishedSet = (newFinishedSet: NewFinishedSet): void => {
-    console.log(newFinishedSet);
     setFinishedSets([...finishedSets, newFinishedSet]);
   };
 
