@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { memo } from "react";
 interface SelectorButtonProps {
   value: string;
   width: string;
@@ -41,4 +41,4 @@ const SelectorButton = ({
     {value}
   </Button>
 );
-export default SelectorButton;
+export default memo(SelectorButton);

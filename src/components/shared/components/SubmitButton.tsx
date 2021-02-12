@@ -1,6 +1,5 @@
-import React from "react";
+import { memo } from "react";
 import styled from "styled-components";
-import { string } from "yargs";
 
 interface SubmitButtonProps {
   value: string;
@@ -55,4 +54,4 @@ const SubmitButton = ({
     {value}
   </Submit>
 );
-export default SubmitButton;
+export default memo(SubmitButton);
