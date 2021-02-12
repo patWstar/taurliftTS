@@ -6,6 +6,7 @@ import styled from "styled-components";
 import SubmitButton from "components/shared/components/SubmitButton";
 //Redux
 //Util
+import refreshLocalToken from "util/refreshLocalToken";
 import Icons from "assets/sprites.svg";
 //~~~~~~~~~~~~~~~~~~~Interfaces & Types
 interface Exercise {
@@ -31,19 +32,28 @@ interface WorkoutBuddyCardProps {
 
 //~~~~~~~~~~~~~~~~~~~Styled Components
 const Wrapper = styled.div`
-  background-color: rgba(0, 0, 0, 0.6);
-  border-radius: 15px;
-  height: 80%;
+  flex: 1;
   width: 80%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-size: 2.4rem;
+  overflow: hidden;
+  padding: 0 3rem;
+`;
+const CardWrapper = styled.div`
+  border-radius: 15px;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 0 3vw;
+  width: 100%;
+  height: 80%;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   font-size: 2.4rem;
-  overflow: hidden;
-  padding: 0 3rem;
 `;
-
 const InfoText = styled.div`
   display: flex;
   width: 90%;
@@ -130,7 +140,7 @@ const ControlButton = styled.button`
     background-color: ${({ theme }) => theme.primaryColor};
   }
 `;
-const Footer = styled.footer`
+const CardFooter = styled.footer`
   height: 20%;
   width: 100%;
   padding-bottom: 2vh;
@@ -138,8 +148,29 @@ const Footer = styled.footer`
   justify-content: space-between;
 `;
 
+const Footer = styled.footer`
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  gap: 8vw;
+  align-items: center;
+`;
+
+const FooterButton = styled.button`
+  width: 30rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: inherit;
+  font-size: 3rem;
+  border-radius: 5px;
+  height: 8rem;
+
+  &:hover {
+    transform: scaleY(-2px);
+    border: 2px ${({ theme }) => theme.primaryColor} solid;
+    font-weight: 500;
+  }
+`;
 let timerInterval: NodeJS.Timeout | null;
-let startingPoint: number = 0;
 //~~~~~~~~~~~~~~~~~~~Component
 const WorkoutBuddyCard = ({
   selectedWorkout,
@@ -157,25 +188,23 @@ const WorkoutBuddyCard = ({
     setExercisesInWorkout(
       selectedWorkout.exercises.map((exercise: Exercise) => exercise)
     );
-    startTimer();
-
-    return () => {
-      timerInterval = null;
-    };
   }, [selectedWorkout]);
 
-  const incrementTimer = () => {
-    startingPoint = startingPoint + 1;
-    const seconds = startingPoint % 10;
-    const tenSeconds = Math.floor(startingPoint / 10) % 6;
-    const minutes = Math.floor(startingPoint / 60);
-    const formatedTime = `${minutes}:${tenSeconds}${seconds}`;
-    setTimerCount(formatedTime);
-  };
-
-  const startTimer = () => {
-    timerInterval = setInterval(incrementTimer, 1000);
-  };
+  useEffect(() => {
+    let startingPoint = 0;
+    let timerInterval = setInterval(() => {
+      startingPoint = startingPoint + 1;
+      const seconds = startingPoint % 10;
+      const tenSeconds = Math.floor(startingPoint / 10) % 6;
+      const minutes = Math.floor(startingPoint / 60);
+      const formatedTime = `${minutes}:${tenSeconds}${seconds}`;
+      setTimerCount(formatedTime);
+    }, 1000);
+    return () => {
+      clearInterval(timerInterval);
+      setTimerCount("0:00");
+    };
+  }, [currentExerciseIndex, selectedWorkout, currentSet]);
 
   const handleSetRep = (action: string): void => {
     switch (action) {
@@ -193,6 +222,27 @@ const WorkoutBuddyCard = ({
     }
   };
 
+  const handleSetCurrentExerciseIndex = (action: string): void => {
+    setTimerCount("0:00");
+    console.log(currentExerciseIndex);
+    console.log(exercisesInWorkout);
+    switch (action) {
+      case "Increment": {
+        currentExerciseIndex + 1 < exercisesInWorkout.length &&
+          setCurrentExerciseIndex(currentExerciseIndex + 1);
+        break;
+      }
+      case "Decrement": {
+        currentExerciseIndex - 1 >= 0 &&
+          setCurrentExerciseIndex(currentExerciseIndex - 1);
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+  };
+
   const handleEndSet = () => {
     const newFinishedSet: NewFinishedSet = {
       exerciseName: exercisesInWorkout[currentExerciseIndex].exerciseName,
@@ -201,69 +251,85 @@ const WorkoutBuddyCard = ({
       weight: exerciseWeight,
     };
     shareFinishedSet(newFinishedSet);
-
-    timerInterval = null;
-    setTimerCount("0:00");
-    startingPoint = 0;
     setCurrentSet(currentSet + 1);
+    setRepCount(1);
+    refreshLocalToken();
   };
 
   //~~~~~~~~~~~~~~~~~~~Render
   return (
     <Wrapper>
-      {exercisesInWorkout.length > 0 && (
-        <>
-          <InfoText>
-            <span>
-              <h1>
-                {exercisesInWorkout[currentExerciseIndex].exerciseName}
-                {exerciseWeight && exerciseWeight}
-              </h1>
-            </span>
-            <span>
-              <h2>Set: {currentSet}</h2>
-            </span>
-          </InfoText>
-          <Content>
-            <TimerContainer>
-              <h3>Timer</h3>
-              <h2>{timerCount}</h2>
-            </TimerContainer>
-            <RepsContainer>
-              <h2>Reps</h2>
-              <RepControls>
-                <ControlButton onClick={() => handleSetRep("Decrement")}>
-                  <svg className="exercise-card__reps-controls-control-icon">
-                    <use xlinkHref={`${Icons}#icon-reply`} />
-                  </svg>
-                </ControlButton>
-                <h2>{repCount}</h2>
-                <ControlButton onClick={() => handleSetRep("Increment")}>
-                  <svg className="exercise-card__reps-controls-control-icon">
-                    <use xlinkHref={`${Icons}#icon-forward`} />
-                  </svg>
-                </ControlButton>
-              </RepControls>
-            </RepsContainer>
-          </Content>
-          <Footer>
-            <SubmitButton
-              value="Set Weight"
-              width="30%"
-              height="100%"
-              borderColor="primary"
-              fontSize="2vmin"
-            />
-            <SubmitButton
-              value="End Set"
-              width="30%"
-              height="100%"
-              fontSize="2vmin"
-              onClick={handleEndSet}
-            />
-          </Footer>
-        </>
-      )}
+      <CardWrapper>
+        {exercisesInWorkout.length > 0 && (
+          <>
+            <InfoText>
+              <span>
+                <p>{`${currentExerciseIndex + 1} of ${
+                  exercisesInWorkout.length
+                }`}</p>
+                <h1>
+                  {exercisesInWorkout[currentExerciseIndex].exerciseName}{" "}
+                  {exerciseWeight && exerciseWeight}
+                </h1>
+              </span>
+
+              <span>
+                <h2>Set: {currentSet}</h2>
+              </span>
+            </InfoText>
+            <Content>
+              <TimerContainer>
+                <h3>Timer</h3>
+                <h2>{timerCount}</h2>
+              </TimerContainer>
+              <RepsContainer>
+                <h2>Reps</h2>
+                <RepControls>
+                  <ControlButton onClick={() => handleSetRep("Decrement")}>
+                    <svg className="exercise-card__reps-controls-control-icon">
+                      <use xlinkHref={`${Icons}#icon-reply`} />
+                    </svg>
+                  </ControlButton>
+                  <h2>{repCount}</h2>
+                  <ControlButton onClick={() => handleSetRep("Increment")}>
+                    <svg className="exercise-card__reps-controls-control-icon">
+                      <use xlinkHref={`${Icons}#icon-forward`} />
+                    </svg>
+                  </ControlButton>
+                </RepControls>
+              </RepsContainer>
+            </Content>
+            <CardFooter>
+              <SubmitButton
+                value="Set Weight"
+                width="30%"
+                height="100%"
+                borderColor="primary"
+                fontSize="2vmin"
+              />
+              <SubmitButton
+                value="End Set"
+                width="30%"
+                height="100%"
+                fontSize="2vmin"
+                onClick={handleEndSet}
+              />
+            </CardFooter>
+          </>
+        )}
+      </CardWrapper>
+      <Footer>
+        <FooterButton
+          onClick={() => handleSetCurrentExerciseIndex("Decrement")}
+        >
+          Previous Exercise
+        </FooterButton>
+        <FooterButton
+          onClick={() => handleSetCurrentExerciseIndex("Increment")}
+        >
+          Next Exercise
+        </FooterButton>
+      </Footer>
     </Wrapper>
   );
 };

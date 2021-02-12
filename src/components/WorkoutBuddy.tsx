@@ -30,6 +30,12 @@ interface NewFinishedSet {
   setNumber: number;
   weight?: number | null;
 }
+
+interface NewFinishedWorkout {
+  name: string;
+  exercises: NewFinishedSet[];
+  createdAt: string;
+}
 //~~~~~~~~~~~~~~~~~~~Styled Components
 const Wrapper = styled.div`
   height: 100%;
@@ -70,28 +76,6 @@ const ContentHeader = styled.header`
   width: 100%;
   & > h1 {
     font-size: 2.6rem;
-  }
-`;
-const Footer = styled.footer`
-  height: fit-content;
-  display: flex;
-  justify-content: center;
-  gap: 8vw;
-  align-items: center;
-`;
-
-const FooterButton = styled.button`
-  width: 30rem;
-  background-color: rgba(0, 0, 0, 0.2);
-  color: inherit;
-  font-size: 3rem;
-  border-radius: 5px;
-  height: 8rem;
-
-  &:hover {
-    transform: scaleY(-2px);
-    border: 2px ${({ theme }) => theme.primaryColor} solid;
-    font-weight: 500;
   }
 `;
 
@@ -162,12 +146,64 @@ const SelectWorkoutButton = styled.button`
     background: ${({ theme }) => theme.secondaryColorLight};
   }
 `;
+
+const FinishedSetWrapper = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 4vh 2vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  height: 80%;
+  border-radius: 36px;
+  background: rgba(0, 0, 0);
+  border: 2px solid ${({ theme }) => theme.primaryColor};
+  z-index: 10;
+  overflow: auto;
+  scroll-behavior: smooth;
+  &::-webkit-scrollbar {
+    width: 1rem;
+    scroll-behavior: smooth;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #555;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #f1f1f1;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #f1f1f1;
+  }
+`;
+
+const FinishedSetItem = styled.div`
+  border: ${({ theme }) => theme.primaryColor} 1px solid;
+  width: 100%;
+  color: inherit;
+  font-size: 2rem;
+  padding: 1rem;
+  font-size: 2vmin;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  & > * {
+    border: 1px solid black;
+  }
+`;
 //~~~~~~~~~~~~~~~~~~~Component
 const WorkoutBuddy = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [workouts, setWorkouts] = useState<Workout[]>([]);
   const [selectedWorkout, setSelectedWorkout] = useState<Workout | null>(null);
   const [finishedSets, setFinishedSets] = useState<NewFinishedSet[]>([]);
+  const [finishedSetsVisible, setFinishedSetsVisible] = useState<boolean>(
+    false
+  );
 
   const userID = useSelector(selectUserID);
 
@@ -202,8 +238,41 @@ const WorkoutBuddy = (): JSX.Element => {
     setFinishedSets([...finishedSets, newFinishedSet]);
   };
 
-  const showFinishedSets = (): void => {
-    console.log(finishedSets);
+  const toggleFinishedSetsVisibility = (): void => {
+    setFinishedSetsVisible(!finishedSetsVisible);
+  };
+
+  const changeWorkoutsHandler = (): void => {
+    setSelectedWorkout(null);
+    setFinishedSets([]);
+  };
+
+  const saveWorkoutHandler = (): void => {
+    if (finishedSets.length === 0) {
+      alert("No exercises completed :(");
+      return;
+    }
+    if (selectedWorkout) {
+      const newFinishedWorkout: NewFinishedWorkout = {
+        createdAt: new Date().toLocaleString(),
+        exercises: finishedSets,
+        name: selectedWorkout.name,
+      };
+
+      setIsLoading(true);
+
+      axios
+        .post("/workouts", newFinishedWorkout)
+        .then(() => {
+          setIsLoading(false);
+
+          refreshLocalToken();
+        })
+        .catch((err) => {
+          console.error(err);
+          setIsLoading(false);
+        });
+    }
   };
   //~~~~~~~~~~~~~~~~~~~Render
   return (
@@ -214,10 +283,11 @@ const WorkoutBuddy = (): JSX.Element => {
         <>
           <ButtonRow>
             <SelectorButton
-              value="Workout List"
+              value="Change Workout"
               width="40%"
               fontSize="2rem"
               height="10rem"
+              onClick={changeWorkoutsHandler}
             />
             <SelectorButton
               value="New Workout"
@@ -231,10 +301,18 @@ const WorkoutBuddy = (): JSX.Element => {
               <h1>{selectedWorkout.name}</h1>
               <SubmitButton
                 value="Show Completed Sets"
-                width="30%"
+                width="20%"
                 height="fit-content"
                 fontSize="2.2rem"
-                onClick={showFinishedSets}
+                onClick={toggleFinishedSetsVisibility}
+              />
+              <SubmitButton
+                value="Save Workout to Profile"
+                width="20%"
+                height="fit-content"
+                fontSize="2.2rem"
+                borderColor="primary"
+                onClick={saveWorkoutHandler}
               />
             </ContentHeader>
             <WorkoutBuddyCard
@@ -242,10 +320,23 @@ const WorkoutBuddy = (): JSX.Element => {
               shareFinishedSet={shareFinishedSet}
             />
           </ContentWrapper>
-          <Footer>
-            <FooterButton>Previous Exercise</FooterButton>
-            <FooterButton>Next Exercise</FooterButton>
-          </Footer>
+          {finishedSetsVisible && (
+            <>
+              <DarkBackground onClick={toggleFinishedSetsVisibility} />
+              <FinishedSetWrapper>
+                {finishedSets.map((finishedSet) => (
+                  <FinishedSetItem>
+                    <span>{finishedSet.exerciseName}</span>
+                    <span>Reps: {finishedSet.repsDoneCount}</span>
+                    <span>Set: {finishedSet.setNumber}</span>
+                    <span>
+                      Weight: {finishedSet.weight ? finishedSet.weight : "N/A"}
+                    </span>
+                  </FinishedSetItem>
+                ))}
+              </FinishedSetWrapper>
+            </>
+          )}
         </>
       ) : (
         <>
