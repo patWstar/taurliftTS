@@ -25,16 +25,17 @@ interface Workout {
   createdAt: string;
 }
 interface NewFinishedSet {
-  exerciseName: string;
+  name: string;
   repsDoneCount: number;
   setNumber: number;
   weight?: number | null;
 }
 
 interface NewFinishedWorkout {
-  name: string;
+  workoutName: string;
   exercises: NewFinishedSet[];
   createdAt: string;
+  userID: string;
 }
 //~~~~~~~~~~~~~~~~~~~Styled Components
 const Wrapper = styled.div`
@@ -252,11 +253,12 @@ const WorkoutBuddy = (): JSX.Element => {
       alert("No exercises completed :(");
       return;
     }
-    if (selectedWorkout) {
+    if (selectedWorkout && finishedSets.length > 0) {
       const newFinishedWorkout: NewFinishedWorkout = {
         createdAt: new Date().toLocaleString(),
         exercises: finishedSets,
-        name: selectedWorkout.name,
+        workoutName: selectedWorkout.name,
+        userID: userID,
       };
 
       setIsLoading(true);
@@ -326,7 +328,7 @@ const WorkoutBuddy = (): JSX.Element => {
               <FinishedSetWrapper>
                 {finishedSets.map((finishedSet) => (
                   <FinishedSetItem>
-                    <span>{finishedSet.exerciseName}</span>
+                    <span>{finishedSet.name}</span>
                     <span>Reps: {finishedSet.repsDoneCount}</span>
                     <span>Set: {finishedSet.setNumber}</span>
                     <span>

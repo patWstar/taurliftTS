@@ -15,7 +15,7 @@ interface Exercise {
   workoutName: string;
 }
 interface NewFinishedSet {
-  exerciseName: string;
+  name: string;
   repsDoneCount: number;
   setNumber: number;
   weight?: number | null;
@@ -245,7 +245,7 @@ const WorkoutBuddyCard = ({
 
   const handleEndSet = () => {
     const newFinishedSet: NewFinishedSet = {
-      exerciseName: exercisesInWorkout[currentExerciseIndex].exerciseName,
+      name: exercisesInWorkout[currentExerciseIndex].exerciseName,
       repsDoneCount: repCount,
       setNumber: currentSet,
       weight: exerciseWeight,

@@ -72,7 +72,7 @@ const Header = styled.header`
 const Content = styled.table`
   table-layout: fixed;
   width: 100%;
-  height: 85%;
+  height: 70%;
   text-align: left;
 
   & th {
