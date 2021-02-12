@@ -9,8 +9,8 @@ import DarkBackground from "components/shared/components/DarkBackground";
 //~~~~~~~~~~~~~~~~~~~Interfaces & Types
 interface ModalConfirmationProps {
   text: string;
-  onAccept: void | (() => void);
-  backGroundClick?: void | (() => void);
+  onAccept: void | (() => void) | any;
+  backGroundClick?: void | (() => void) | any;
 }
 
 //~~~~~~~~~~~~~~~~~~~Styled Components
@@ -63,17 +63,22 @@ const ModalConfirmation = ({
         <Text>{text}</Text>
         <ButtonRow>
           <SubmitButton
-            value="cancel"
+            value="Cancel"
             width="30%"
             borderColor="red"
             fontSize="inherit"
-            danger={true}
+            onClick={backGroundClick}
           />
           <SubmitButton
             value="Proceed"
             width="30%"
             borderColor="lighCoral"
             fontSize="inherit"
+            danger={true}
+            onClick={() => {
+              onAccept();
+              backGroundClick();
+            }}
           />
         </ButtonRow>
       </Wrapper>

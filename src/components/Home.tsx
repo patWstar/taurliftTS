@@ -19,6 +19,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: linear-gradient(to top, #464747, #6e7270);
   background-image: url("./backgrounds/backgroundMAX.jpg");
   background-size: cover;
   background-repeat: no-repeat;

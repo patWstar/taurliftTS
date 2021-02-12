@@ -1,12 +1,16 @@
-import React from "react";
+//Fundamentals
+import React, { useState } from "react";
+import { NavLink, useHistory } from "react-router-dom";
+import styled, { keyframes } from "styled-components";
+//Components
+import ModalConfirmation from "components/shared/components/ModalConfirmation";
+//Redux
 import { logout, selectAuthenticated } from "redux/Slices/UserSlice";
 import { useSelector, useDispatch } from "react-redux";
-import styled, { keyframes } from "styled-components";
-import Icons from "assets/sprites.svg";
+//Util
 import loggedInByczq from "assets/icons/gotowy2.svg";
 import loggedOutByczq from "assets/icons/gotowy1.svg";
-import { NavLink } from "react-router-dom";
-
+import Icons from "assets/sprites.svg";
 //~~~~~~~~~~~~~~~~~~~Interfaces & types
 type NavsProps = {
   logged: boolean;
@@ -65,8 +69,7 @@ const Nav = styled(NavLink)<NavProps>`
   }
   &:hover {
     letter-spacing: 1px;
-    color: ${({ danger, theme }) =>
-      danger ? "lightcoral" : theme.secondaryColorDark};
+    color: ${({ theme }) => theme.secondaryColorDark};
   }
 
   &.${({ activeClassName }) => activeClassName} {
@@ -75,14 +78,40 @@ const Nav = styled(NavLink)<NavProps>`
     animation: ${activeLinkBackground} 0.4s ease-out 1;
   }
 `;
+
+const LogoutButton = styled.button`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: inherit;
+  font-weight: 700;
+  transition: 0.4s;
+  height: 100%;
+  font-size: 2rem;
+
+  &:hover {
+    letter-spacing: 1px;
+    color: red;
+  }
+`;
 //~~~~~~~~~~~~~~~~~~~Component
 const Navbar = (): JSX.Element => {
+  const [
+    confirmationModalVisible,
+    setConfirmationModalVisible,
+  ] = useState<boolean>(false);
   const dispatch = useDispatch();
   const authenticated: boolean = useSelector(selectAuthenticated);
 
+  const history = useHistory();
+
   const logoutHandler = () => {
     dispatch(logout());
+
+    history.push("/");
   };
+
   return (
     <Container>
       {authenticated ? (
@@ -115,9 +144,9 @@ const Navbar = (): JSX.Element => {
               </svg>
               Workouts
             </Nav>
-            <Nav to="/" danger="danger" onClick={logoutHandler}>
+            <LogoutButton onClick={() => setConfirmationModalVisible(true)}>
               Logout
-            </Nav>
+            </LogoutButton>
           </Navs>
         </>
       ) : (
@@ -146,6 +175,13 @@ const Navbar = (): JSX.Element => {
             </Nav>
           </Navs>
         </>
+      )}
+      {confirmationModalVisible && (
+        <ModalConfirmation
+          text="Are you sure you want to logout?"
+          backGroundClick={() => setConfirmationModalVisible(false)}
+          onAccept={logoutHandler}
+        />
       )}
     </Container>
   );

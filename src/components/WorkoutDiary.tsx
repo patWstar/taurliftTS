@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Spinner from "components/shared/components/Spinner";
 import WorkoutDetailsModal from "components/WorkoutDetailsModal";
 import ModalInformation from "components/shared/components/ModalInformation";
+import ModalConfirmation from "components/shared/components/ModalConfirmation";
 //Redux
 import { selectUserID } from "redux/Slices/UserSlice";
 import { useSelector } from "react-redux";
@@ -107,11 +108,16 @@ const WorkoutDiary = (): JSX.Element => {
   const [finishedWorkouts, setFinishedWorkouts] = useState<FinishedWorkout[]>(
     []
   );
+  const [deletionIndex, setDeletionIndex] = useState<number>(0);
   const [detailModal, setDetailModal] = useState<JSX.Element | null>(null);
   const [detailModalVisible, setDetailModalVisible] = useState<boolean>(false);
   const [infoModalVisible, setInfoModalVisible] = React.useState<boolean>(
     false
   );
+  const [
+    confirmationModalVisible,
+    setConfirmationModalVisible,
+  ] = useState<boolean>(false);
 
   const userID = useSelector(selectUserID);
 
@@ -213,7 +219,10 @@ const WorkoutDiary = (): JSX.Element => {
                     </OptionButton>
                     <OptionButton
                       erase={true}
-                      onClick={() => handleDelete(index)}
+                      onClick={() => {
+                        setDeletionIndex(index);
+                        setConfirmationModalVisible(true);
+                      }}
                     >
                       Erase
                     </OptionButton>
@@ -226,6 +235,13 @@ const WorkoutDiary = (): JSX.Element => {
         </Content>
       )}
       {infoModalVisible && <ModalInformation text="Workout Entry Erased" />}
+      {confirmationModalVisible && (
+        <ModalConfirmation
+          text="Are you sure you want to delete this entry?"
+          backGroundClick={() => setConfirmationModalVisible(false)}
+          onAccept={() => handleDelete(deletionIndex)}
+        />
+      )}
     </Wrapper>
   );
 };

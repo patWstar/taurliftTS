@@ -8,7 +8,7 @@ interface SubmitButtonProps {
   fontSize?: string;
   borderColor?: string;
   danger?: boolean;
-  onClick?: () => void;
+  onClick?: void | (() => void) | any;
 }
 
 const Submit = styled.button<SubmitButtonProps>`

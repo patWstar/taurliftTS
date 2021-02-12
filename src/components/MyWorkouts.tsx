@@ -6,6 +6,7 @@ import axios from "axios";
 import SubmitButton from "components/shared/components/SubmitButton";
 import Spinner from "components/shared/components/Spinner";
 import ModalInformation from "components/shared/components/ModalInformation";
+import ModalConfirmation from "components/shared/components/ModalConfirmation";
 //Redux
 import { selectUserID } from "redux/Slices/UserSlice";
 import { useSelector } from "react-redux";
@@ -144,6 +145,10 @@ const MyWorkouts = (): JSX.Element => {
   const [infoModalVisible, setInfoModalVisible] = React.useState<boolean>(
     false
   );
+  const [
+    confirmationModalVisible,
+    setConfirmationModalVisible,
+  ] = useState<boolean>(false);
 
   useEffect(() => {
     let source = axios.CancelToken.source();
@@ -275,11 +280,18 @@ const MyWorkouts = (): JSX.Element => {
                 width="30rem"
                 height="7rem"
                 fontSize="2rem"
-                onClick={handleDelete}
+                onClick={() => setConfirmationModalVisible(true)}
               />
             )}
           </Footer>
         </>
+      )}
+      {confirmationModalVisible && (
+        <ModalConfirmation
+          text="Are you sure you want to delete this workout?"
+          backGroundClick={() => setConfirmationModalVisible(false)}
+          onAccept={handleDelete}
+        />
       )}
       {infoModalVisible && <ModalInformation text="Custom Workout Deleted" />}
     </Wrapper>
