@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
 //Components
 import SubmitButton from "components/shared/components/SubmitButton";
 import Spinner from "components/shared/components/Spinner";

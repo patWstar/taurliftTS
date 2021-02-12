@@ -53,3 +53,10 @@ const App = (): JSX.Element => {
 };
 
 export default App;
+
+//todo
+//funkcjonalnosc w create workout
+//workout buddy
+//kalkulatory
+//media queriesy
+//react testing i jest
