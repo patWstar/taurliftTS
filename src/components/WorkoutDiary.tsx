@@ -8,7 +8,7 @@ import WorkoutDetailsModal from "components/WorkoutDetailsModal";
 import ModalInformation from "components/shared/components/ModalInformation";
 import ModalConfirmation from "components/shared/components/ModalConfirmation";
 //Redux
-import { selectUserID } from "redux/Slices/UserSlice";
+import { selectUserID, selectAuthenticated } from "redux/Slices/UserSlice";
 import { useSelector } from "react-redux";
 //Util
 import refreshLocalToken from "util/refreshLocalToken";
@@ -120,26 +120,28 @@ const WorkoutDiary = (): JSX.Element => {
   ] = useState<boolean>(false);
 
   const userID = useSelector(selectUserID);
-
+  const authenticated = useSelector(selectAuthenticated);
   useEffect(() => {
     let source = axios.CancelToken.source();
+    if (authenticated) {
+      axios
+        .get("/workouts", {
+          headers: {
+            userID: userID,
+          },
+        })
+        .then(({ data }) => {
+          setFinishedWorkouts(data);
+          setIsLoading(false);
+          refreshLocalToken();
+        })
+        .catch((err) => {
+          setIsLoading(false);
+          alert("Couldn't get workouts.");
+          source.cancel();
+        });
+    }
 
-    axios
-      .get("/workouts", {
-        headers: {
-          userID: userID,
-        },
-      })
-      .then(({ data }) => {
-        setFinishedWorkouts(data);
-        setIsLoading(false);
-        refreshLocalToken();
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        alert("Couldn't get workouts.");
-        source.cancel();
-      });
     return () => {
       source.cancel();
     };
@@ -181,66 +183,72 @@ const WorkoutDiary = (): JSX.Element => {
   //~~~~~~~~~~~~~~~~~~~Render
   return (
     <Wrapper>
-      <Header>
-        <h1>Workout Diary</h1>
-        <h2>Completed Workouts</h2>
-      </Header>
-      {isLoading ? (
-        <Spinner height="10rem" width="8rem" />
+      {authenticated ? (
+        <>
+          <Header>
+            <h1>Workout Diary</h1>
+            <h2>Completed Workouts</h2>
+          </Header>
+          {isLoading ? (
+            <Spinner height="10rem" width="8rem" />
+          ) : (
+            <Content>
+              <thead>
+                <tr>
+                  <th scope="col" colSpan={2}>
+                    Workout Name
+                  </th>
+                  <th scope="col" colSpan={2}>
+                    Date and Time
+                  </th>
+                  <th scope="col">Options</th>
+                </tr>
+              </thead>
+              <tbody>
+                {finishedWorkouts.map((workout, index) => {
+                  return (
+                    <Row
+                      index={index}
+                      isOdd={!(index % 2) ? true : false}
+                      key={index}
+                    >
+                      <td colSpan={2}>{workout.workoutName}</td>
+                      <td colSpan={2}>{workout.createdAt}</td>
+                      <ButtonTD colSpan={1}>
+                        <OptionButton
+                          erase={false}
+                          onClick={() => showDetailModal(workout, index)}
+                        >
+                          Details
+                        </OptionButton>
+                        <OptionButton
+                          erase={true}
+                          onClick={() => {
+                            setDeletionIndex(index);
+                            setConfirmationModalVisible(true);
+                          }}
+                        >
+                          Erase
+                        </OptionButton>
+                      </ButtonTD>
+                    </Row>
+                  );
+                })}
+              </tbody>
+              {detailModalVisible && detailModal}
+            </Content>
+          )}
+          {infoModalVisible && <ModalInformation text="Workout Entry Erased" />}
+          {confirmationModalVisible && (
+            <ModalConfirmation
+              text="Are you sure you want to delete this entry?"
+              backGroundClick={() => setConfirmationModalVisible(false)}
+              onAccept={() => handleDelete(deletionIndex)}
+            />
+          )}
+        </>
       ) : (
-        <Content>
-          <thead>
-            <tr>
-              <th scope="col" colSpan={2}>
-                Workout Name
-              </th>
-              <th scope="col" colSpan={2}>
-                Date and Time
-              </th>
-              <th scope="col">Options</th>
-            </tr>
-          </thead>
-          <tbody>
-            {finishedWorkouts.map((workout, index) => {
-              return (
-                <Row
-                  index={index}
-                  isOdd={!(index % 2) ? true : false}
-                  key={index}
-                >
-                  <td colSpan={2}>{workout.workoutName}</td>
-                  <td colSpan={2}>{workout.createdAt}</td>
-                  <ButtonTD colSpan={1}>
-                    <OptionButton
-                      erase={false}
-                      onClick={() => showDetailModal(workout, index)}
-                    >
-                      Details
-                    </OptionButton>
-                    <OptionButton
-                      erase={true}
-                      onClick={() => {
-                        setDeletionIndex(index);
-                        setConfirmationModalVisible(true);
-                      }}
-                    >
-                      Erase
-                    </OptionButton>
-                  </ButtonTD>
-                </Row>
-              );
-            })}
-          </tbody>
-          {detailModalVisible && detailModal}
-        </Content>
-      )}
-      {infoModalVisible && <ModalInformation text="Workout Entry Erased" />}
-      {confirmationModalVisible && (
-        <ModalConfirmation
-          text="Are you sure you want to delete this entry?"
-          backGroundClick={() => setConfirmationModalVisible(false)}
-          onAccept={() => handleDelete(deletionIndex)}
-        />
+        <ModalInformation text="The Diary Feature is only available for users who are logged in" />
       )}
     </Wrapper>
   );

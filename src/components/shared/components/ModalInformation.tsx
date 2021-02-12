@@ -27,8 +27,10 @@ const Wrapper = styled.div<WrapperProps>`
   display: ${({ visibility }) => (visibility ? "flex" : "none")};
   justify-content: center;
   align-items: center;
-  font-size: 3vmin;
+  font-size: 2vmin;
   color: ${({ theme }) => theme.textColor};
+  text-align: center;
+  padding: 0 2vw;
 `;
 
 //~~~~~~~~~~~~~~~~~~~Component

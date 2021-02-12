@@ -7,6 +7,9 @@ import WorkoutCard from "components/shared/components/WorkoutCard";
 import CustomWorkouts from "components/CustomWorkouts";
 import { Route, Switch } from "react-router-dom";
 import WorkoutBuddy from "./WorkoutBuddy";
+import { useSelector } from "react-redux";
+import { selectAuthenticated } from "redux/Slices/UserSlice";
+import ModalInformation from "components/shared/components/ModalInformation";
 
 //~~~~~~~~~~~~~~~~~~~Styled Components
 const Wrapper = styled.main`
@@ -19,36 +22,45 @@ const Wrapper = styled.main`
 `;
 //~~~~~~~~~~~~~~~~~~~Component
 const Workouts = (): JSX.Element => {
+  const authenticated = useSelector(selectAuthenticated);
   return (
-    <Switch>
-      <Route path="/workouts/CustomWorkouts" component={CustomWorkouts} />
-      <Route path="/workouts/WorkoutBuddy" component={WorkoutBuddy} />
-      <Route
-        path="/workouts"
-        component={() => (
-          <Wrapper>
-            <WorkoutCard
-              imgSrc={cardImageDiary}
-              header="Workout Diary"
-              textContent="See completed workouts!"
-              linkTo="/diary"
+    <>
+      {authenticated ? (
+        <>
+          <Switch>
+            <Route path="/workouts/CustomWorkouts" component={CustomWorkouts} />
+            <Route path="/workouts/WorkoutBuddy" component={WorkoutBuddy} />
+            <Route
+              path="/workouts"
+              component={() => (
+                <Wrapper>
+                  <WorkoutCard
+                    imgSrc={cardImageDiary}
+                    header="Workout Diary"
+                    textContent="See completed workouts!"
+                    linkTo="/diary"
+                  />
+                  <WorkoutCard
+                    imgSrc={cardImageCustomWorkout}
+                    header="My Workouts"
+                    textContent="Create custom workouts!"
+                    linkTo="/workouts/CustomWorkouts/CreateWorkout"
+                  ></WorkoutCard>
+                  <WorkoutCard
+                    imgSrc={cardImageWorkoutAssistant}
+                    header="Workout Buddy"
+                    textContent="Start a workout!"
+                    linkTo="/workouts/WorkoutBuddy"
+                  ></WorkoutCard>
+                </Wrapper>
+              )}
             />
-            <WorkoutCard
-              imgSrc={cardImageCustomWorkout}
-              header="My Workouts"
-              textContent="Create custom workouts!"
-              linkTo="/workouts/CustomWorkouts/CreateWorkout"
-            ></WorkoutCard>
-            <WorkoutCard
-              imgSrc={cardImageWorkoutAssistant}
-              header="Workout Buddy"
-              textContent="Start a workout!"
-              linkTo="/workouts/WorkoutBuddy"
-            ></WorkoutCard>
-          </Wrapper>
-        )}
-      />
-    </Switch>
+          </Switch>
+        </>
+      ) : (
+        <ModalInformation text="The Workout Feature is only available for users who are logged in" />
+      )}
+    </>
   );
 };
 

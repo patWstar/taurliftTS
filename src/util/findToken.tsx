@@ -12,7 +12,7 @@ const findToken = (): void => {
   const token: string = localStorage.token;
   const refreshToken: string = localStorage.refreshToken;
 
-  if (token) {
+  if (token && token !== undefined && token !== "undefined") {
     const decodedToken: DecodedToken = jwtDecode(token);
     if (decodedToken) {
       if (decodedToken.exp * 1000 < Date.now()) {
