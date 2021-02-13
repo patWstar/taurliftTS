@@ -2,12 +2,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 //Components
-
 import SubmitButton from "components/shared/components/SubmitButton";
 //Redux
 //Util
 import refreshLocalToken from "util/refreshLocalToken";
 import Icons from "assets/sprites.svg";
+import BuddyWeightWindow from "components/BuddyWeightWindow";
 //~~~~~~~~~~~~~~~~~~~Interfaces & Types
 interface Exercise {
   exerciseName: string;
@@ -32,8 +32,8 @@ interface WorkoutBuddyCardProps {
 
 //~~~~~~~~~~~~~~~~~~~Styled Components
 const Wrapper = styled.div`
-  flex: 1;
   width: 80%;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -41,18 +41,30 @@ const Wrapper = styled.div`
   font-size: 2.4vmin;
   overflow: hidden;
   padding: 0 2vw;
+  @media only screen and (max-width: 56.25em) {
+    width: 100%;
+  }
+  @media only screen and (max-width: 37.5em) {
+    justify-content: flex-start;
+    padding: 0;
+    height: fit-content;
+  }
 `;
 const CardWrapper = styled.div`
   border-radius: 15px;
   background-color: rgba(0, 0, 0, 0.6);
   padding: 0 3vw;
   width: 100%;
-  height: 80%;
+  flex: 1;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   font-size: 2.4vmin;
+  @media only screen and (max-width: 37.5em) {
+    flex: 0;
+    height: fit-content;
+  }
 `;
 const InfoText = styled.div`
   display: flex;
@@ -69,12 +81,19 @@ const InfoText = styled.div`
   & h2 {
     font-size: 4vmin;
   }
+  @media only screen and (max-width: 37.5em) {
+    height: 10%;
+  }
 `;
 
 const Content = styled.main`
   height: 60%;
   width: 100%;
   display: flex;
+  @media only screen and (max-width: 37.5em) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const TimerContainer = styled.article`
@@ -89,13 +108,20 @@ const TimerContainer = styled.article`
   & > h3 {
     font-size: 4vmin;
     color: ${({ theme }) => theme.secondaryColorLight};
+    @media only screen and (max-width: 37.5em) {
+      font-size: 5vmin;
+    }
+  }
+  @media only screen and (max-width: 37.5em) {
+    width: 100%;
+    height: fit-content;
+    gap: 1vh;
   }
 `;
 
 const RepsContainer = styled.article`
   width: 50%;
   align-self: stretch;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -105,8 +131,15 @@ const RepsContainer = styled.article`
   & > h2 {
     font-size: 3vmin;
     color: ${({ theme }) => theme.primaryColor};
+    @media only screen and (max-width: 37.5em) {
+      display: none;
+    }
   }
-  & > h3 {
+
+  @media only screen and (max-width: 37.5em) {
+    width: 100%;
+    flex: 1;
+    height: 70%;
   }
 `;
 
@@ -133,11 +166,22 @@ const ControlButton = styled.button`
     fill: currentColor;
     width: 100%;
     height: 100%;
+    @media only screen and (max-width: 37.5em) {
+      width: 80%;
+      height: 70%;
+    }
   }
 
   &:hover,
   &:focus {
     background-color: ${({ theme }) => theme.primaryColor};
+  }
+
+  @media only screen and (max-width: 37.5em) {
+    width: 30%;
+  }
+  @media only screen and (max-width: 37.5em) {
+    height: 50%;
   }
 `;
 const CardFooter = styled.footer`
@@ -146,14 +190,25 @@ const CardFooter = styled.footer`
   padding-bottom: 2vh;
   display: flex;
   justify-content: space-between;
+
+  & button {
+    @media only screen and (max-width: 37.5em) {
+      font-size: 3vmin;
+      padding: 0;
+    }
+  }
 `;
 
 const Footer = styled.footer`
-  height: fit-content;
+  height: 10%;
   display: flex;
   justify-content: center;
   gap: 8vw;
   align-items: center;
+
+  @media only screen and (max-width: 37.5em) {
+    flex: 1;
+  }
 `;
 
 const FooterButton = styled.button`
@@ -162,15 +217,17 @@ const FooterButton = styled.button`
   color: inherit;
   font-size: 3vmin;
   border-radius: 5px;
-  height: 8vh;
+  height: 100%;
 
   &:hover {
     transform: scaleY(-2px);
     border: 2px ${({ theme }) => theme.primaryColor} solid;
     font-weight: 500;
   }
+  @media only screen and (max-width: 37.5em) {
+    font-size: 4vmin;
+  }
 `;
-let timerInterval: NodeJS.Timeout | null;
 //~~~~~~~~~~~~~~~~~~~Component
 const WorkoutBuddyCard = ({
   selectedWorkout,
@@ -178,6 +235,9 @@ const WorkoutBuddyCard = ({
 }: WorkoutBuddyCardProps): JSX.Element => {
   const [exercisesInWorkout, setExercisesInWorkout] = useState<Exercise[]>([]);
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState<number>(0);
+  const [weightWindowVisible, setWeightWindowVisible] = useState<boolean>(
+    false
+  );
 
   const [timerCount, setTimerCount] = useState<string>("0:00");
   const [exerciseWeight, setExerciseWeight] = useState<number | null>(null);
@@ -241,7 +301,11 @@ const WorkoutBuddyCard = ({
     }
   };
 
-  const handleEndSet = () => {
+  const handleSetWeight = (weight: number): void => {
+    setExerciseWeight(weight);
+    setWeightWindowVisible(false);
+  };
+  const handleEndSet = (): void => {
     const newFinishedSet: NewFinishedSet = {
       name: exercisesInWorkout[currentExerciseIndex].exerciseName,
       repsDoneCount: repCount,
@@ -267,7 +331,7 @@ const WorkoutBuddyCard = ({
                 }`}</p>
                 <h1>
                   {exercisesInWorkout[currentExerciseIndex].exerciseName}{" "}
-                  {exerciseWeight && exerciseWeight}
+                  {exerciseWeight && `${exerciseWeight}kg`}
                 </h1>
               </span>
 
@@ -304,6 +368,7 @@ const WorkoutBuddyCard = ({
                 height="100%"
                 borderColor="primary"
                 fontSize="2vmin"
+                onClick={() => setWeightWindowVisible(true)}
               />
               <SubmitButton
                 value="End Set"
@@ -328,6 +393,12 @@ const WorkoutBuddyCard = ({
           Next Exercise
         </FooterButton>
       </Footer>
+      {weightWindowVisible && (
+        <BuddyWeightWindow
+          handleSetWeight={handleSetWeight}
+          onBackgroundClick={() => setWeightWindowVisible(false)}
+        />
+      )}
     </Wrapper>
   );
 };

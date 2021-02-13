@@ -57,6 +57,10 @@ const Content = styled.form`
   gap: 5vh;
   align-items: center;
   font-size: 2vmin;
+  @media only screen and (max-width: 37.5em) {
+    font-size: 3vmin;
+    text-align: center;
+  }
 `;
 
 //~~~~~~~~~~~~~~~~~~~Component
@@ -100,7 +104,7 @@ const CalculatorBMI = ({ shareBMIResult }: CalculatorBMIProps): JSX.Element => {
         <label htmlFor="userCalories">Height</label>
         <FormTextInput
           name="userCalories"
-          placeholder="Daily"
+          placeholder="Centimeters"
           width="30%"
           reactRef={heightInputRef}
           type="number"
@@ -108,7 +112,7 @@ const CalculatorBMI = ({ shareBMIResult }: CalculatorBMIProps): JSX.Element => {
         <label htmlFor="protein">Weight</label>
         <FormTextInput
           name="protein"
-          placeholder="Daily %"
+          placeholder="Centimeters"
           width="30%"
           reactRef={weightInputRef}
           type="number"

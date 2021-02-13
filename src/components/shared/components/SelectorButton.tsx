@@ -8,6 +8,9 @@ interface SelectorButtonProps {
   onClick?: () => void;
 }
 const Button = styled.button<SelectorButtonProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   font-size: ${({ fontSize }) => fontSize};

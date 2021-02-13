@@ -22,6 +22,9 @@ const Submit = styled.button<SubmitButtonProps>`
         ? theme.primaryColor
         : theme.secondaryColorLight};
   padding: 1.4rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: ${({ height }) => height};
   width: ${({ width }) => width};
   outline: none;
@@ -37,6 +40,9 @@ const Submit = styled.button<SubmitButtonProps>`
         : borderColor === "primary"
         ? theme.primaryColor
         : theme.secondaryColorLight};
+  }
+  @media only screen and (max-width: 37.5em) {
+    transform: scale(1.2);
   }
 `;
 

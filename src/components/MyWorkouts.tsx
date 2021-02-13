@@ -80,12 +80,19 @@ const SelectorButton = styled.button<SelectorProps>`
     letter-spacing: 2px;
     font-weight: 600;
   }
+  @media only screen and (max-width: 37.5em) {
+    font-size: 4vmin;
+    padding: 3vh 0;
+  }
 `;
 
 const WorkoutHeader = styled.header`
   text-align: center;
   & > h2 {
     font-size: 2.6vmin;
+    @media only screen and (max-width: 37.5em) {
+      font-size: 4vmin;
+    }
   }
 `;
 const TableWrapper = styled.span`
@@ -110,6 +117,9 @@ const TableWrapper = styled.span`
   &::-webkit-scrollbar-thumb:hover {
     background: #f1f1f1;
   }
+  @media only screen and (max-width: 56.25em) {
+    padding: 2vh 0;
+  }
 `;
 const TableContent = styled.table`
   width: 100%;
@@ -117,6 +127,9 @@ const TableContent = styled.table`
   text-align: left;
   & th {
     font-size: 2.4vmin;
+    @media only screen and (max-width: 75em) {
+      font-size: 3vmin;
+    }
   }
 `;
 
@@ -126,6 +139,10 @@ const Row = styled.tr<RowProps>`
     isOdd ? theme.containerBackgroundSecondary : "transparent"};
   & > td {
     padding: 1vh 1vmin;
+    @media only screen and (max-width: 75em) {
+      font-size: 3vmin;
+      padding: 2vh 1vmin;
+    }
   }
 `;
 const Footer = styled.footer`
@@ -278,9 +295,9 @@ const MyWorkouts = (): JSX.Element => {
             {workouts.length > 0 && (
               <SubmitButton
                 value="Delete"
-                width="30rem"
-                height="7rem"
-                fontSize="2rem"
+                width="50%"
+                height="80%"
+                fontSize="3vmin"
                 onClick={() => setConfirmationModalVisible(true)}
               />
             )}

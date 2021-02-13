@@ -19,6 +19,13 @@ const Wrapper = styled.main`
   gap: 1vw;
   width: 100%;
   height: 100%;
+  min-height: 450px;
+  @media only screen and (max-width: 75em) {
+    gap: 0;
+  }
+  @media only screen and (max-width: 37.5em) {
+    flex-direction: column;
+  }
 `;
 //~~~~~~~~~~~~~~~~~~~Component
 const Workouts = (): JSX.Element => {

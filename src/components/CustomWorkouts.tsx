@@ -16,11 +16,15 @@ const Wrapper = styled.div`
   height: 100%;
   background: ${({ theme }) => theme.containerBackgroundPrimary};
   width: 55vw;
+  min-height: 490px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   color: ${({ theme }) => theme.textColor};
   overflow: hidden;
+  @media only screen and (max-width: 75em) {
+    width: 100%;
+  }
 `;
 const ButtonRow = styled.nav`
   display: flex;
@@ -47,6 +51,10 @@ const NavButton = styled(NavLink)<NavButtonProps>`
   }
   &.${({ activeClassName }) => activeClassName} {
     background-color: ${({ theme }) => theme.primaryColor};
+  }
+  @media only screen and (max-width: 37.5em) {
+    font-size: 3.2vmin;
+    padding: 3vh 0;
   }
 `;
 //~~~~~~~~~~~~~~~~~~~Component

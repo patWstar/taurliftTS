@@ -20,6 +20,7 @@ type SelectorButtonProps = {
 //~~~~~~~~~~~~~~~~~~~Styled Components
 const Wrapper = styled.div`
   height: 100%;
+  min-height: 450px;
   background: ${({ theme }) => theme.containerBackgroundPrimary};
   width: 55vw;
   margin: 0 auto;
@@ -39,10 +40,13 @@ const NavRow = styled.nav`
   align-items: center;
   height: 15%;
   width: 100%;
-  min-height: 5rem;
+  min-height: 3rem;
   & > :nth-child(2) {
     border-left: 1px solid #444040;
     border-right: 1px solid #444040;
+  }
+  @media only screen and (max-width: 37.5em) {
+    height: 10%;
   }
 `;
 
@@ -72,16 +76,15 @@ const ContentWrapper = styled.main`
 `;
 const Footer = styled.footer`
   height: 10%;
-  min-height: 5rem;
   display: flex;
   width: 100%;
+  border-top: 2px solid ${({ theme }) => theme.primaryColor};
   & > :nth-child(2) {
     border-left: 1px solid ${({ theme }) => theme.primaryColor};
     border-right: 1px solid ${({ theme }) => theme.primaryColor};
     justify-content: space-between;
     padding: 0 2vw;
   }
-  border-top: 2px solid ${({ theme }) => theme.primaryColor};
 `;
 
 const FooterResult = styled.div`
@@ -92,6 +95,9 @@ const FooterResult = styled.div`
   font-size: 2vmin;
   width: calc(100% / 3);
   height: 100%;
+  @media only screen and (max-width: 37.5em) {
+    font-size: 3vmin;
+  }
 `;
 //~~~~~~~~~~~~~~~~~~~Component
 const Calculators = (): JSX.Element => {
