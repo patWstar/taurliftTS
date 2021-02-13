@@ -38,6 +38,9 @@ const Submit = styled.button<SubmitButtonProps>`
         ? theme.primaryColor
         : theme.secondaryColorLight};
   }
+  @media only screen and (max-width: 37.5em) {
+    transform: scale(1.2);
+  }
 `;
 
 const SubmitButton = ({

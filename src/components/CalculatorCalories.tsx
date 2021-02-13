@@ -50,10 +50,14 @@ const Content = styled.form`
   align-items: center;
 
   font-size: 2vmin;
+  @media only screen and (max-width: 37.5em) {
+    font-size: 3vmin;
+    text-align: center;
+  }
 
   & select {
     user-select: none;
-    height: 5rem;
+    height: 3rem;
     border: none;
     outline: none;
     background-color: rgba(0, 0, 0, 0.2);
@@ -66,6 +70,9 @@ const Content = styled.form`
     & option {
       background-color: rgba(0, 0, 0, 0.9);
       padding: 0.5vmin;
+    }
+    @media only screen and (max-width: 37.5em) {
+      font-size: 5vmin;
     }
   }
 `;

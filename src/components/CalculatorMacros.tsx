@@ -60,6 +60,10 @@ const Content = styled.form`
   justify-content: space-between;
   align-items: center;
   font-size: 2vmin;
+  @media only screen and (max-width: 37.5em) {
+    font-size: 3vmin;
+    text-align: center;
+  }
 `;
 
 //~~~~~~~~~~~~~~~~~~~Component

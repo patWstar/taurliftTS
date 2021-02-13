@@ -16,6 +16,7 @@ const Input = styled.input<InputProps>`
   overflow: hidden;
   background: transparent;
   width: ${({ width }) => width};
+  min-width: 19rem;
   border: 2px solid ${({ theme }) => theme.primaryColor};
   padding: 1.4rem 1.5rem;
   color: inherit;
@@ -27,6 +28,10 @@ const Input = styled.input<InputProps>`
     transform: scaleX(1.2) scaleY(1.1);
     border-color: ${({ theme }) => theme.secondaryColorLight};
     background-color: transparent;
+  }
+  @media only screen and (max-width: 37.5em) {
+    width: ${({ width }) => Number(width) * 2};
+    font-size: 3vmin;
   }
 `;
 const formTextInput = ({
