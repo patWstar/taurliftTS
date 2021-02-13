@@ -13,9 +13,11 @@ import Calculators from "components/Calculators";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100vw;
   height: 100vh;
-  min-height: fit-content;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
   overflow: auto;
   background: linear-gradient(to right, #005aa7, #fffde4);
 
