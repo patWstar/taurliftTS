@@ -27,12 +27,16 @@ interface NewUserCredentials {
 const Wrapper = styled.div`
   width: 60vw;
   height: 100%;
+  min-height: 400px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background: ${({ theme }) => theme.containerBackgroundPrimary};
+  @media only screen and (max-width: 75em) {
+    width: 100%;
+  }
 `;
 const Content = styled.main`
   background-color: ${({ theme }) => theme.containerBackgroundPrimary};
@@ -46,6 +50,9 @@ const Content = styled.main`
   color: ${({ theme }) => theme.textColor};
   border-radius: 12px;
   padding-bottom: 4rem;
+  @media only screen and (max-width: 56.25em) {
+    width: 100%;
+  }
 `;
 
 const Header = styled.header`
@@ -59,11 +66,17 @@ const Header = styled.header`
   & > h2 {
     font-size: 3vmin;
     font-weight: 600;
+    @media only screen and (max-width: 37.5em) {
+      font-size: 4vmin;
+    }
   }
 
   & > h1 {
     font-size: 3.2vmin;
     letter-spacing: 2px;
+    @media only screen and (max-width: 37.5em) {
+      font-size: 4.5vmin;
+    }
   }
 `;
 
@@ -76,6 +89,15 @@ const Form = styled.form`
   align-items: center;
   gap: 1vh;
   font-size: 2vmin;
+  @media only screen and (max-width: 37.5em) {
+    & label {
+      font-size: 3.5vmin;
+    }
+
+    & button {
+      font-size: 3vmin;
+    }
+  }
 `;
 
 const BottomTextWrapper = styled.span`
@@ -83,11 +105,17 @@ const BottomTextWrapper = styled.span`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media only screen and (max-width: 37.5em) {
+    margin-top: 5vh;
+  }
 `;
 const SmallText = styled.aside`
   display: inline-block;
   font-size: 1.6vmin;
   padding: 0.5vh 1vw;
+  @media only screen and (max-width: 37.5em) {
+    font-size: 3vmin;
+  }
 `;
 
 const LinkElement = styled(Link)`
@@ -97,6 +125,9 @@ const LinkElement = styled(Link)`
   &:hover {
     color: ${({ theme }) => theme.secondaryColorLight};
     letter-spacing: 2px;
+  }
+  @media only screen and (max-width: 37.5em) {
+    font-size: 3.5vmin;
   }
 `;
 //~~~~~~~~~~~~~~~~~~~Component

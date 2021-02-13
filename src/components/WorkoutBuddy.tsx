@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 //Components
 import SelectorButton from "components/shared/components/SelectorButton";
 import WorkoutBuddyCard from "components/WorkoutBuddyCard";
@@ -9,6 +10,7 @@ import Spinner from "components/shared/components/Spinner";
 import DarkBackground from "components/shared/components/DarkBackground";
 import SubmitButton from "components/shared/components/SubmitButton";
 import ModalInformation from "components/shared/components/ModalInformation";
+import ModalConfirmation from "components/shared/components/ModalConfirmation";
 //Redux
 import { useSelector } from "react-redux";
 import { selectUserID } from "redux/Slices/UserSlice";
@@ -41,6 +43,7 @@ interface NewFinishedWorkout {
 //~~~~~~~~~~~~~~~~~~~Styled Components
 const Wrapper = styled.div`
   height: 100%;
+  min-height: 490px;
   background: ${({ theme }) => theme.containerBackgroundPrimary};
   width: 55vw;
   margin: 0 auto;
@@ -49,7 +52,13 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   color: ${({ theme }) => theme.textColor};
-  overflow: hidden;
+  overflow: auto;
+  @media only screen and (max-width: 75em) {
+    width: 100%;
+  }
+  @media only screen and (max-width: 37.5em) {
+    justify-content: flex-start;
+  }
 `;
 
 const ButtonRow = styled.div`
@@ -59,6 +68,12 @@ const ButtonRow = styled.div`
   height: 15%;
   width: 100%;
   gap: 5vw;
+  & button {
+    @media only screen and (max-width: 37.5em) {
+      font-size: 4vmin;
+      padding: 2vh 0;
+    }
+  }
 `;
 
 const ContentWrapper = styled.main`
@@ -69,6 +84,12 @@ const ContentWrapper = styled.main`
   justify-content: center;
   align-items: center;
   gap: 4vh;
+  @media only screen and (max-width: 37.5em) {
+    gap: 0;
+  }
+  @media only screen and (max-width: 37.5em) {
+    justify-content: flex-start;
+  }
 `;
 const ContentHeader = styled.header`
   display: flex;
@@ -78,6 +99,17 @@ const ContentHeader = styled.header`
   width: 100%;
   & > h1 {
     font-size: 2.6vmin;
+    @media only screen and (max-width: 56.25em) {
+      font-size: 3.5vmin;
+    }
+  }
+  @media only screen and (max-width: 56.25em) {
+    justify-content: space-between;
+    gap: 0;
+    padding: 5px 7vw;
+    & button {
+      width: 30%;
+    }
   }
 `;
 
@@ -111,6 +143,10 @@ const SelectWorkoutWrapper = styled.div`
   &::-webkit-scrollbar-thumb:hover {
     background: #f1f1f1;
   }
+  @media only screen and (max-width: 56.25em) {
+    width: 90%;
+    height: 80%;
+  }
 `;
 
 const SelectWorkoutHeader = styled.header`
@@ -122,6 +158,9 @@ const SelectWorkoutHeader = styled.header`
   padding: 2vmin;
   & > h2 {
     font-size: 2vmin;
+    @media only screen and (max-width: 56.25em) {
+      font-size: 3.5vmin;
+    }
   }
 `;
 
@@ -132,6 +171,9 @@ const SelectWorkoutContent = styled.div`
   flex: 1;
   padding: 2rem 0rem;
   text-align: center;
+  @media only screen and (max-width: 37.5em) {
+    padding: 0;
+  }
 `;
 
 const SelectWorkoutButton = styled.button`
@@ -139,7 +181,7 @@ const SelectWorkoutButton = styled.button`
   width: 100%;
   color: inherit;
   font-size: 2vmin;
-  padding: 1rem;
+  padding: 1vh 1vw;
   border-bottom: 1px solid black;
   transition: 0.4s;
   cursor: pointer;
@@ -147,12 +189,15 @@ const SelectWorkoutButton = styled.button`
   &:hover {
     background: ${({ theme }) => theme.secondaryColorLight};
   }
+  @media only screen and (max-width: 56.25em) {
+    font-size: 3.5vmin;
+    margin: 1vh 0;
+  }
 `;
 
 const FinishedSetWrapper = styled.div`
   display: flex;
-  flex-direction: column-reverse;
-  padding: 4vh 2vw;
+  flex-direction: column;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -181,19 +226,30 @@ const FinishedSetWrapper = styled.div`
   &::-webkit-scrollbar-thumb:hover {
     background: #f1f1f1;
   }
+  @media only screen and (max-width: 56.25em) {
+    width: 90%;
+    height: 80%;
+  }
+  @media only screen and (max-width: 37.5em) {
+    padding: 0;
+  }
 `;
 
 const FinishedSetItem = styled.div`
+  margin-top: 10px;
   border: ${({ theme }) => theme.primaryColor} 1px solid;
   width: 100%;
   color: inherit;
-  padding: 1rem;
+  padding: 1vh 1vmin;
   font-size: 2vmin;
   display: flex;
   justify-content: space-between;
   align-items: center;
   & > * {
     border: 1px solid black;
+  }
+  @media only screen and (max-width: 56.25em) {
+    font-size: 3.5vmin;
   }
 `;
 //~~~~~~~~~~~~~~~~~~~Component
@@ -208,7 +264,12 @@ const WorkoutBuddy = (): JSX.Element => {
   const [infoModalVisible, setInfoModalVisible] = React.useState<boolean>(
     false
   );
+  const [
+    confirmationModalVisible,
+    setConfirmationModalVisible,
+  ] = useState<boolean>(false);
 
+  const history = useHistory();
   const userID = useSelector(selectUserID);
 
   useEffect(() => {
@@ -282,6 +343,10 @@ const WorkoutBuddy = (): JSX.Element => {
         });
     }
   };
+
+  const handleRedirectToNewWorkout = (): void => {
+    history.push("/workouts/CustomWorkouts/CreateWorkout");
+  };
   //~~~~~~~~~~~~~~~~~~~Render
   return (
     <Wrapper>
@@ -293,15 +358,16 @@ const WorkoutBuddy = (): JSX.Element => {
             <SelectorButton
               value="Change Workout"
               width="40%"
-              fontSize="2rem"
-              height="10rem"
+              fontSize="2.3vmin"
+              height="80%"
               onClick={changeWorkoutsHandler}
             />
             <SelectorButton
               value="New Workout"
               width="40%"
-              fontSize="2rem"
-              height="10rem"
+              fontSize="2.3vmin"
+              height="80%"
+              onClick={() => setConfirmationModalVisible(true)}
             />
           </ButtonRow>
           <ContentWrapper>
@@ -310,15 +376,15 @@ const WorkoutBuddy = (): JSX.Element => {
               <SubmitButton
                 value="Show Completed Sets"
                 width="20%"
-                height="fit-content"
-                fontSize="2.2rem"
+                height="80%"
+                fontSize="2.2vmin"
                 onClick={toggleFinishedSetsVisibility}
               />
               <SubmitButton
                 value="Save Workout to Profile"
                 width="20%"
-                height="fit-content"
-                fontSize="2.2rem"
+                height="80%"
+                fontSize="2.2vmin"
                 borderColor="primary"
                 onClick={saveWorkoutHandler}
               />
@@ -368,6 +434,13 @@ const WorkoutBuddy = (): JSX.Element => {
       )}
       {infoModalVisible && (
         <ModalInformation text="Great job! Workout added." />
+      )}
+      {confirmationModalVisible && (
+        <ModalConfirmation
+          text="Are you sure you want to leave? All progress will be lost"
+          backGroundClick={() => setConfirmationModalVisible(false)}
+          onAccept={handleRedirectToNewWorkout}
+        />
       )}
     </Wrapper>
   );
