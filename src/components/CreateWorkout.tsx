@@ -73,6 +73,12 @@ const InputLabel = styled.label`
 const Content = styled.main`
   display: flex;
   height: 85%;
+  @media only screen and (max-width: 37.5em) {
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh;
+    padding: 2vh 0;
+  }
 `;
 const FormContent = styled.form`
   width: 50%;
@@ -81,6 +87,17 @@ const FormContent = styled.form`
   flex-direction: column;
   justify-content: center;
   gap: 3vh;
+  @media only screen and (max-width: 37.5em) {
+    gap: 1vh;
+
+    & label {
+      font-size: 4vmin;
+    }
+
+    & button {
+      font-size: 2vmin;
+    }
+  }
 `;
 const TableWrapper = styled.span`
   height: 100%;
@@ -88,7 +105,7 @@ const TableWrapper = styled.span`
   overflow: auto;
   scroll-behavior: smooth;
   &::-webkit-scrollbar {
-    width: 1rem;
+    width: 1vmin;
     scroll-behavior: smooth;
   }
 
@@ -103,6 +120,10 @@ const TableWrapper = styled.span`
   &::-webkit-scrollbar-thumb:hover {
     background: #f1f1f1;
   }
+
+  @media only screen and (max-width: 37.5em) {
+    width: 90%;
+  }
 `;
 const TableContent = styled.table`
   width: 100%;
@@ -111,6 +132,9 @@ const TableContent = styled.table`
   text-align: left;
   & th {
     font-size: 2.4vmin;
+    @media only screen and (max-width: 37.5em) {
+      font-size: 3vmin;
+    }
   }
 `;
 
@@ -120,6 +144,9 @@ const Row = styled.tr<RowProps>`
     isOdd ? theme.containerBackgroundSecondary : "transparent"};
   & > td {
     padding: 1rem;
+    @media only screen and (max-width: 37.5em) {
+      font-size: 3vmin;
+    }
   }
 `;
 const Footer = styled.footer`
@@ -129,6 +156,11 @@ const Footer = styled.footer`
   justify-content: center;
   align-items: center;
   gap: 4vw;
+  @media only screen and (max-width: 37.5em) {
+    padding: 0 10%;
+    justify-content: space-between;
+    height: 10%;
+  }
 `;
 
 //~~~~~~~~~~~~~~~~~~~Component
@@ -264,8 +296,9 @@ const CreateWorkout = (): JSX.Element => {
               />
               <SubmitButton
                 value="Add Exercise"
-                width="45%"
-                fontSize="1.6rem"
+                width="50%"
+                fontSize="1.6vmin"
+                height="15%"
               />
               {errors.length > 0 && <ErrorList width="100%" errors={errors} />}
             </FormContent>
@@ -300,15 +333,15 @@ const CreateWorkout = (): JSX.Element => {
             <SubmitButton
               value="Reset"
               width="30%"
-              height="7rem"
-              fontSize="2rem"
+              height="80%"
+              fontSize="2vmin"
               onClick={fullReset}
             />
             <SubmitButton
               value="Save Workout"
               width="30%"
-              height="7rem"
-              fontSize="2rem"
+              height="80%"
+              fontSize="2vmin"
               onClick={handleWebSubmit}
             />
           </Footer>
