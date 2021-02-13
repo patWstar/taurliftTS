@@ -297,7 +297,7 @@ const CreateWorkout = (): JSX.Element => {
               <SubmitButton
                 value="Add Exercise"
                 width="50%"
-                fontSize="1.6vmin"
+                fontSize="2vmin"
                 height="15%"
               />
               {errors.length > 0 && <ErrorList width="100%" errors={errors} />}
@@ -334,14 +334,14 @@ const CreateWorkout = (): JSX.Element => {
               value="Reset"
               width="30%"
               height="80%"
-              fontSize="2vmin"
+              fontSize="2.3vmin"
               onClick={fullReset}
             />
             <SubmitButton
               value="Save Workout"
               width="30%"
               height="80%"
-              fontSize="2vmin"
+              fontSize="2.3vmin"
               onClick={handleWebSubmit}
             />
           </Footer>
