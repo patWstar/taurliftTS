@@ -6,7 +6,7 @@ import { Link, useHistory, Redirect } from "react-router-dom";
 //Components
 import Spinner from "components/shared/components/Spinner";
 import fadeInAnimation from "components/shared/animations/fadeIn";
-import TextInput from "components/shared/components/FormTextInput";
+import FormTextInput from "components/shared/components/FormTextInput";
 import SubmitButton from "components/shared/components/SubmitButton";
 import ErrorList from "components/shared/components/ErrorList";
 //Redux
@@ -171,14 +171,14 @@ const Login = (): JSX.Element => {
           ) : (
             <Form onSubmit={submitHandler}>
               <label htmlFor="email">Email</label>
-              <TextInput
+              <FormTextInput
                 name="Email"
                 placeholder="E-mail"
                 width="40%"
                 reactRef={emailRef}
               />
               <label htmlFor="password">Password</label>
-              <TextInput
+              <FormTextInput
                 name="password"
                 placeholder="Password"
                 width="40%"

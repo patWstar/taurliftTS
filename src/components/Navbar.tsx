@@ -22,15 +22,25 @@ type NavProps = {
 //~~~~~~~~~~~~~~~~~~~Styled Components
 const Container = styled.div`
   display: flex;
+  align-self: stretch;
   justify-content: space-between;
   height: 7rem;
   background-color: ${({ theme }) => theme.navBarColor};
   padding: 0 5%;
   color: ${({ theme }) => theme.textColor};
+
+  @media only screen and (max-width: 56.25em) {
+    padding: 0;
+  }
 `;
+
 const Logo = styled(NavLink)`
   & > img {
     height: 100%;
+    width: 6rem;
+  }
+  @media only screen and (max-width: 56.25em) {
+    display: none;
   }
 `;
 const Navs = styled.nav<NavsProps>`
@@ -40,6 +50,10 @@ const Navs = styled.nav<NavsProps>`
   width: 60%;
   @media only screen and (max-width: 75em) {
     width: 80%;
+  }
+  @media only screen and (max-width: 56.25em) {
+    width: 100%;
+    justify-content: center;
   }
   & > * {
     width: ${({ logged }) => (logged ? "calc(100% / 5)" : "calc(100% / 3)")};
@@ -62,11 +76,18 @@ const Nav = styled(NavLink)<NavProps>`
   color: inherit;
   font-weight: 700;
   transition: 0.4s;
-  height: 100%;
+  align-self: stretch;
+  flex: 1;
   font-size: 1.5vmin;
   & > svg {
-    height: 40%;
+    height: 4rem;
+    width: 4rem;
     fill: ${({ theme }) => theme.textColor};
+
+    @media only screen and (max-width: 56.25em) {
+      height: 2rem;
+      width: 2rem;
+    }
   }
   &:hover {
     letter-spacing: 1px;
@@ -77,6 +98,11 @@ const Nav = styled(NavLink)<NavProps>`
     background: linear-gradient(to right, #2ecc71, #1b914c);
     background-repeat: no-repeat;
     animation: ${activeLinkBackground} 0.4s ease-out 1;
+  }
+
+  @media only screen and (max-width: 56.25em) {
+    flex: 1;
+    font-size: 3vmin;
   }
 `;
 
@@ -94,6 +120,9 @@ const LogoutButton = styled.button`
   &:hover {
     letter-spacing: 1px;
     color: red;
+  }
+  @media only screen and (max-width: 56.25em) {
+    font-size: 3vmin;
   }
 `;
 //~~~~~~~~~~~~~~~~~~~Component

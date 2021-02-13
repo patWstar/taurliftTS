@@ -19,17 +19,27 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: linear-gradient(to top, #464747, #6e7270);
-  background-image: url("./backgrounds/backgroundMAX.jpg");
+  background-image: url("backgrounds/backgroundMAX.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   color: ${({ theme }) => theme.textColor};
-  padding: 10rem;
+  padding: 4vh 4vw;
+
+  @media only screen and (max-width: 37.5em) {
+    padding: 0;
+    justify-content: space-between;
+    padding: 1vh 0;
+    align-items: center;
+    gap: 10px;
+
+    background-size: 100% 100%;
+  }
 `;
 const Header = styled.header`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  width: 80%;
   & > h1 {
     color: transparent;
     background: linear-gradient(to bottom, #2ecc71, #1b914c);
@@ -39,6 +49,13 @@ const Header = styled.header`
     font-size: 9vmin;
     font-weight: 500;
     animation: ${fadeInAnimation} 1s linear 1;
+    @media only screen and (max-width: 56.25em) {
+      font-size: 7vmin;
+    }
+    @media only screen and (max-width: 37.5em) {
+      font-size: 4rem;
+      text-align: center;
+    }
   }
 `;
 const HeaderLink = styled(Link)`
@@ -46,14 +63,21 @@ const HeaderLink = styled(Link)`
   font-size: 7.5vmin;
   transition: 0.4s;
   width: fit-content;
+
   &:hover,
   &:focus {
     color: ${({ theme }) => theme.primaryColor};
     letter-spacing: 0.2rem;
   }
+  @media only screen and (max-width: 37.5em) {
+    display: none;
+  }
 `;
 const HeaderText = styled.p`
   font-size: 2.4vmin;
+  @media only screen and (max-width: 37.5em) {
+    display: none;
+  }
 `;
 const shakeButton = keyframes`
   0% {
@@ -79,11 +103,12 @@ const HeaderButton = styled(Link)`
   justify-content: center;
   align-items: center;
   color: inherit;
-  height: 6rem;
-  width: 30rem;
+  height: 8vh;
+  width: 30vw;
+  max-width: 30rem;
   background-color: ${({ theme }) => theme.primaryColor};
   font-size: 2.4vmin;
-  border-radius: 30px;
+  border-radius: 80px;
   transition: 0.4s;
   animation: ${shakeButton} 1s ease-out 1;
 
@@ -92,6 +117,16 @@ const HeaderButton = styled(Link)`
     transform: scale(1.1);
     box-shadow: 0 1rem 2rem 1rem rgba(0, 0, 0, 0.2);
   }
+  @media only screen and (max-width: 37.5em) {
+    margin: 0 auto;
+    width: 18rem;
+    height: 8rem;
+    font-size: 2rem;
+  }
+
+  @media only screen and (max-height: 28.75em) {
+    display: none;
+  }
 `;
 
 const Navigation = styled.nav`
@@ -99,12 +134,23 @@ const Navigation = styled.nav`
   justify-content: flex-end;
   align-items: center;
   gap: 4vw;
+  width: 100%;
+  @media only screen and (max-width: 56.25em) {
+    height: fit-content;
+    width: 100%;
+    flex-wrap: nowrap;
+    justify-content: center;
+  }
+  @media only screen and (max-width: 37.5em) {
+    flex-wrap: wrap;
+    padding: 0 10vw;
+  }
 `;
 
 const NavButton = styled(Link)<NavButtonProps>`
   border-radius: 5px;
-  width: 22rem;
-  height: 18rem;
+  width: 15vw;
+  height: 20vh;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -121,8 +167,19 @@ const NavButton = styled(Link)<NavButtonProps>`
 
   & > svg {
     fill: currentColor;
-    width: 40%;
+    width: 35%;
     height: 40%;
+  }
+  @media only screen and (max-width: 56.25em) {
+    height: 20vh;
+    width: 20%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  @media only screen and (max-width: 37.5em) {
+    width: 30vw;
+    height: 18vh;
+    min-width: 10rem;
   }
 `;
 //~~~~~~~~~~~~~~~~~~~Component

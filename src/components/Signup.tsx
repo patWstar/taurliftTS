@@ -5,7 +5,7 @@ import axios from "axios";
 import { Link, useHistory, Redirect } from "react-router-dom";
 //Components
 import fadeInAnimation from "components/shared/animations/fadeIn";
-import TextInput from "components/shared/components/FormTextInput";
+import FormTextInput from "components/shared/components/FormTextInput";
 import SubmitButton from "components/shared/components/SubmitButton";
 import ErrorList from "components/shared/components/ErrorList";
 import Spinner from "components/shared/components/Spinner";
@@ -178,14 +178,14 @@ const Signup = (): JSX.Element => {
           ) : (
             <Form autoComplete="off" onSubmit={submitHandler}>
               <label htmlFor="email">Email</label>
-              <TextInput
+              <FormTextInput
                 name="Email"
                 placeholder="E-mail"
                 width="40%"
                 reactRef={emailRef}
               />
               <label htmlFor="password">Password</label>
-              <TextInput
+              <FormTextInput
                 name="password"
                 placeholder="Password"
                 width="40%"
@@ -193,7 +193,7 @@ const Signup = (): JSX.Element => {
                 reactRef={passwordRef}
               />
               <label htmlFor="confirmPassword">Confirm</label>
-              <TextInput
+              <FormTextInput
                 name="confirmPassword"
                 placeholder="Confirm Password"
                 width="40%"

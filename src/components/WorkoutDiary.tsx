@@ -46,8 +46,10 @@ const Wrapper = styled.div`
   align-items: center;
   flex-direction: column;
   color: ${({ theme }) => theme.textColor};
-
   gap: 3rem;
+  @media only screen and (max-width: 75em) {
+    width: 100%;
+  }
 `;
 
 const Header = styled.header`
@@ -73,6 +75,10 @@ const Content = styled.table`
   & > thead {
     font-size: 3vmin;
   }
+
+  @media only screen and (max-width: 37.5em) {
+    width: 100%;
+  }
 `;
 
 const Row = styled.tr<RowProps>`
@@ -81,6 +87,13 @@ const Row = styled.tr<RowProps>`
     isOdd ? theme.containerBackgroundSecondary : "transparent"};
   & > td {
     padding: 1.5vmin;
+    @media only screen and (max-width: 75em) {
+      padding: 2.5vmin;
+    }
+    @media only screen and (max-width: 37.5em) {
+      font-size: 4vmin;
+      padding: 6vmin;
+    }
   }
 `;
 
@@ -90,6 +103,10 @@ const ButtonTD = styled.td`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  @media only screen and (max-width: 37.5em) {
+    flex-direction: column;
+    justify-content: space-between;
+  }
 `;
 const OptionButton = styled.button<ButtonProps>`
   font-size: 2vmin;
@@ -100,6 +117,9 @@ const OptionButton = styled.button<ButtonProps>`
   &:hover {
     transform: scale(1.05) translateY(-1px);
     filter: brightness(1.2);
+  }
+  @media only screen and (max-width: 37.5em) {
+    font-size: 3vmin;
   }
 `;
 //~~~~~~~~~~~~~~~~~~~Component
