@@ -11,8 +11,8 @@ interface WorkoutCardProps {
 }
 
 const WorkoutCardElement = styled(Link)`
-  width: 35rem;
-  height: 70vh;
+  width: 20%;
+  height: 70%;
   margin: 0 3rem;
   text-align: center;
   color: inherit;
@@ -26,7 +26,7 @@ const WorkoutCardElement = styled(Link)`
     box-shadow: 0px 0px 13px 3px rgb(32, 32, 32);
   }
   @media only screen and (max-width: 56.25em) {
-    margin: 0 5px;
+    width: 30%;
   }
   @media only screen and (max-width: 37.5em) {
     height: 33%;
@@ -77,6 +77,9 @@ const CardDescription = styled.p`
 `;
 
 const CardButtonSpan = styled.span`
+  width: 100%;
+  display: flex;
+  justify-content: center;
   @media only screen and (max-width: 37.5em) {
     display: none;
   }
