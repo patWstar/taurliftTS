@@ -160,7 +160,6 @@ const WorkoutDiary = (): JSX.Element => {
         })
         .catch((err) => {
           setIsLoading(false);
-          alert("Couldn't get workouts.");
           source.cancel();
         });
     }
