@@ -5,7 +5,7 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 //Components
 import SelectorButton from "components/shared/components/SelectorButton";
-import WorkoutBuddyCard from "components/WorkoutBuddyCard";
+import WorkoutBuddyCard from "components/WorkoutBuddy/WorkoutBuddyCard";
 import Spinner from "components/shared/components/Spinner";
 import DarkBackground from "components/shared/components/DarkBackground";
 import SubmitButton from "components/shared/components/SubmitButton";

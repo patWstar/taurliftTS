@@ -2,8 +2,7 @@ import React from "react";
 import { cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import "@testing-library/jest-dom/extend-expect";
-import renderWithReduxAndRouter from "./utilRenderWithReduxAndRouter";
-
+import renderWithReduxAndRouter from "util/utilRenderWithReduxAndRouter";
 import WorkoutDiary from "../WorkoutDiary";
 
 afterEach(cleanup);

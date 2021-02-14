@@ -3,7 +3,7 @@ import { cleanup, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import Login from "../Login";
 import "@testing-library/jest-dom/extend-expect";
-import renderWithReduxAndRouter from "./utilRenderWithReduxAndRouter";
+import renderWithReduxAndRouter from "util/utilRenderWithReduxAndRouter";
 
 afterEach(cleanup);
 

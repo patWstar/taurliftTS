@@ -3,8 +3,8 @@ import React from "react";
 import styled from "styled-components";
 import { NavLink, Route } from "react-router-dom";
 //Components
-import CreateWorkout from "components/CreateWorkout";
-import MyWorkouts from "./MyWorkouts";
+import CreateWorkout from "components/CustomWorkouts/CreateWorkout";
+import MyWorkouts from "components/CustomWorkouts/MyWorkouts";
 // import { validateExercise } from "../util/validators";
 //~~~~~~~~~~~~~~~~~~~Interfaces & Types
 type NavButtonProps = {

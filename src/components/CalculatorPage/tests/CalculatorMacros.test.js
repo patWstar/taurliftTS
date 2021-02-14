@@ -1,7 +1,7 @@
 import React from "react";
 import { cleanup, fireEvent, render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import CalculatorMacros from "../CalculatorMacros";
+import CalculatorMacros from "components/CalculatorPage/CalculatorMacros";
 afterEach(cleanup);
 test("check if errors appear if macros don`t add up to 100%", () => {
   const { getByText, getByPlaceholderText } = render(<CalculatorMacros />);

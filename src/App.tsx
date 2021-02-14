@@ -1,15 +1,17 @@
+//Fundamentals
 import React from "react";
 import styled from "styled-components";
+import { Route, Switch } from "react-router-dom";
+//Components
 import Navbar from "components/Navbar";
 import Home from "components/Home";
-import { Route, Switch } from "react-router-dom";
-import Login from "components/Login";
-import Signup from "components/Signup";
+import Login from "components/Auth/Login";
+import Signup from "components/Auth/Signup";
 import Workouts from "components/Workouts";
-import WorkoutDiary from "components/WorkoutDiary";
-import Calculators from "components/Calculators";
+import WorkoutDiary from "components/WorkoutDiary/WorkoutDiary";
+import Calculators from "components/CalculatorPage/Calculators";
 
-//Basic CSS, Resets etc. are in index.css
+//Styled Components
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -39,7 +41,7 @@ const Wrapper = styled.div`
     background: #f1f1f1;
   }
 `;
-
+//Component
 const App = (): JSX.Element => {
   return (
     <Wrapper>
@@ -57,10 +59,3 @@ const App = (): JSX.Element => {
 };
 
 export default App;
-
-//todo
-//funkcjonalnosc w create workout
-//workout buddy
-//kalkulatory
-//media queriesy
-//react testing i jest

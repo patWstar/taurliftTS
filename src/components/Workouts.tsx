@@ -4,9 +4,9 @@ import cardImageDiary from "assets/cardImageDiary.jpg";
 import cardImageCustomWorkout from "assets/cardImageCustomWorkout.jpg";
 import cardImageWorkoutAssistant from "assets/cardImageWorkoutAssistant.jpg";
 import WorkoutCard from "components/shared/components/WorkoutCard";
-import CustomWorkouts from "components/CustomWorkouts";
+import CustomWorkouts from "components/CustomWorkouts/CustomWorkouts";
 import { Route, Switch } from "react-router-dom";
-import WorkoutBuddy from "./WorkoutBuddy";
+import WorkoutBuddy from "./WorkoutBuddy/WorkoutBuddy";
 import { useSelector } from "react-redux";
 import { selectAuthenticated } from "redux/Slices/UserSlice";
 import ModalInformation from "components/shared/components/ModalInformation";
@@ -23,7 +23,7 @@ const Wrapper = styled.main`
   @media only screen and (max-width: 75em) {
     gap: 0;
   }
-  @media only screen and (max-width: 37.5em) {
+  @media only screen and (max-width: 56.25em) {
     flex-direction: column;
   }
 `;

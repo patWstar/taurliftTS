@@ -6,7 +6,7 @@ import SubmitButton from "components/shared/components/SubmitButton";
 //Util
 import refreshLocalToken from "util/refreshLocalToken";
 import Icons from "assets/sprites.svg";
-import BuddyWeightWindow from "components/BuddyWeightWindow";
+import BuddyWeightWindow from "components/WorkoutBuddy/BuddyWeightWindow";
 //~~~~~~~~~~~~~~~~~~~Interfaces & Types
 interface Exercise {
   exerciseName: string;

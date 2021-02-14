@@ -25,10 +25,10 @@ const WorkoutCardElement = styled(Link)`
     transform: scale(1.02);
     box-shadow: 0px 0px 13px 3px rgb(32, 32, 32);
   }
-  @media only screen and (max-width: 56.25em) {
+  @media only screen and (max-width: 107em) {
     width: 30%;
   }
-  @media only screen and (max-width: 37.5em) {
+  @media only screen and (max-width: 56.25em) {
     height: 33%;
     width: 70%;
     margin: 1vh 0;

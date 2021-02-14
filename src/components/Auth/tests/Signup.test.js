@@ -3,7 +3,7 @@ import { cleanup, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import Signup from "../Signup";
 import "@testing-library/jest-dom/extend-expect";
-import renderWithReduxAndRouter from "./utilRenderWithReduxAndRouter";
+import renderWithReduxAndRouter from "util/utilRenderWithReduxAndRouter";
 afterEach(cleanup);
 
 test("should it fire an error message upon entering incorrect e-mail format", () => {

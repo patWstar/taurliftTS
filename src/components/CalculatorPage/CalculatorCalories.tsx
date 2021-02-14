@@ -3,7 +3,7 @@ import React, { useState, useRef } from "react";
 import styled from "styled-components";
 //Components
 import SubmitButton from "components/shared/components/SubmitButton";
-import FormTextInput from "./shared/components/FormTextInput";
+import FormTextInput from "components/shared/components/FormTextInput";
 //Util
 import { calorieValidator } from "util/validators";
 import ErrorList from "components/shared/components/ErrorList";

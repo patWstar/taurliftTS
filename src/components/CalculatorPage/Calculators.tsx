@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import { NavLink, Route } from "react-router-dom";
 import styled from "styled-components";
 //Components
-import CalculatorCalories from "components/CalculatorCalories";
-import CalculatorMacros from "./CalculatorMacros";
-import CalculatorBMI from "./CalculatorBMI";
+import CalculatorCalories from "components/CalculatorPage/CalculatorCalories";
+import CalculatorMacros from "components/CalculatorPage/CalculatorMacros";
+import CalculatorBMI from "components/CalculatorPage/CalculatorBMI";
 //Redux
 //Util
 //~~~~~~~~~~~~~~~~~~~Interfaces & Types

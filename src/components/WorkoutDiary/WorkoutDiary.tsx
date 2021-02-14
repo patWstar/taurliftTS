@@ -4,7 +4,7 @@ import axios from "axios";
 import styled from "styled-components";
 //Components
 import Spinner from "components/shared/components/Spinner";
-import WorkoutDetailsModal from "components/WorkoutDetailsModal";
+import WorkoutDetailsModal from "components/WorkoutDiary/WorkoutDetailsModal";
 import ModalInformation from "components/shared/components/ModalInformation";
 import ModalConfirmation from "components/shared/components/ModalConfirmation";
 //Redux

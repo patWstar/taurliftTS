@@ -1,8 +1,8 @@
 import React from "react";
 import { cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import Navbar from "../Navbar";
-import renderWithReduxAndRouter from "./utilRenderWithReduxAndRouter";
+import Navbar from "../../Navbar";
+import renderWithReduxAndRouter from "util/utilRenderWithReduxAndRouter";
 
 afterEach(cleanup);
 
