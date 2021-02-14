@@ -176,10 +176,13 @@ const MyWorkouts = (): JSX.Element => {
           userID: userID,
         },
       })
-      .then(({ data }) => {
-        const response = data.exercises.map((exercise: any) => {
-          return exercise;
-        });
+      .then((res) => {
+        const response =
+          res && res.data
+            ? res.data.exercises.map((exercise: any) => {
+                return exercise;
+              })
+            : [];
         setWorkouts(response);
       })
       .then(() => {
@@ -188,8 +191,7 @@ const MyWorkouts = (): JSX.Element => {
       })
       .catch((err) => {
         setIsLoading(false);
-        alert(`Couldn't get custom workouts. ${err.response.data}`);
-        console.log(err.response.data);
+
         source.cancel();
       });
     return () => {
@@ -240,7 +242,7 @@ const MyWorkouts = (): JSX.Element => {
     <Wrapper>
       {isLoading ? (
         <Spinner width="10rem" height="12rem" />
-      ) : (
+      ) : workouts.length > 0 ? (
         <>
           <SelectorsWrapper>
             <SelectorButton
@@ -302,6 +304,11 @@ const MyWorkouts = (): JSX.Element => {
             )}
           </Footer>
         </>
+      ) : (
+        <h2>
+          No workouts created yet <br />
+          Try our default workout in the workout buddy :)
+        </h2>
       )}
       {confirmationModalVisible && (
         <ModalConfirmation

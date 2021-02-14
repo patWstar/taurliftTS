@@ -32,7 +32,7 @@ interface WorkoutBuddyCardProps {
 //~~~~~~~~~~~~~~~~~~~Styled Components
 const Wrapper = styled.div`
   width: 80%;
-  height: fit-content;
+  height: 100%;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -199,7 +199,7 @@ const CardFooter = styled.footer`
 `;
 
 const Footer = styled.footer`
-  height: 10%;
+  height: fit-content;
   display: flex;
   justify-content: center;
   gap: 8vw;
@@ -214,7 +214,7 @@ const FooterButton = styled.button`
   width: 40%;
   background-color: rgba(0, 0, 0, 0.2);
   color: inherit;
-  font-size: 3vmin;
+  font-size: 2.2vmin;
   border-radius: 5px;
   height: 100%;
 

@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 import { selectUserID } from "redux/Slices/UserSlice";
 //Util
 import refreshLocalToken from "util/refreshLocalToken";
+import SampleWorkout from "components/WorkoutBuddy/sampleWorkout";
 //~~~~~~~~~~~~~~~~~~~Interfaces & Types
 interface Exercise {
   exerciseName: string;
@@ -43,7 +44,7 @@ interface NewFinishedWorkout {
 //~~~~~~~~~~~~~~~~~~~Styled Components
 const Wrapper = styled.div`
   height: 100%;
-  min-height: 490px;
+  min-height: 450px;
   background: ${({ theme }) => theme.containerBackgroundPrimary};
   width: 55vw;
   margin: 0 auto;
@@ -417,20 +418,29 @@ const WorkoutBuddy = (): JSX.Element => {
         </>
       ) : (
         <>
-          <DarkBackground />
+          <DarkBackground onClick={() => history.push("/workouts")} />
           <SelectWorkoutWrapper>
             <SelectWorkoutHeader>
               <h2>Choose a Workout</h2>
             </SelectWorkoutHeader>
             <SelectWorkoutContent>
-              {workouts.map((workout: Workout, index: number) => (
+              {workouts.length! > 0 ? (
+                workouts.map((workout: Workout, index: number) => (
+                  <SelectWorkoutButton
+                    onClick={() => setSelectedWorkout(workouts[index])}
+                    key={index}
+                  >
+                    {workout.name}
+                  </SelectWorkoutButton>
+                ))
+              ) : (
                 <SelectWorkoutButton
-                  onClick={() => setSelectedWorkout(workouts[index])}
-                  key={index}
+                  key={1}
+                  onClick={() => setSelectedWorkout(SampleWorkout)}
                 >
-                  {workout.name}
+                  Sample Workout
                 </SelectWorkoutButton>
-              ))}
+              )}
             </SelectWorkoutContent>
           </SelectWorkoutWrapper>
         </>
