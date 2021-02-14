@@ -218,7 +218,6 @@ const Login = (): JSX.Element => {
                 type="password"
                 reactRef={passwordRef}
               />
-              <label htmlFor="confirmPassword" />
 
               <SubmitButton value="Log In" width="30%" />
               {!isErrorsEmpty && <ErrorList width="90%" errors={errors} />}

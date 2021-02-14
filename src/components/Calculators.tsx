@@ -28,7 +28,9 @@ const Wrapper = styled.div`
   flex-direction: column;
   color: ${({ theme }) => theme.textColor};
   overflow: auto;
-
+  @media only screen and (max-width: 107em) {
+    width: 80%;
+  }
   @media only screen and (max-width: 56.25em) {
     width: 100%;
   }

@@ -19,8 +19,8 @@ const Errors = styled.ul<ulProps>`
 
 const errorList = ({ errors, width }: errorListProps): JSX.Element => (
   <Errors width={width}>
-    {errors?.map((error) => (
-      <li>{error}</li>
+    {errors?.map((error, index) => (
+      <li key={index}>{error}</li>
     ))}
   </Errors>
 );

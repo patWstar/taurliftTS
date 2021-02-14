@@ -15,6 +15,7 @@ type NavButtonProps = {
 //~~~~~~~~~~~~~~~~~~~Styled Components
 const Wrapper = styled.div`
   height: calc(100vh - 7rem);
+  min-height: 490px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -31,7 +32,7 @@ const Wrapper = styled.div`
     padding: 1vh 0;
     align-items: center;
     gap: 10px;
-
+    background-image: url("backgrounds/backgroundSmall.jpg");
     background-size: 100% 100%;
   }
 `;
@@ -49,7 +50,7 @@ const Header = styled.header`
     font-size: 9vmin;
     font-weight: 500;
     animation: ${fadeInAnimation} 1s linear 1;
-    @media only screen and (max-width: 56.25em) {
+    @media only screen and (max-width: 107em) {
       font-size: 7vmin;
     }
     @media only screen and (max-width: 37.5em) {
@@ -179,6 +180,7 @@ const NavButton = styled(Link)<NavButtonProps>`
   @media only screen and (max-width: 37.5em) {
     width: 30vw;
     height: 18vh;
+    min-height: 30vw;
     min-width: 10rem;
   }
 `;

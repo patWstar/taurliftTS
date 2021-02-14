@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 //Components
 import SubmitButton from "components/shared/components/SubmitButton";
-//Redux
 //Util
 import refreshLocalToken from "util/refreshLocalToken";
 import Icons from "assets/sprites.svg";
@@ -330,7 +329,7 @@ const WorkoutBuddyCard = ({
                   exercisesInWorkout.length
                 }`}</p>
                 <h1>
-                  {exercisesInWorkout[currentExerciseIndex].exerciseName}{" "}
+                  {exercisesInWorkout[currentExerciseIndex].exerciseName}
                   {exerciseWeight && `${exerciseWeight}kg`}
                 </h1>
               </span>
@@ -352,8 +351,11 @@ const WorkoutBuddyCard = ({
                       <use xlinkHref={`${Icons}#icon-reply`} />
                     </svg>
                   </ControlButton>
-                  <h2>{repCount}</h2>
-                  <ControlButton onClick={() => handleSetRep("Increment")}>
+                  <h2 data-testid="repCountHeader">{repCount}</h2>
+                  <ControlButton
+                    onClick={() => handleSetRep("Increment")}
+                    data-testid="increment"
+                  >
                     <svg className="exercise-card__reps-controls-control-icon">
                       <use xlinkHref={`${Icons}#icon-forward`} />
                     </svg>

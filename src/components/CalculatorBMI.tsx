@@ -8,7 +8,7 @@ import FormTextInput from "./shared/components/FormTextInput";
 import { BMIValidator } from "util/validators";
 import ErrorList from "components/shared/components/ErrorList";
 
-const inputsCriteria = {
+const inputsCriteria: InputsCriteria = {
   userHeightCriteria: {
     min: 1,
     max: 999,
@@ -24,8 +24,8 @@ interface CalculatorBMIProps {
   shareBMIResult: (BMIResult: number) => void;
 }
 
-interface inputsCriteria {
-  userHieghtCriteria: {
+interface InputsCriteria {
+  userHeightCriteria: {
     min: number;
     max: number;
   };

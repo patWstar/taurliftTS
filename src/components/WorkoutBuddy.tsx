@@ -53,6 +53,9 @@ const Wrapper = styled.div`
   align-items: center;
   color: ${({ theme }) => theme.textColor};
   overflow: auto;
+  @media only screen and (max-width: 107em) {
+    width: 80%;
+  }
   @media only screen and (max-width: 75em) {
     width: 100%;
   }

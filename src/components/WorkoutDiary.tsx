@@ -47,6 +47,9 @@ const Wrapper = styled.div`
   flex-direction: column;
   color: ${({ theme }) => theme.textColor};
   gap: 3rem;
+  @media only screen and (max-width: 107em) {
+    width: 80%;
+  }
   @media only screen and (max-width: 75em) {
     width: 100%;
   }
@@ -210,7 +213,7 @@ const WorkoutDiary = (): JSX.Element => {
             <h2>Completed Workouts</h2>
           </Header>
           {isLoading ? (
-            <Spinner height="10rem" width="8rem" />
+            <Spinner height="10rem" width="8rem" data-testid="diarySpinner" />
           ) : (
             <Content>
               <thead>
@@ -225,35 +228,43 @@ const WorkoutDiary = (): JSX.Element => {
                 </tr>
               </thead>
               <tbody>
-                {finishedWorkouts.map((workout, index) => {
-                  return (
-                    <Row
-                      index={index}
-                      isOdd={!(index % 2) ? true : false}
-                      key={index}
-                    >
-                      <td colSpan={2}>{workout.workoutName}</td>
-                      <td colSpan={2}>{workout.createdAt}</td>
-                      <ButtonTD colSpan={1}>
-                        <OptionButton
-                          erase={false}
-                          onClick={() => showDetailModal(workout, index)}
-                        >
-                          Details
-                        </OptionButton>
-                        <OptionButton
-                          erase={true}
-                          onClick={() => {
-                            setDeletionIndex(index);
-                            setConfirmationModalVisible(true);
-                          }}
-                        >
-                          Erase
-                        </OptionButton>
-                      </ButtonTD>
-                    </Row>
-                  );
-                })}
+                {finishedWorkouts.length > 0 ? (
+                  finishedWorkouts.map((workout, index) => {
+                    return (
+                      <Row
+                        index={index}
+                        isOdd={!(index % 2) ? true : false}
+                        key={index}
+                      >
+                        <td colSpan={2}>{workout.workoutName}</td>
+                        <td colSpan={2}>{workout.createdAt}</td>
+                        <ButtonTD colSpan={1}>
+                          <OptionButton
+                            erase={false}
+                            onClick={() => showDetailModal(workout, index)}
+                          >
+                            Details
+                          </OptionButton>
+                          <OptionButton
+                            erase={true}
+                            onClick={() => {
+                              setDeletionIndex(index);
+                              setConfirmationModalVisible(true);
+                            }}
+                          >
+                            Erase
+                          </OptionButton>
+                        </ButtonTD>
+                      </Row>
+                    );
+                  })
+                ) : (
+                  <tr>
+                    <td colSpan={5}>
+                      <h2>You don't have any workouts completed</h2>
+                    </td>
+                  </tr>
+                )}
               </tbody>
               {detailModalVisible && detailModal}
             </Content>

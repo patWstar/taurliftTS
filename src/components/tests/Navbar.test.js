@@ -1,37 +1,21 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
-import { render, queryAllByText } from "@testing-library/react";
+import { cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import { createStore } from "redux";
-import { Provider } from "react-redux";
-import reducer from "redux/Slices/UserSlice";
 import Navbar from "../Navbar";
-//helper function
+import renderWithReduxAndRouter from "./utilRenderWithReduxAndRouter";
 
-const renderWithRedux = (
-  component,
-  { initialState, store = createStore(reducer, { user: initialState }) } = {}
-) => {
-  return {
-    ...render(
-      <BrowserRouter>
-        <Provider store={store}>{component}</Provider>
-      </BrowserRouter>
-    ),
-    store,
-  };
-};
+afterEach(cleanup);
 
-test("render logout when authenticated", () => {
-  const { getByText } = renderWithRedux(<Navbar />, {
+test("change content when user is authenticated", () => {
+  const { getByText } = renderWithReduxAndRouter(<Navbar />, {
     initialState: { authenticated: true },
   });
 
   expect(getByText("Logout")).toBeInTheDocument();
 });
 
-test("don't render logout when unauthenticated", async () => {
-  const { queryAllByText } = renderWithRedux(<Navbar />, {
+test("hide content when user is unauthenticated", async () => {
+  const { queryAllByText } = renderWithReduxAndRouter(<Navbar />, {
     initialState: { authenticated: false },
   });
 

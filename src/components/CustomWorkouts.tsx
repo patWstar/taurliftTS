@@ -15,6 +15,7 @@ type NavButtonProps = {
 const Wrapper = styled.div`
   height: 100%;
   background: ${({ theme }) => theme.containerBackgroundPrimary};
+
   width: 55vw;
   min-height: 490px;
   margin: 0 auto;
@@ -22,6 +23,9 @@ const Wrapper = styled.div`
   flex-direction: column;
   color: ${({ theme }) => theme.textColor};
   overflow: hidden;
+  @media only screen and (max-width: 107em) {
+    width: 80%;
+  }
   @media only screen and (max-width: 75em) {
     width: 100%;
   }

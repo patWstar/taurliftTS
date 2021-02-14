@@ -135,7 +135,7 @@ const CalculatorMacros = ({
         <label htmlFor="protein">Protein %</label>
         <FormTextInput
           name="protein"
-          placeholder="Daily %"
+          placeholder="Protein %"
           width="30%"
           reactRef={proteinInputRef}
           type="number"
@@ -143,7 +143,7 @@ const CalculatorMacros = ({
         <label htmlFor="carbs">Carbs %</label>
         <FormTextInput
           name="carb"
-          placeholder="Daily %"
+          placeholder="Carbs %"
           width="30%"
           reactRef={carbsInputRef}
           type="number"
@@ -151,7 +151,7 @@ const CalculatorMacros = ({
         <label htmlFor="fats">Fats %</label>
         <FormTextInput
           name="fats"
-          placeholder="Daily %"
+          placeholder="Fats %"
           width="30%"
           reactRef={fatsInputRef}
           type="number"
