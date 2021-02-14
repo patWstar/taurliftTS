@@ -57,6 +57,9 @@ const Wrapper = styled.div`
   &::-webkit-scrollbar-thumb:hover {
     background: #f1f1f1;
   }
+  @media only screen and (max-width: 56.25em) {
+    width: 90%;
+  }
 `;
 
 const Header = styled.header`

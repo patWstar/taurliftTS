@@ -72,7 +72,7 @@ const Content = styled.form`
       padding: 0.5vmin;
     }
     @media only screen and (max-width: 37.5em) {
-      font-size: 5vmin;
+      font-size: 3vmin;
     }
   }
 `;
