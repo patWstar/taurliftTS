@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 
 const userSlice = createSlice({
   name: "user",
@@ -23,7 +23,9 @@ const userSlice = createSlice({
 export const { login, logout } = userSlice.actions;
 export const selectUserID = (state: { user: { userID: string } }) =>
   state.user.userID;
+
 export const selectAuthenticated = (state: {
-  user: { authenticated: boolean };
+  user: { userID: string | null; authenticated: boolean };
 }) => state.user.authenticated;
+
 export default userSlice.reducer;

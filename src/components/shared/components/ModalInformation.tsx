@@ -8,7 +8,7 @@ interface ModalInformationProps {
 }
 
 type WrapperProps = {
-  visibility: boolean;
+  visibility: string;
 };
 
 //~~~~~~~~~~~~~~~~~~~Styled Components
@@ -44,7 +44,7 @@ const ModalInformation = ({
   }, 1800);
 
   //~~~~~~~~~~~~~~~~~~~Render
-  return <Wrapper visibility={visible}>{text}</Wrapper>;
+  return <Wrapper visibility={visible ? "true" : "false"}>{text}</Wrapper>;
 };
 
 export default ModalInformation;

@@ -5,6 +5,7 @@ import styled from "styled-components";
 import DarkBackground from "components/shared/components/DarkBackground";
 import FormTextField from "components/shared/components/FormTextInput";
 import SubmitButton from "components/shared/components/SubmitButton";
+import ModalInformation from "components/shared/components/ModalInformation";
 //Redux
 //Util
 //~~~~~~~~~~~~~~~~~~~Interfaces & Types
@@ -45,15 +46,21 @@ const BuddyWeightWindow = ({
   handleSetWeight,
 }: BuddyWeightWindowProps): JSX.Element => {
   const weightRef = useRef<HTMLInputElement>(null);
+  const [infoModalVisible, setInfoModalVisible] = React.useState<boolean>(
+    false
+  );
 
   const setWeight = (event: React.FormEvent): void => {
     event.preventDefault();
+
     if (weightRef.current) {
       const weight: number = Number(weightRef.current.value);
 
-      weight > 0 && weight < 999
-        ? handleSetWeight(weight)
-        : alert("Weight must be a number between 1 and 999");
+      const toggleModal = (): void => {
+        setInfoModalVisible(true);
+        setTimeout(() => setInfoModalVisible(false), 2000);
+      };
+      weight > 0 && weight < 999 ? handleSetWeight(weight) : toggleModal();
     }
   };
   //~~~~~~~~~~~~~~~~~~~Render
@@ -61,6 +68,7 @@ const BuddyWeightWindow = ({
     <>
       <DarkBackground onClick={onBackgroundClick} />
       <Wrapper onSubmit={setWeight}>
+        <label htmlFor="weight">Weight</label>
         <FormTextField
           name="weight"
           placeholder="kilograms"
@@ -74,6 +82,9 @@ const BuddyWeightWindow = ({
           fontSize="3vmin"
           height="10%"
         />
+        {infoModalVisible && (
+          <ModalInformation text={"Input must be a value between 1 and 999"} />
+        )}
       </Wrapper>
     </>
   );
