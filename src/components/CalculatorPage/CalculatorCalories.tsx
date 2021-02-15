@@ -23,6 +23,9 @@ const inputsCriteria = {
   },
 };
 //~~~~~~~~~~~~~~~~~~~Interfaces & Types
+type RadioProps = {
+  checked?: boolean;
+};
 interface CalculatorCaloriesProps {
   shareCalorieResult: (calorieResult: number) => void;
 }
@@ -57,7 +60,7 @@ const Content = styled.form`
 
   & select {
     user-select: none;
-    height: 3rem;
+    height: fit-content;
     border: none;
     outline: none;
     background-color: rgba(0, 0, 0, 0.2);
@@ -79,21 +82,34 @@ const Content = styled.form`
 
 const RadioWrapper = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
 
-  width: 20rem;
-`;
-
-const Radios = styled.div`
-  display: flex;
-  width: 100%;
   justify-content: space-between;
   align-items: center;
+  text-align: center;
 
-  & > * {
-    cursor: pointer;
+  width: 30%;
+  margin: 0 auto;
+`;
+
+const Radio = styled.div<RadioProps>`
+  display: flex;
+  height: 4vh;
+  width: 100%;
+
+  align-items: center;
+  cursor: pointer;
+  font-size: 2vmin;
+
+  &:before {
+    content: "";
+    position: relative;
+    margin: 0vh 1vw;
+    width: 3vh;
+    height: 3vh;
+    border-radius: 100px;
+    border: 4px solid ${({ theme }) => theme.secondaryColorLight};
+    background-color: ${({ theme, checked }) =>
+      checked ? theme.secondaryColorDark : "transparent"};
   }
 `;
 
@@ -155,6 +171,7 @@ const CalculatorCalories = ({
       }
     }
   };
+
   //~~~~~~~~~~~~~~~~~~~Render
   return (
     <Wrapper>
@@ -184,21 +201,18 @@ const CalculatorCalories = ({
           type="number"
         />
         <RadioWrapper>
-          <h4>Gender</h4>
-          <Radios>
-            <span onClick={() => setUserGender("woman")}>
-              <input
-                type="radio"
-                value="Woman"
-                checked={userGender === "woman"}
-              />
-              Woman
-            </span>
-            <span onClick={() => setUserGender("man")}>
-              <input type="radio" value="Man" checked={userGender === "man"} />
-              Man
-            </span>
-          </Radios>
+          <Radio
+            onClick={() => setUserGender("woman")}
+            checked={userGender === "woman"}
+          >
+            Woman
+          </Radio>
+          <Radio
+            onClick={() => setUserGender("man")}
+            checked={userGender === "man"}
+          >
+            Man
+          </Radio>
         </RadioWrapper>
         <select
           onChange={(e) => {

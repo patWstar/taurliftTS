@@ -1,7 +1,7 @@
 //Those are just basic FrontEnd validators. Better and safer authentication is present on the backend.
 //Further signup and login validation happens in the backend.
 const passwordMin: number = 6;
-const passwordMax: number = 12;
+const passwordMax: number = 30;
 //Authentication
 //Basic signup validation before sending requests to the backend.
 //~~~~~~~~~~~~~~~~~~~Interfaces & types
