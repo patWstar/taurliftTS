@@ -97,6 +97,14 @@ const Row = styled.tr<RowProps>`
       font-size: 4vmin;
       padding: 6vmin;
     }
+    &:first-child {
+      transition: 0.2s;
+      color: ${({ theme }) => theme.secondaryColorLight};
+      cursor: pointer;
+      &:hover {
+        font-weight: 700;
+      }
+    }
   }
 `;
 
@@ -115,6 +123,7 @@ const OptionButton = styled.button<ButtonProps>`
   font-size: 2vmin;
   font-weight: 600;
   transition: all 0.2s;
+
   color: ${({ theme, erase }) =>
     erase ? "lightCoral" : theme.secondaryColorLight};
   &:hover {
@@ -235,15 +244,14 @@ const WorkoutDiary = (): JSX.Element => {
                         isOdd={!(index % 2) ? true : false}
                         key={index}
                       >
-                        <td colSpan={2}>{workout.workoutName}</td>
+                        <td
+                          colSpan={2}
+                          onClick={() => showDetailModal(workout, index)}
+                        >
+                          {workout.workoutName}
+                        </td>
                         <td colSpan={2}>{workout.createdAt}</td>
                         <ButtonTD colSpan={1}>
-                          <OptionButton
-                            erase={false}
-                            onClick={() => showDetailModal(workout, index)}
-                          >
-                            Details
-                          </OptionButton>
                           <OptionButton
                             erase={true}
                             onClick={() => {
