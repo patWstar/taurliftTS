@@ -27,7 +27,7 @@ const Wrapper = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
   align-items: center;
   top: 50%;
   left: 50%;
@@ -75,7 +75,7 @@ const Header = styled.header`
 const Content = styled.table`
   table-layout: fixed;
   width: 100%;
-  height: 70%;
+
   text-align: left;
 
   & th {
@@ -85,6 +85,7 @@ const Content = styled.table`
 
 const Row = styled.tr<RowProps>`
   font-size: 2.4vmin;
+
   background-color: ${({ theme, isOdd }) =>
     isOdd ? theme.containerBackgroundSecondary : "transparent"};
 

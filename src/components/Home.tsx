@@ -20,6 +20,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: #525b70;
   background-image: url("backgrounds/backgroundMAX.jpg");
   background-size: cover;
   background-repeat: no-repeat;
