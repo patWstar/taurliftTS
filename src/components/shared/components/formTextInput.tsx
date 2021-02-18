@@ -26,6 +26,7 @@ const Input = styled.input<InputProps>`
   font-size: 2vmin;
   &:focus {
     transform: scaleX(1.2) scaleY(1.1);
+    border-width: 2px;
     border-color: ${({ theme }) => theme.secondaryColorLight};
     background-color: transparent;
   }

@@ -10,6 +10,12 @@ declare module "styled-components" {
     navBarColor: string;
     containerBackgroundPrimary: string;
     containerBackgroundSecondary: string;
+
+    fontSmall: string;
+    fontMedium: string;
+    fontMediumLarge: string;
+    fontLarge: string;
+    fontExtraLarge: string;
   }
 }
 
@@ -23,4 +29,10 @@ export const theme: DefaultTheme = {
   navBarColor: "#0c0c0c",
   containerBackgroundPrimary: "rgba(0, 0, 0, 0.6)",
   containerBackgroundSecondary: "#1a1818",
+
+  fontSmall: "0.75rem",
+  fontMedium: "1.25rem",
+  fontMediumLarge: "1.5rem",
+  fontLarge: "2rem",
+  fontExtraLarge: "3rem",
 };

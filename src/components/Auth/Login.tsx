@@ -1,5 +1,5 @@
 //Fundamentals
-import React, { useRef, useState } from "react";
+import React, { Children, useRef, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { Link, useHistory, Redirect } from "react-router-dom";
@@ -9,6 +9,7 @@ import fadeInAnimation from "components/shared/animations/fadeIn";
 import FormTextInput from "components/shared/components/FormTextInput";
 import SubmitButton from "components/shared/components/SubmitButton";
 import ErrorList from "components/shared/components/ErrorList";
+import FeatureFlexWrapper from "components/shared/components/FeatureFlexWrapper";
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectAuthenticated, login } from "redux/Slices/UserSlice";
@@ -22,24 +23,11 @@ interface UserCredentials {
   password: string;
 }
 //~~~~~~~~~~~~~~~~~~~Styled Components
-const Wrapper = styled.div`
-  width: 60vw;
-  height: 100%;
-  min-height: 400px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: ${({ theme }) => theme.containerBackgroundPrimary};
-  @media only screen and (max-width: 75em) {
-    width: 100%;
-  }
-`;
+
 const Content = styled.main`
   background-color: ${({ theme }) => theme.containerBackgroundPrimary};
   box-shadow: 0px 2px 5px 3px rgba(0, 0, 0, 0.2);
-  width: 70rem;
+  width: 90%;
   min-height: 60vh;
   display: flex;
   flex-direction: column;
@@ -190,7 +178,7 @@ const Login = (): JSX.Element => {
   };
   //~~~~~~~~~~~~~~~~~~~Component
   return (
-    <Wrapper>
+    <FeatureFlexWrapper props={Children} justifyContent="center">
       {authenticated ? (
         <Redirect to="/" />
       ) : (
@@ -229,7 +217,7 @@ const Login = (): JSX.Element => {
           </BottomTextWrapper>
         </Content>
       )}
-    </Wrapper>
+    </FeatureFlexWrapper>
   );
 };
 

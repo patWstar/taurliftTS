@@ -1,6 +1,8 @@
-import React from "react";
+import React, { Children } from "react";
 import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
+//Components
+import FeatureFlexWrapper from "components/shared/components/FeatureFlexWrapper";
 //Assets
 import Icons from "assets/sprites.svg";
 import fadeInAnimation from "components/shared/animations/fadeIn";
@@ -13,32 +15,37 @@ type NavButtonProps = {
   color: string;
 };
 //~~~~~~~~~~~~~~~~~~~Styled Components
-const Wrapper = styled.div`
-  flex: 1;
-  min-height: 490px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+// const Wrapper = styled.div`
+//   flex: 1;
+//   min-height: 490px;
+//   width: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
 
-  color: ${({ theme }) => theme.textColor};
-  padding: 4vh 4vw;
-  max-width: 1180px;
-  @media only screen and (max-width: 37.5em) {
-    padding: 0;
-    justify-content: space-between;
-    padding: 1vh 0;
-    align-items: center;
-    gap: 10px;
-    /* background-image: url("backgrounds/backgroundSmall.jpg"); */
-    background-size: 100% 100%;
-  }
-`;
+//   color: ${({ theme }) => theme.textColor};
+//   padding: 4vh 4vw;
+//   max-width: 1180px;
+//   @media only screen and (max-width: 37.5em) {
+//     padding: 0;
+//     justify-content: space-between;
+//     padding: 1vh 0;
+//     align-items: center;
+//     gap: 10px;
+//     /* background-image: url("backgrounds/backgroundSmall.jpg"); */
+//     background-size: 100% 100%;
+//   }
+// `;
 const Header = styled.header`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  justify-content: center;
+  text-align: center;
   width: 80%;
+  background-color: ${(props) => props.theme.containerBackgroundPrimary};
+  padding: 2rem;
+  width: 100vw;
+  gap: 3rem;
   & > h1 {
     color: transparent;
     background: linear-gradient(to bottom, #2ecc71, #1b914c);
@@ -57,23 +64,9 @@ const Header = styled.header`
     }
   }
 `;
-const HeaderLink = styled(Link)`
-  color: inherit;
-  font-size: 7.5vmin;
-  transition: 0.4s;
-  width: fit-content;
-
-  &:hover,
-  &:focus {
-    color: ${({ theme }) => theme.primaryColor};
-    letter-spacing: 0.2rem;
-  }
-  @media only screen and (max-width: 37.5em) {
-    display: none;
-  }
-`;
 const HeaderText = styled.p`
-  font-size: 2.4vmin;
+  font-size: ${(props) => props.theme.fontMediumLarge};
+  padding: 0.5rem;
   @media only screen and (max-width: 37.5em) {
     display: none;
   }
@@ -98,31 +91,20 @@ const shakeButton = keyframes`
   }
 `;
 const HeaderButton = styled(Link)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   color: inherit;
-  height: 8vh;
-  width: 30vw;
-  max-width: 30rem;
+  padding: 2rem 5rem;
+  max-width: 40%;
   background-color: ${({ theme }) => theme.primaryColor};
-  font-size: 2.4vmin;
   border-radius: 80px;
   transition: 0.4s;
+  margin: 0 auto;
   animation: ${shakeButton} 1s ease-out 1;
-
+  font-size: ${(props) => props.theme.fontMedium};
   &:hover,
   &:focus {
     transform: scale(1.1);
     box-shadow: 0 1rem 2rem 1rem rgba(0, 0, 0, 0.2);
   }
-  @media only screen and (max-width: 37.5em) {
-    margin: 0 auto;
-    width: 18rem;
-    height: 8rem;
-    font-size: 2rem;
-  }
-
   @media only screen and (max-height: 28.75em) {
     display: none;
   }
@@ -130,33 +112,25 @@ const HeaderButton = styled(Link)`
 
 const Navigation = styled.nav`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
-  gap: 4vw;
-  width: 100%;
-  @media only screen and (max-width: 56.25em) {
-    height: fit-content;
-    width: 100%;
-    flex-wrap: nowrap;
-    justify-content: center;
-  }
-  @media only screen and (max-width: 37.5em) {
-    flex-wrap: wrap;
-    padding: 0 10vw;
-  }
+  flex-wrap: wrap;
+  gap: 1rem;
 `;
 
 const NavButton = styled(Link)<NavButtonProps>`
+  float: left;
   border-radius: 5px;
-  width: 15vw;
-  height: 20vh;
+  width: 34%;
+  min-height: fit-content;
+  padding: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   flex-direction: column;
   background-color: ${(props) => props.color};
   transition: 0.4s;
-  font-size: 2.5vmin;
+  font-size: ${(props) => props.theme.fontMedium};
   color: inherit;
   &:hover,
   &:focus {
@@ -187,12 +161,9 @@ const Home = (): JSX.Element => {
   const authenticated: boolean = useSelector(selectAuthenticated);
 
   return (
-    <Wrapper>
+    <FeatureFlexWrapper props={Children} backgroundColor="none">
       <Header>
         <h1>Outrun your bad habbits</h1>
-        <HeaderLink to={authenticated ? "/workouts/WorkoutBuddy" : "/signup"}>
-          {authenticated ? "Welcome Back!" : "Let's go"}
-        </HeaderLink>
         <HeaderText>
           Give the world all you've got while Taurlift handles all
           <br />
@@ -228,7 +199,7 @@ const Home = (): JSX.Element => {
           Create
         </NavButton>
       </Navigation>
-    </Wrapper>
+    </FeatureFlexWrapper>
   );
 };
 

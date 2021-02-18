@@ -18,24 +18,8 @@ button {
 html {
   overflow: hidden;
   /* background: linear-gradient(to right, #005aa7, #fffde4); */
-  background-image: url("assets/backgroundMAX.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
 
-  /* 1 rem/em = 16px (if unchanged by client)
   font-size: 100%;
-  /* 1440 px */
-  @media only screen and (max-width: 90em) {
-    font-size: 50%;
-  }
-  /* 900px */
-  @media only screen and (max-width: 56.25em) {
-    font-size: 45%;
-  }
-  /* 600px */
-  @media only screen and (max-width: 37.5em) {
-    font-size: 40%;
-  }
 }
 
 body {
@@ -46,4 +30,9 @@ body {
     "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("assets/backgroundMAX.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
