@@ -17,11 +17,13 @@ button {
 
 html {
   overflow: hidden;
-  background: linear-gradient(to right, #005aa7, #fffde4);
+  /* background: linear-gradient(to right, #005aa7, #fffde4); */
+  background-image: url("assets/backgroundMAX.jpg");
+  background-size: cover;
   background-repeat: no-repeat;
-  background-size: 100% 100%;
-  /* 1 rem. 62.5% = 10px for default 16px. */
-  font-size: 62.5%;
+
+  /* 1 rem/em = 16px (if unchanged by client)
+  font-size: 100%;
   /* 1440 px */
   @media only screen and (max-width: 90em) {
     font-size: 50%;

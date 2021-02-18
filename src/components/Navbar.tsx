@@ -24,7 +24,7 @@ const Container = styled.div`
   display: flex;
   align-self: stretch;
   justify-content: space-between;
-  height: 7rem;
+  height: 70px;
   background-color: ${({ theme }) => theme.navBarColor};
   padding: 0 5%;
   color: ${({ theme }) => theme.textColor};

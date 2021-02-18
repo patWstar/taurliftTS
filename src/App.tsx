@@ -12,16 +12,17 @@ import WorkoutDiary from "components/WorkoutDiary/WorkoutDiary";
 import Calculators from "components/CalculatorPage/Calculators";
 
 //Styled Components
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
+  align-items: center;
   height: 100vh;
   width: 100vw;
+
   position: absolute;
   top: 0;
   left: 0;
   overflow: auto;
-  background: linear-gradient(to right, #005aa7, #fffde4);
 
   scroll-behavior: smooth;
   &::-webkit-scrollbar {
@@ -41,6 +42,7 @@ const Wrapper = styled.div`
     background: #f1f1f1;
   }
 `;
+
 //Component
 const App = (): JSX.Element => {
   return (
@@ -59,3 +61,12 @@ const App = (): JSX.Element => {
 };
 
 export default App;
+
+//todo ideas
+//rewrite to REM's
+//create a flex wrapper to get rid of flexbox boilerplate from every element
+//switch gaps to space-between + padding
+//create font-sizes in theme
+//make wrappers max 1180px
+//check how it will look if the background stays behind the whole time but blurred if the path !== /home
+//try to make small components have paddings instead of widths and heights to avoid having to center them

@@ -14,26 +14,23 @@ type NavButtonProps = {
 };
 //~~~~~~~~~~~~~~~~~~~Styled Components
 const Wrapper = styled.div`
-  height: calc(100vh - 7rem);
+  flex: 1;
   min-height: 490px;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #525b70;
-  background-image: url("backgrounds/backgroundMAX.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
+
   color: ${({ theme }) => theme.textColor};
   padding: 4vh 4vw;
-
+  max-width: 1180px;
   @media only screen and (max-width: 37.5em) {
     padding: 0;
     justify-content: space-between;
     padding: 1vh 0;
     align-items: center;
     gap: 10px;
-    background-image: url("backgrounds/backgroundSmall.jpg");
+    /* background-image: url("backgrounds/backgroundSmall.jpg"); */
     background-size: 100% 100%;
   }
 `;
