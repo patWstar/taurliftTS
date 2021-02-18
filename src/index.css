@@ -20,6 +20,10 @@ html {
   /* background: linear-gradient(to right, #005aa7, #fffde4); */
 
   font-size: 100%;
+
+  @media (max-width: 62.5em) {
+    font-size: 75%;
+  }
 }
 
 body {

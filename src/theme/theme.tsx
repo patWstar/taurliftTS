@@ -16,6 +16,7 @@ declare module "styled-components" {
     fontMediumLarge: string;
     fontLarge: string;
     fontExtraLarge: string;
+    fontExtremeLarge: string;
   }
 }
 
@@ -35,4 +36,5 @@ export const theme: DefaultTheme = {
   fontMediumLarge: "1.5rem",
   fontLarge: "2rem",
   fontExtraLarge: "3rem",
+  fontExtremeLarge: "4rem",
 };

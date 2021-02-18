@@ -52,16 +52,9 @@ const Header = styled.header`
     -webkit-background-clip: text;
     background-clip: text;
     letter-spacing: 0.6rem;
-    font-size: 9vmin;
+    font-size: ${(props) => props.theme.fontExtremeLarge};
     font-weight: 500;
     animation: ${fadeInAnimation} 1s linear 1;
-    @media only screen and (max-width: 107em) {
-      font-size: 7vmin;
-    }
-    @media only screen and (max-width: 37.5em) {
-      font-size: 4rem;
-      text-align: center;
-    }
   }
 `;
 const HeaderText = styled.p`
@@ -143,12 +136,7 @@ const NavButton = styled(Link)<NavButtonProps>`
     width: 35%;
     height: 40%;
   }
-  @media only screen and (max-width: 56.25em) {
-    height: 20vh;
-    width: 20%;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+
   @media only screen and (max-width: 37.5em) {
     width: 30vw;
     height: 18vh;
