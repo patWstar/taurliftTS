@@ -22,7 +22,7 @@ const Header = styled.header`
   text-align: center;
   background-color: ${(props) => props.theme.containerBackgroundPrimary};
   padding: 2rem;
-  width: 100vw;
+  width: 98vw;
   gap: 0.5rem;
   & > h1 {
     color: transparent;

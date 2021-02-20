@@ -35,14 +35,6 @@ interface UserData {
   userAge: number;
 }
 //~~~~~~~~~~~~~~~~~~~Styled Components
-const Wrapper = styled.div`
-  flex: 1;
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2vh 2vw;
-`;
 
 const Content = styled.form`
   align-self: stretch;
@@ -52,9 +44,7 @@ const Content = styled.form`
   justify-content: space-between;
   align-items: center;
 
-  font-size: 2vmin;
   @media only screen and (max-width: 37.5em) {
-    font-size: 3vmin;
     text-align: center;
   }
 
@@ -67,15 +57,12 @@ const Content = styled.form`
     color: $text-color;
     padding: 0.5rem 1rem;
     border-radius: 10px;
-    font-size: 1.6vmin;
+    font-size: ${(props) => props.theme.fontMedium};
     color: inherit;
     cursor: pointer;
     & option {
       background-color: rgba(0, 0, 0, 0.9);
-      padding: 0.5vmin;
-    }
-    @media only screen and (max-width: 37.5em) {
-      font-size: 3vmin;
+      padding: 0.5rem;
     }
   }
 `;
@@ -93,19 +80,18 @@ const RadioWrapper = styled.div`
 
 const Radio = styled.div<RadioProps>`
   display: flex;
-  height: 4vh;
+  height: 2rem;
   width: 100%;
 
   align-items: center;
   cursor: pointer;
-  font-size: 2vmin;
 
   &:before {
     content: "";
     position: relative;
-    margin: 0vh 1vw;
-    width: 3vh;
-    height: 3vh;
+    margin: 0 auto;
+    width: 2rem;
+    height: 2rem;
     border-radius: 100px;
     border: 4px solid ${({ theme }) => theme.secondaryColorLight};
     background-color: ${({ theme, checked }) =>
@@ -174,7 +160,7 @@ const CalculatorCalories = ({
 
   //~~~~~~~~~~~~~~~~~~~Render
   return (
-    <Wrapper>
+    <>
       <Content>
         <label htmlFor="userHeight">Height</label>
         <FormTextInput
@@ -225,10 +211,15 @@ const CalculatorCalories = ({
           <option value="1.8">Very Active ( x1.8 )</option>
           <option value="2">Extremely Active ( x2.0 )</option>
         </select>
-        <SubmitButton value="Submit" width="30%" onClick={onSubmitHandler} />
+        <SubmitButton
+          value="Submit"
+          width="30%"
+          onClick={onSubmitHandler}
+          fontSize="1.2rem"
+        />
         <ErrorList errors={errors} width="100%" />
       </Content>
-    </Wrapper>
+    </>
   );
 };
 

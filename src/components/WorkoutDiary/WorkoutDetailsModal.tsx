@@ -42,7 +42,7 @@ const Wrapper = styled.div`
   overflow: auto;
   scroll-behavior: smooth;
   &::-webkit-scrollbar {
-    width: 1vmin;
+    width: 5px;
     scroll-behavior: smooth;
   }
 

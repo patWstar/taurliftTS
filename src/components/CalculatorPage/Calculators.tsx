@@ -6,6 +6,7 @@ import styled from "styled-components";
 import CalculatorCalories from "components/CalculatorPage/CalculatorCalories";
 import CalculatorMacros from "components/CalculatorPage/CalculatorMacros";
 import CalculatorBMI from "components/CalculatorPage/CalculatorBMI";
+import FeatureFlexWrapper from "components/shared/components/FeatureFlexWrapper";
 //Redux
 //Util
 //~~~~~~~~~~~~~~~~~~~Interfaces & Types
@@ -18,37 +19,19 @@ type SelectorButtonProps = {
   activeClassName: string;
 };
 //~~~~~~~~~~~~~~~~~~~Styled Components
-const Wrapper = styled.div`
-  height: 100%;
-  min-height: 450px;
-  background: ${({ theme }) => theme.containerBackgroundPrimary};
-  width: 55vw;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  color: ${({ theme }) => theme.textColor};
-  overflow: auto;
-  @media only screen and (max-width: 107em) {
-    width: 80%;
-  }
-  @media only screen and (max-width: 56.25em) {
-    width: 100%;
-  }
-`;
 
 const NavRow = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 15%;
+  height: 4rem;
   width: 100%;
-  min-height: 3rem;
   & > :nth-child(2) {
     border-left: 1px solid #444040;
     border-right: 1px solid #444040;
   }
   @media only screen and (max-width: 37.5em) {
-    height: 10%;
+    height: 5rem;
   }
 `;
 
@@ -56,7 +39,7 @@ const SelectorButton = styled(NavLink)<SelectorButtonProps>`
   background-color: rgba(107, 107, 93, 0.3);
   width: calc(100% / 3);
   align-self: stretch;
-  font-size: 3vmin;
+  font-size: ${(props) => props.theme.fontMediumLarge};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,15 +52,17 @@ const SelectorButton = styled(NavLink)<SelectorButtonProps>`
   }
   &.${({ activeClassName }) => activeClassName} {
     background-color: transparent;
+    color: ${({ theme }) => theme.secondaryColorLight};
   }
 `;
 const ContentWrapper = styled.main`
   flex: 1;
   align-self: stretch;
   display: flex;
+  padding: 1rem 0;
 `;
 const Footer = styled.footer`
-  height: 10%;
+  height: 3rem;
   display: flex;
   width: 100%;
   border-top: 2px solid ${({ theme }) => theme.primaryColor};
@@ -87,19 +72,19 @@ const Footer = styled.footer`
     justify-content: space-between;
     padding: 0 2vw;
   }
+  @media only screen and (max-width: 37.5em) {
+    height: 5rem;
+  }
 `;
 
 const FooterResult = styled.div`
   display: flex;
-  padding: 1vh 0;
+  padding: 1rem 0;
   justify-content: center;
   align-items: center;
-  font-size: 2vmin;
+  font-size: ${(props) => props.theme.fontMediumLarge};
   width: calc(100% / 3);
   height: 100%;
-  @media only screen and (max-width: 37.5em) {
-    font-size: 3vmin;
-  }
 `;
 //~~~~~~~~~~~~~~~~~~~Component
 const Calculators = (): JSX.Element => {
@@ -124,7 +109,11 @@ const Calculators = (): JSX.Element => {
   };
   //~~~~~~~~~~~~~~~~~~~Render
   return (
-    <Wrapper>
+    <FeatureFlexWrapper
+      props={React.Children}
+      padding="0px 0px"
+      justifyContent="center"
+    >
       <NavRow>
         <SelectorButton
           to="/calculators/CalorieCalculator"
@@ -179,7 +168,7 @@ const Calculators = (): JSX.Element => {
         </FooterResult>
         <FooterResult>{bmiResult && `${bmiResult}`}</FooterResult>
       </Footer>
-    </Wrapper>
+    </FeatureFlexWrapper>
   );
 };
 

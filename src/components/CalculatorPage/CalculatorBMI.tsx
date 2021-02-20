@@ -39,14 +39,6 @@ interface UserInputs {
   userWeight: number;
 }
 //~~~~~~~~~~~~~~~~~~~Styled Components
-const Wrapper = styled.div`
-  flex: 1;
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2vh 2vw;
-`;
 
 const Content = styled.form`
   align-self: stretch;
@@ -54,13 +46,8 @@ const Content = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 5vh;
+  gap: 1rem;
   align-items: center;
-  font-size: 2vmin;
-  @media only screen and (max-width: 37.5em) {
-    font-size: 3vmin;
-    text-align: center;
-  }
 `;
 
 //~~~~~~~~~~~~~~~~~~~Component
@@ -99,7 +86,7 @@ const CalculatorBMI = ({ shareBMIResult }: CalculatorBMIProps): JSX.Element => {
   };
   //~~~~~~~~~~~~~~~~~~~Render
   return (
-    <Wrapper>
+    <>
       <Content>
         <label htmlFor="userCalories">Height</label>
         <FormTextInput
@@ -120,7 +107,7 @@ const CalculatorBMI = ({ shareBMIResult }: CalculatorBMIProps): JSX.Element => {
         <SubmitButton value="Submit" width="30%" onClick={onSubmitHandler} />
         <ErrorList errors={errors} width="100%" />
       </Content>
-    </Wrapper>
+    </>
   );
 };
 

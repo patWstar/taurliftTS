@@ -43,14 +43,6 @@ interface UserInputs {
 }
 
 //~~~~~~~~~~~~~~~~~~~Styled Components
-const Wrapper = styled.div`
-  flex: 1;
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2vh 2vw;
-`;
 
 const Content = styled.form`
   align-self: stretch;
@@ -59,11 +51,6 @@ const Content = styled.form`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  font-size: 2vmin;
-  @media only screen and (max-width: 37.5em) {
-    font-size: 3vmin;
-    text-align: center;
-  }
 `;
 
 //~~~~~~~~~~~~~~~~~~~Component
@@ -122,7 +109,7 @@ const CalculatorMacros = ({
   };
   //~~~~~~~~~~~~~~~~~~~Render
   return (
-    <Wrapper>
+    <>
       <Content>
         <label htmlFor="userCalories">Calories</label>
         <FormTextInput
@@ -156,10 +143,15 @@ const CalculatorMacros = ({
           reactRef={fatsInputRef}
           type="number"
         />
-        <SubmitButton value="Submit" width="30%" onClick={onSubmitHandler} />
+        <SubmitButton
+          value="Submit"
+          width="30%"
+          onClick={onSubmitHandler}
+          fontSize="1.2rem"
+        />
         <ErrorList errors={errors} width="100%" />
       </Content>
-    </Wrapper>
+    </>
   );
 };
 
