@@ -25,9 +25,9 @@ const Container = styled.div`
   align-self: stretch;
   justify-content: space-between;
   height: 70px;
-  background-color: ${({ theme }) => theme.navBarColor};
+  background-color: ${(props) => props.theme.navBarColor};
   padding: 0 5%;
-  color: ${({ theme }) => theme.textColor};
+  color: ${(props) => props.theme.textColor};
 
   @media only screen and (max-width: 56.25em) {
     padding: 0;
@@ -78,11 +78,11 @@ const Nav = styled(NavLink)<NavProps>`
   transition: 0.4s;
   align-self: stretch;
   flex: 1;
-  font-size: 1.5vmin;
+
   & > svg {
-    height: 4rem;
-    width: 4rem;
-    fill: ${({ theme }) => theme.textColor};
+    height: 2.5rem;
+    width: 2.5rem;
+    fill: ${(props) => props.theme.textColor};
 
     @media only screen and (max-width: 56.25em) {
       height: 2rem;
@@ -91,7 +91,7 @@ const Nav = styled(NavLink)<NavProps>`
   }
   &:hover {
     letter-spacing: 1px;
-    color: ${({ theme }) => theme.secondaryColorDark};
+    color: ${(props) => props.theme.secondaryColorDark};
   }
 
   &.${({ activeClassName }) => activeClassName} {
@@ -102,7 +102,6 @@ const Nav = styled(NavLink)<NavProps>`
 
   @media only screen and (max-width: 56.25em) {
     flex: 1;
-    font-size: 3vmin;
   }
 `;
 
@@ -115,14 +114,11 @@ const LogoutButton = styled.button`
   font-weight: 700;
   transition: 0.4s;
   height: 100%;
-  font-size: 2vmin;
+  font-size: ${(props) => props.theme.fontMediumLarge};
 
   &:hover {
     letter-spacing: 1px;
     color: red;
-  }
-  @media only screen and (max-width: 56.25em) {
-    font-size: 3vmin;
   }
 `;
 //~~~~~~~~~~~~~~~~~~~Component

@@ -22,7 +22,7 @@ const Header = styled.header`
   text-align: center;
   background-color: ${(props) => props.theme.containerBackgroundPrimary};
   padding: 2rem;
-  width: 98vw;
+  width: 100vw;
   gap: 0.5rem;
   & > h1 {
     color: transparent;
@@ -93,8 +93,8 @@ const NavButton = styled(Link)<NavButtonProps>`
   border-radius: 5px;
   width: 34%;
   min-height: fit-content;
-  max-height: 50%;
-  padding: 1rem;
+  max-height: 45%;
+  padding: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: space-evenly;

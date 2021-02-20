@@ -35,8 +35,7 @@ const Wrapper = styled.section<FeatureFlexWrapperProps>`
   }
 
   @media only screen and (max-width: 37.5em) {
-    padding: 0;
-    justify-content: center;
+    padding: 3rem 0;
   }
 `;
 
