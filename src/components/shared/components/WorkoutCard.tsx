@@ -31,7 +31,7 @@ const WorkoutCardElement = styled(Link)`
   @media only screen and (max-width: 56.25em) {
     height: 33%;
     width: 70%;
-    margin: 1vh 0;
+    margin: 0.5rem 0;
   }
 `;
 
@@ -50,29 +50,23 @@ const CardTitle = styled.header`
   height: 15%;
   border-bottom: solid ${({ theme }) => theme.primaryColor} 2px;
   border-radius: 50%;
-  font-size: 2.4vmin;
+  font-size: ${(props) => props.theme.fontMediumLarge};
   @media only screen and (max-width: 37.5em) {
     height: 30%;
-  }
-  @media only screen and (max-width: 37.5em) {
-    font-size: 3.5vmin;
   }
 `;
 
 const CardDescription = styled.p`
   display: block;
-  font-size: 2.5vmin;
+  font-size: ${(props) => props.theme.fontMedium};
   font-weight: 500;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 20%;
-  padding: 0 2vw;
+  padding: 0 2rem;
   @media only screen and (max-width: 37.5em) {
     height: 50%;
-  }
-  @media only screen and (max-width: 37.5em) {
-    font-size: 3.5vmin;
   }
 `;
 
