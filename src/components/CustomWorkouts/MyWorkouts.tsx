@@ -38,11 +38,10 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
   overflow: auto;
   scroll-behavior: smooth;
   &::-webkit-scrollbar {
-    width: 1rem;
+    width: 8px;
     scroll-behavior: smooth;
   }
 
@@ -63,7 +62,7 @@ const SelectorsWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 3vh;
+  gap: 1.5rem;
   width: 100%;
   height: fit-content;
 `;
@@ -73,25 +72,19 @@ const SelectorButton = styled.button<SelectorProps>`
   background-color: inherit;
   color: ${({ theme, disable }) =>
     disable ? "grey" : theme.secondaryColorLight};
-  font-size: 3.2vmin;
+  padding: 1rem;
+  font-size: ${(props) => props.theme.fontMediumLarge};
   transition: 0.4s;
   &:hover {
     letter-spacing: 2px;
     font-weight: 600;
-  }
-  @media only screen and (max-width: 37.5em) {
-    font-size: 4vmin;
-    padding: 3vh 0;
   }
 `;
 
 const WorkoutHeader = styled.header`
   text-align: center;
   & > h2 {
-    font-size: 2.6vmin;
-    @media only screen and (max-width: 37.5em) {
-      font-size: 4vmin;
-    }
+    font-size: ${(props) => props.theme.fontMediumLarge};
   }
 `;
 const TableWrapper = styled.span`
@@ -117,7 +110,7 @@ const TableWrapper = styled.span`
     background: #f1f1f1;
   }
   @media only screen and (max-width: 56.25em) {
-    padding: 2vh 0;
+    padding: 1rem 0;
   }
 `;
 const TableContent = styled.table`
@@ -125,32 +118,24 @@ const TableContent = styled.table`
   table-layout: fixed;
   text-align: left;
   & th {
-    font-size: 2.4vmin;
-    @media only screen and (max-width: 75em) {
-      font-size: 3vmin;
-    }
+    font-size: ${(props) => props.theme.fontMedium};
   }
 `;
 
 const Row = styled.tr<RowProps>`
-  font-size: 2vmin;
   background-color: ${({ theme, isOdd }) =>
     isOdd ? theme.containerBackgroundSecondary : "transparent"};
   & > td {
-    padding: 1vh 1vmin;
-    @media only screen and (max-width: 75em) {
-      font-size: 3vmin;
-      padding: 2vh 1vmin;
-    }
+    padding: 1rem;
   }
 `;
 const Footer = styled.footer`
-  height: 15%;
+  height: 5rem;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 4vw;
+  gap: 2rem;
   border-top: 2px solid ${({ theme }) => theme.primaryColor};
 `;
 //~~~~~~~~~~~~~~~~~~~Component
@@ -296,9 +281,9 @@ const MyWorkouts = (): JSX.Element => {
             {workouts.length > 0 && (
               <SubmitButton
                 value="Delete"
-                width="50%"
+                width="14rem"
                 height="80%"
-                fontSize="3vmin"
+                fontSize="1.2rem"
                 onClick={() => setConfirmationModalVisible(true)}
               />
             )}

@@ -5,6 +5,7 @@ import { NavLink, Route } from "react-router-dom";
 //Components
 import CreateWorkout from "components/CustomWorkouts/CreateWorkout";
 import MyWorkouts from "components/CustomWorkouts/MyWorkouts";
+import FeatureFlexWrapper from "components/shared/components/FeatureFlexWrapper";
 // import { validateExercise } from "../util/validators";
 //~~~~~~~~~~~~~~~~~~~Interfaces & Types
 type NavButtonProps = {
@@ -12,31 +13,14 @@ type NavButtonProps = {
 };
 
 //~~~~~~~~~~~~~~~~~~~Styled Components
-const Wrapper = styled.div`
-  height: 100%;
-  background: ${({ theme }) => theme.containerBackgroundPrimary};
 
-  width: 55vw;
-  min-height: 490px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  color: ${({ theme }) => theme.textColor};
-  overflow: hidden;
-  @media only screen and (max-width: 107em) {
-    width: 80%;
-  }
-  @media only screen and (max-width: 75em) {
-    width: 100%;
-  }
-`;
 const ButtonRow = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 15%;
   width: 100%;
-  gap: 5vw;
+  gap: 1rem;
 `;
 
 const NavButton = styled(NavLink)<NavButtonProps>`
@@ -45,10 +29,10 @@ const NavButton = styled(NavLink)<NavButtonProps>`
   text-align: center;
   background-color: rgba(0, 0, 0, 0.7);
   border: 2px solid #3498db;
-  padding: 2.5rem;
+  padding: 2rem;
   border-radius: 24px;
   transition: 0.4s;
-  font-size: 2.5vmin;
+  font-size: ${(props) => props.theme.fontMedium};
 
   &:hover {
     background-color: ${({ theme }) => theme.primaryColor};
@@ -56,16 +40,12 @@ const NavButton = styled(NavLink)<NavButtonProps>`
   &.${({ activeClassName }) => activeClassName} {
     background-color: ${({ theme }) => theme.primaryColor};
   }
-  @media only screen and (max-width: 37.5em) {
-    font-size: 3.2vmin;
-    padding: 3vh 0;
-  }
 `;
 //~~~~~~~~~~~~~~~~~~~Component
 const CreateCustomWorkout = (): JSX.Element => {
   //~~~~~~~~~~~~~~~~~~~Render
   return (
-    <Wrapper>
+    <FeatureFlexWrapper props={React.Children}>
       <ButtonRow>
         <NavButton
           to="/workouts/CustomWorkouts/CreateWorkout"
@@ -91,7 +71,7 @@ const CreateCustomWorkout = (): JSX.Element => {
         component={MyWorkouts}
         exact
       />
-    </Wrapper>
+    </FeatureFlexWrapper>
   );
 };
 

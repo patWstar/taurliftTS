@@ -58,26 +58,15 @@ interface NewWorkout {
   userID: string;
 }
 //~~~~~~~~~~~~~~~~~~~Styled Components
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  justify-content: center;
-  align-items: center;
-`;
-const InputLabel = styled.label`
-  font-size: 2vmin;
-`;
+const InputLabel = styled.label``;
 const Content = styled.main`
+  padding: 1rem 0;
   display: flex;
   height: 85%;
   @media only screen and (max-width: 37.5em) {
     flex-direction: column;
     align-items: center;
-    gap: 2vh;
-    padding: 2vh 0;
+    gap: 1rem;
   }
 `;
 const FormContent = styled.form`
@@ -86,18 +75,7 @@ const FormContent = styled.form`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  gap: 3vh;
-  @media only screen and (max-width: 37.5em) {
-    gap: 1vh;
-
-    & label {
-      font-size: 4vmin;
-    }
-
-    & button {
-      font-size: 2vmin;
-    }
-  }
+  gap: 1rem;
 `;
 const TableWrapper = styled.span`
   height: 100%;
@@ -105,7 +83,7 @@ const TableWrapper = styled.span`
   overflow: auto;
   scroll-behavior: smooth;
   &::-webkit-scrollbar {
-    width: 1vmin;
+    width: 8px;
     scroll-behavior: smooth;
   }
 
@@ -131,10 +109,7 @@ const TableContent = styled.table`
   table-layout: fixed;
   text-align: left;
   & th {
-    font-size: 2.4vmin;
-    @media only screen and (max-width: 37.5em) {
-      font-size: 3vmin;
-    }
+    font-size: ${(props) => props.theme.fontMedium};
   }
 `;
 
@@ -145,7 +120,7 @@ const Row = styled.tr<RowProps>`
   & > td {
     padding: 1rem;
     @media only screen and (max-width: 37.5em) {
-      font-size: 3vmin;
+      font-size: ${(props) => props.theme.fontMedium};
     }
   }
 `;
@@ -155,11 +130,10 @@ const Footer = styled.footer`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 4vw;
+  gap: 1rem;
   @media only screen and (max-width: 37.5em) {
     padding: 0 10%;
     justify-content: space-between;
-    height: 10%;
   }
 `;
 
@@ -265,7 +239,7 @@ const CreateWorkout = (): JSX.Element => {
   };
   //~~~~~~~~~~~~~~~~~~~Render
   return (
-    <Wrapper>
+    <>
       {isLoading ? (
         <Spinner width="10rem" height="12rem" />
       ) : (
@@ -297,7 +271,7 @@ const CreateWorkout = (): JSX.Element => {
               <SubmitButton
                 value="Add Exercise"
                 width="50%"
-                fontSize="2vmin"
+                fontSize="1rem"
                 height="15%"
               />
               {errors.length > 0 && <ErrorList width="100%" errors={errors} />}
@@ -332,23 +306,23 @@ const CreateWorkout = (): JSX.Element => {
           <Footer>
             <SubmitButton
               value="Reset"
-              width="30%"
+              width="35%"
               height="80%"
-              fontSize="2.3vmin"
+              fontSize=".8rem"
               onClick={fullReset}
             />
             <SubmitButton
               value="Save Workout"
-              width="30%"
+              width="35%"
               height="80%"
-              fontSize="2.3vmin"
+              fontSize=".8rem"
               onClick={handleWebSubmit}
             />
           </Footer>
         </>
       )}
       {infoModalVisible && <ModalInformation text="Custom Workout added!" />}
-    </Wrapper>
+    </>
   );
 };
 
