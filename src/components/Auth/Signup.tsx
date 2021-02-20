@@ -1,5 +1,5 @@
 //Fundamentals
-import React, { Children, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { Link, useHistory, Redirect } from "react-router-dom";
@@ -162,7 +162,7 @@ const Signup = (): JSX.Element => {
     }
   };
   return (
-    <FeatureFlexWrapper props={Children} justifyContent="center">
+    <FeatureFlexWrapper props={React.Children} justifyContent="center">
       {authenticated ? (
         <Redirect to="/" />
       ) : (

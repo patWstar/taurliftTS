@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 //Components
@@ -128,7 +128,7 @@ const Home = (): JSX.Element => {
   const authenticated: boolean = useSelector(selectAuthenticated);
 
   return (
-    <FeatureFlexWrapper props={Children} backgroundColor="none">
+    <FeatureFlexWrapper props={React.Children} backgroundColor="none">
       <Header>
         <h1>Outrun your bad habbits</h1>
         <HeaderText>

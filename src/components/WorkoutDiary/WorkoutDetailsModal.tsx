@@ -36,7 +36,7 @@ const Wrapper = styled.div`
   width: 50vw;
   border: ${({ theme }) => theme.primaryColor} 1px solid;
   border-radius: 30px;
-  padding: 2.5vmin;
+  padding: 1rem;
   background-color: rgb(0, 0, 0);
   z-index: 4;
   overflow: auto;
@@ -65,7 +65,7 @@ const Wrapper = styled.div`
 const Header = styled.header`
   height: 15%;
   & > h1 {
-    font-size: 5vmin;
+    font-size: ${(props) => props.theme.fontLarge};
     letter-spacing: 4px;
     text-align: left;
     font-weight: 400;
@@ -79,18 +79,18 @@ const Content = styled.table`
   text-align: left;
 
   & th {
-    font-size: 2vmin;
+    font-size: ${(props) => props.theme.fontMedium};
   }
 `;
 
 const Row = styled.tr<RowProps>`
-  font-size: 2.4vmin;
+  font-size: ${(props) => props.theme.fontMedium};
 
   background-color: ${({ theme, isOdd }) =>
     isOdd ? theme.containerBackgroundSecondary : "transparent"};
 
   & td {
-    padding: 1vmin;
+    padding: 1rem;
   }
 `;
 

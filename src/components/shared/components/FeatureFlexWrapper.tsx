@@ -19,10 +19,11 @@ const Wrapper = styled.section<FeatureFlexWrapperProps>`
   align-items: ${(props) => props.alignItems || "center"};
   flex-direction: ${(props) => props.flexDirection || "column"};
   justify-content: ${(props) => props.justifyContent || "space-between"};
-  height: 100%;
+
   display: flex;
   width: 60vw;
   min-height: 400px;
+  height: 100%;
   max-width: 1180px;
   padding: 2rem;
   background: ${(props) =>

@@ -7,6 +7,7 @@ import Spinner from "components/shared/components/Spinner";
 import WorkoutDetailsModal from "components/WorkoutDiary/WorkoutDetailsModal";
 import ModalInformation from "components/shared/components/ModalInformation";
 import ModalConfirmation from "components/shared/components/ModalConfirmation";
+import FeatureFlexWrapper from "components/shared/components/FeatureFlexWrapper";
 //Redux
 import { selectUserID, selectAuthenticated } from "redux/Slices/UserSlice";
 import { useSelector } from "react-redux";
@@ -37,35 +38,17 @@ interface FinishedWorkout {
 }
 //~~~~~~~~~~~~~~~~~~~Styled Components
 
-const Wrapper = styled.div`
-  flex: 1;
-  background: ${({ theme }) => theme.containerBackgroundPrimary};
-  width: 55vw;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  color: ${({ theme }) => theme.textColor};
-  gap: 3rem;
-  @media only screen and (max-width: 107em) {
-    width: 80%;
-  }
-  @media only screen and (max-width: 75em) {
-    width: 100%;
-  }
-`;
-
 const Header = styled.header`
   text-align: center;
 
   & > h1 {
-    padding: 5vh 0;
-    font-size: 6vmin;
+    padding: 2rem 0;
+    font-size: ${(props) => props.theme.fontExtraLarge};
     font-weight: 400;
     letter-spacing: 4px;
   }
   & > h2 {
-    font-size: 3vmin;
+    font-size: ${(props) => props.theme.fontMediumLarge};
     font-weight: 300;
   }
 `;
@@ -74,9 +57,8 @@ const Content = styled.table`
   table-layout: fixed;
   width: 80%;
   text-align: left;
-
   & > thead {
-    font-size: 3vmin;
+    font-size: ${(props) => props.theme.fontMediumLarge};
   }
 
   @media only screen and (max-width: 37.5em) {
@@ -85,18 +67,12 @@ const Content = styled.table`
 `;
 
 const Row = styled.tr<RowProps>`
-  font-size: 2.4vmin;
   background-color: ${({ theme, isOdd }) =>
     isOdd ? theme.containerBackgroundSecondary : "transparent"};
   & > td {
-    padding: 1.5vmin;
-    @media only screen and (max-width: 75em) {
-      padding: 2.5vmin;
-    }
-    @media only screen and (max-width: 37.5em) {
-      font-size: 4vmin;
-      padding: 6vmin;
-    }
+    padding: 1.5rem;
+    font-size: ${(props) => props.theme.fontMedium};
+
     &:first-child {
       transition: 0.2s;
       color: ${({ theme }) => theme.secondaryColorLight};
@@ -120,7 +96,6 @@ const ButtonTD = styled.td`
   }
 `;
 const OptionButton = styled.button<ButtonProps>`
-  font-size: 2vmin;
   font-weight: 600;
   transition: all 0.2s;
 
@@ -129,9 +104,6 @@ const OptionButton = styled.button<ButtonProps>`
   &:hover {
     transform: scale(1.05) translateY(-1px);
     filter: brightness(1.2);
-  }
-  @media only screen and (max-width: 37.5em) {
-    font-size: 3vmin;
   }
 `;
 //~~~~~~~~~~~~~~~~~~~Component
@@ -213,7 +185,7 @@ const WorkoutDiary = (): JSX.Element => {
   };
   //~~~~~~~~~~~~~~~~~~~Render
   return (
-    <Wrapper>
+    <FeatureFlexWrapper props={React.Children} justifyContent="flex-start">
       {authenticated ? (
         <>
           <Header>
@@ -288,7 +260,7 @@ const WorkoutDiary = (): JSX.Element => {
       ) : (
         <ModalInformation text="The Diary Feature is only available for users who are logged in" />
       )}
-    </Wrapper>
+    </FeatureFlexWrapper>
   );
 };
 
