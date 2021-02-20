@@ -114,7 +114,6 @@ const TableContent = styled.table`
 `;
 
 const Row = styled.tr<RowProps>`
-  font-size: 2vmin;
   background-color: ${({ theme, isOdd }) =>
     isOdd ? theme.containerBackgroundSecondary : "transparent"};
   & > td {
