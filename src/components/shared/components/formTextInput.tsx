@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-interface formTextInputProps {
+interface FormTextInputProps {
   type?: string;
   name: string;
   placeholder: string;
@@ -35,13 +35,13 @@ const Input = styled.input<InputProps>`
     font-size: 3vmin;
   }
 `;
-const formTextInput = ({
+const FormTextInput = ({
   type,
   name,
   placeholder,
   width,
   reactRef,
-}: formTextInputProps) => (
+}: FormTextInputProps) => (
   <Input
     type={type ? type : "text"}
     width={width}
@@ -51,4 +51,4 @@ const formTextInput = ({
   />
 );
 
-export default formTextInput;
+export default FormTextInput;
