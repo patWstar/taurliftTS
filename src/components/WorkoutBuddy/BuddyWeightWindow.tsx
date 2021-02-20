@@ -33,7 +33,7 @@ const Wrapper = styled.form`
   left: 50%;
   z-index: 10;
   transform: translate(-50%, -50%);
-  gap: 5vh;
+  gap: 4rem;
   @media only screen and (max-width: 56.25em) {
     width: 80%;
     height: 70%;
@@ -79,7 +79,7 @@ const BuddyWeightWindow = ({
         <SubmitButton
           value="Submit"
           width="35%"
-          fontSize="3vmin"
+          fontSize="1.2rem"
           height="10%"
         />
         {infoModalVisible && (

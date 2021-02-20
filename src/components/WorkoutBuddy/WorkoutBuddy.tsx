@@ -11,6 +11,7 @@ import DarkBackground from "components/shared/components/DarkBackground";
 import SubmitButton from "components/shared/components/SubmitButton";
 import ModalInformation from "components/shared/components/ModalInformation";
 import ModalConfirmation from "components/shared/components/ModalConfirmation";
+import FeatureFlexWrapper from "components/shared/components/FeatureFlexWrapper";
 //Redux
 import { useSelector } from "react-redux";
 import { selectUserID } from "redux/Slices/UserSlice";
@@ -42,28 +43,6 @@ interface NewFinishedWorkout {
   userID: string;
 }
 //~~~~~~~~~~~~~~~~~~~Styled Components
-const Wrapper = styled.div`
-  height: 100%;
-  min-height: 450px;
-  background: ${({ theme }) => theme.containerBackgroundPrimary};
-  width: 55vw;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: ${({ theme }) => theme.textColor};
-  overflow: auto;
-  @media only screen and (max-width: 107em) {
-    width: 80%;
-  }
-  @media only screen and (max-width: 75em) {
-    width: 100%;
-  }
-  @media only screen and (max-width: 37.5em) {
-    justify-content: flex-start;
-  }
-`;
 
 const ButtonRow = styled.div`
   display: flex;
@@ -71,13 +50,7 @@ const ButtonRow = styled.div`
   align-items: center;
   height: 15%;
   width: 100%;
-  gap: 5vw;
-  & button {
-    @media only screen and (max-width: 37.5em) {
-      font-size: 4vmin;
-      padding: 2vh 0;
-    }
-  }
+  gap: 2rem;
 `;
 
 const ContentWrapper = styled.main`
@@ -87,7 +60,7 @@ const ContentWrapper = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 4vh;
+  gap: 2rem;
   @media only screen and (max-width: 37.5em) {
     gap: 0;
   }
@@ -98,19 +71,15 @@ const ContentWrapper = styled.main`
 const ContentHeader = styled.header`
   display: flex;
   justify-content: center;
-  gap: 5vw;
+  gap: 2rem;
   align-items: center;
   width: 100%;
   & > h1 {
-    font-size: 2.6vmin;
-    @media only screen and (max-width: 56.25em) {
-      font-size: 3.5vmin;
-    }
+    font-size: ${(props) => props.theme.fontMediumLarge};
   }
   @media only screen and (max-width: 56.25em) {
     justify-content: space-between;
-    gap: 0;
-    padding: 5px 7vw;
+    padding: 0.5rem 2rem;
     & button {
       width: 30%;
     }
@@ -159,12 +128,9 @@ const SelectWorkoutHeader = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2vmin;
+  padding: 1rem 2rem;
   & > h2 {
-    font-size: 2vmin;
-    @media only screen and (max-width: 56.25em) {
-      font-size: 3.5vmin;
-    }
+    font-size: ${(props) => props.theme.fontMediumLarge};
   }
 `;
 
@@ -184,8 +150,8 @@ const SelectWorkoutButton = styled.button`
   background: ${({ theme }) => theme.primaryColor};
   width: 100%;
   color: inherit;
-  font-size: 2vmin;
-  padding: 1vh 1vw;
+  font-size: ${(props) => props.theme.fontMediumLarge};
+  padding: 0.5rem 1rem;
   border-bottom: 1px solid black;
   transition: 0.4s;
   cursor: pointer;
@@ -194,8 +160,7 @@ const SelectWorkoutButton = styled.button`
     background: ${({ theme }) => theme.secondaryColorLight};
   }
   @media only screen and (max-width: 56.25em) {
-    font-size: 3.5vmin;
-    margin: 1vh 0;
+    margin: 1rem 0;
   }
 `;
 
@@ -245,15 +210,12 @@ const FinishedSetItem = styled.div`
   width: 100%;
   color: inherit;
   padding: 1vh 1vmin;
-  font-size: 2vmin;
+  font-size: ${(props) => props.theme.fontMediumLarge};
   display: flex;
   justify-content: space-between;
   align-items: center;
   & > * {
     border: 1px solid black;
-  }
-  @media only screen and (max-width: 56.25em) {
-    font-size: 3.5vmin;
   }
 `;
 //~~~~~~~~~~~~~~~~~~~Component
@@ -353,7 +315,7 @@ const WorkoutBuddy = (): JSX.Element => {
   };
   //~~~~~~~~~~~~~~~~~~~Render
   return (
-    <Wrapper>
+    <FeatureFlexWrapper props={React.Children}>
       {isLoading ? (
         <Spinner width="10rem" height="12rem" />
       ) : selectedWorkout ? (
@@ -362,14 +324,14 @@ const WorkoutBuddy = (): JSX.Element => {
             <SelectorButton
               value="Change Workout"
               width="40%"
-              fontSize="2.3vmin"
+              fontSize="1.2rem"
               height="80%"
               onClick={changeWorkoutsHandler}
             />
             <SelectorButton
               value="New Workout"
               width="40%"
-              fontSize="2.3vmin"
+              fontSize="1.2rem"
               height="80%"
               onClick={() => setConfirmationModalVisible(true)}
             />
@@ -381,14 +343,14 @@ const WorkoutBuddy = (): JSX.Element => {
                 value="Show Completed Sets"
                 width="20%"
                 height="80%"
-                fontSize="2.2vmin"
+                fontSize="1rem"
                 onClick={toggleFinishedSetsVisibility}
               />
               <SubmitButton
                 value="Save Workout to Profile"
                 width="20%"
                 height="80%"
-                fontSize="2.2vmin"
+                fontSize="1rem"
                 borderColor="primary"
                 onClick={saveWorkoutHandler}
               />
@@ -455,7 +417,7 @@ const WorkoutBuddy = (): JSX.Element => {
           onAccept={handleRedirectToNewWorkout}
         />
       )}
-    </Wrapper>
+    </FeatureFlexWrapper>
   );
 };
 

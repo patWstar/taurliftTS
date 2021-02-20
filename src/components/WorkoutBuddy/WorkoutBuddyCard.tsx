@@ -37,9 +37,9 @@ const Wrapper = styled.div`
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-between;
-  font-size: 2.4vmin;
+  font-size: ${(props) => props.theme.fontMedium};
   overflow: hidden;
-  padding: 0 2vw;
+  padding: 0 2rem;
   @media only screen and (max-width: 56.25em) {
     width: 100%;
   }
@@ -52,36 +52,31 @@ const Wrapper = styled.div`
 const CardWrapper = styled.div`
   border-radius: 15px;
   background-color: rgba(0, 0, 0, 0.6);
-  padding: 0 3vw;
+  padding: 0 1.5rem;
   width: 100%;
   flex: 1;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
-  font-size: 2.4vmin;
-  @media only screen and (max-width: 37.5em) {
-    flex: 0;
-    height: fit-content;
-  }
+  font-size: ${(props) => props.theme.fontMedium};
+  min-height: fit-content;
 `;
 const InfoText = styled.div`
   display: flex;
   width: 90%;
   justify-content: space-between;
   align-items: center;
-  height: 20%;
+  height: fit-content;
   white-space: nowrap;
   overflow: hidden;
+
   & h1 {
-    font-size: 5vmin;
     letter-spacing: 2px;
+    font-size: ${(props) => props.theme.fontLarge};
   }
   & h2 {
-    font-size: 4vmin;
-  }
-  @media only screen and (max-width: 37.5em) {
-    height: 10%;
+    font-size: ${(props) => props.theme.fontMediumLarge};
   }
 `;
 
@@ -102,19 +97,15 @@ const TimerContainer = styled.article`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4vh;
-
+  gap: 2rem;
   & > h3 {
-    font-size: 4vmin;
+    font-size: ${(props) => props.theme.fontLarge};
     color: ${({ theme }) => theme.secondaryColorLight};
-    @media only screen and (max-width: 37.5em) {
-      font-size: 5vmin;
-    }
   }
   @media only screen and (max-width: 37.5em) {
     width: 100%;
     height: fit-content;
-    gap: 1vh;
+    gap: 0.5rem;
   }
 `;
 
@@ -125,10 +116,10 @@ const RepsContainer = styled.article`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1vh;
+  gap: 4rem;
 
   & > h2 {
-    font-size: 3vmin;
+    font-size: ${(props) => props.theme.fontMedium};
     color: ${({ theme }) => theme.primaryColor};
     @media only screen and (max-width: 37.5em) {
       display: none;
@@ -148,61 +139,43 @@ const RepControls = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1vw;
-  padding-bottom: 8vh;
+  gap: 1rem;
+  padding-bottom: 4rem;
   & > h2 {
-    font-size: 10vh;
+    font-size: ${(props) => props.theme.fontExtremeLarge};
   }
 `;
 const ControlButton = styled.button`
-  width: 30%;
-  height: 60%;
+  width: 5rem;
+  height: 5rem;
   border: 1px solid ${({ theme }) => theme.primaryColor};
   border-radius: 24px;
   transition: 0.4s;
-  padding: 1vmin;
+  padding: 1rem;
   & > svg {
     fill: currentColor;
     width: 100%;
     height: 100%;
-    @media only screen and (max-width: 37.5em) {
-      width: 80%;
-      height: 70%;
-    }
   }
 
   &:hover,
   &:focus {
     background-color: ${({ theme }) => theme.primaryColor};
   }
-
-  @media only screen and (max-width: 37.5em) {
-    width: 30%;
-  }
-  @media only screen and (max-width: 37.5em) {
-    height: 50%;
-  }
 `;
 const CardFooter = styled.footer`
   height: 20%;
   width: 100%;
-  padding-bottom: 2vh;
+  padding-bottom: 1rem;
   display: flex;
   justify-content: space-between;
-
-  & button {
-    @media only screen and (max-width: 37.5em) {
-      font-size: 3vmin;
-      padding: 0;
-    }
-  }
 `;
 
 const Footer = styled.footer`
   height: fit-content;
   display: flex;
   justify-content: center;
-  gap: 8vw;
+  gap: 3rem;
   align-items: center;
 
   @media only screen and (max-width: 37.5em) {
@@ -214,7 +187,7 @@ const FooterButton = styled.button`
   width: 40%;
   background-color: rgba(0, 0, 0, 0.2);
   color: inherit;
-  font-size: 2.2vmin;
+  font-size: ${(props) => props.theme.fontMediumLarge};
   border-radius: 5px;
   height: 100%;
 
@@ -222,9 +195,6 @@ const FooterButton = styled.button`
     transform: scaleY(-2px);
     border: 2px ${({ theme }) => theme.primaryColor} solid;
     font-weight: 500;
-  }
-  @media only screen and (max-width: 37.5em) {
-    font-size: 4vmin;
   }
 `;
 //~~~~~~~~~~~~~~~~~~~Component
@@ -369,14 +339,14 @@ const WorkoutBuddyCard = ({
                 width="30%"
                 height="100%"
                 borderColor="primary"
-                fontSize="2vmin"
+                fontSize="1.2rem"
                 onClick={() => setWeightWindowVisible(true)}
               />
               <SubmitButton
                 value="End Set"
                 width="30%"
                 height="100%"
-                fontSize="2vmin"
+                fontSize="1.2rem"
                 onClick={handleEndSet}
               />
             </CardFooter>
