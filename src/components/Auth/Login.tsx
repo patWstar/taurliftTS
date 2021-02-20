@@ -47,22 +47,16 @@ const Header = styled.header`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 3vh;
-  gap: 2vmin;
+  padding: 1rem;
+  gap: 2rem;
   & > h2 {
-    font-size: 3vmin;
+    font-size: ${(props) => props.theme.fontMediumLarge};
     font-weight: 600;
-    @media only screen and (max-width: 37.5em) {
-      font-size: 4vmin;
-    }
   }
 
   & > h1 {
-    font-size: 3.2vmin;
+    font-size: ${(props) => props.theme.fontLarge};
     letter-spacing: 2px;
-    @media only screen and (max-width: 37.5em) {
-      font-size: 4.5vmin;
-    }
   }
 `;
 
@@ -74,16 +68,7 @@ const Form = styled.form`
   justify-content: center;
   align-items: center;
   gap: 1.5rem;
-  font-size: 2vmin;
-  @media only screen and (max-width: 37.5em) {
-    & label {
-      font-size: 3.5vmin;
-    }
-
-    & button {
-      font-size: 3vmin;
-    }
-  }
+  font-size: ${(props) => props.theme.fontMedium};
 `;
 
 const BottomTextWrapper = styled.span`
@@ -93,29 +78,21 @@ const BottomTextWrapper = styled.span`
   align-items: center;
 
   @media only screen and (max-width: 37.5em) {
-    margin-top: 5vh;
+    margin-top: 2rem;
   }
 `;
 const SmallText = styled.aside`
   display: inline-block;
-  font-size: 1.6vmin;
-  padding: 1vmin;
-  @media only screen and (max-width: 37.5em) {
-    font-size: 3vmin;
-  }
+  padding: 1rem;
 `;
 
 const LinkElement = styled(Link)`
-  font-size: 2.4vmin;
+  font-size: ${(props) => props.theme.fontMediumLarge};
   color: ${({ theme }) => theme.primaryColor};
   transition: 0.4s;
   &:hover {
     color: ${({ theme }) => theme.secondaryColorLight};
     letter-spacing: 2px;
-  }
-
-  @media only screen and (max-width: 37.5em) {
-    font-size: 3.5vmin;
   }
 `;
 //~~~~~~~~~~~~~~~~~~~Component
@@ -207,7 +184,7 @@ const Login = (): JSX.Element => {
                 reactRef={passwordRef}
               />
 
-              <SubmitButton value="Log In" width="30%" />
+              <SubmitButton value="Log In" width="30%" fontSize="1.2rem" />
               {!isErrorsEmpty && <ErrorList width="90%" errors={errors} />}
             </Form>
           )}

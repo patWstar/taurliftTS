@@ -36,5 +36,5 @@ export const theme: DefaultTheme = {
   fontMediumLarge: "1.5rem",
   fontLarge: "2rem",
   fontExtraLarge: "3rem",
-  fontExtremeLarge: "4rem",
+  fontExtremeLarge: "3.4rem",
 };

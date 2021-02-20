@@ -1,5 +1,5 @@
 //Fundamentals
-import React, { useRef, useState } from "react";
+import React, { Children, useRef, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { Link, useHistory, Redirect } from "react-router-dom";
@@ -9,6 +9,7 @@ import FormTextInput from "components/shared/components/FormTextInput";
 import SubmitButton from "components/shared/components/SubmitButton";
 import ErrorList from "components/shared/components/ErrorList";
 import Spinner from "components/shared/components/Spinner";
+import FeatureFlexWrapper from "components/shared/components/FeatureFlexWrapper";
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectAuthenticated, login } from "redux/Slices/UserSlice";
@@ -24,24 +25,11 @@ interface NewUserCredentials {
 }
 
 //~~~~~~~~~~~~~~~~~~~Styled Components
-const Wrapper = styled.div`
-  width: 60vw;
-  height: 100%;
-  min-height: 400px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: ${({ theme }) => theme.containerBackgroundPrimary};
-  @media only screen and (max-width: 75em) {
-    width: 100%;
-  }
-`;
+
 const Content = styled.main`
   background-color: ${({ theme }) => theme.containerBackgroundPrimary};
   box-shadow: 0px 2px 5px 3px rgba(0, 0, 0, 0.2);
-  width: 70rem;
+  width: 90%;
   min-height: 60vh;
   display: flex;
   flex-direction: column;
@@ -49,7 +37,6 @@ const Content = styled.main`
   align-items: center;
   color: ${({ theme }) => theme.textColor};
   border-radius: 12px;
-  padding-bottom: 4rem;
   @media only screen and (max-width: 56.25em) {
     width: 100%;
   }
@@ -61,22 +48,16 @@ const Header = styled.header`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 3vh;
-  gap: 2rem;
+  padding: 1rem;
+  gap: 1rem;
   & > h2 {
-    font-size: 3vmin;
+    font-size: ${(props) => props.theme.fontMediumLarge};
     font-weight: 600;
-    @media only screen and (max-width: 37.5em) {
-      font-size: 4vmin;
-    }
   }
 
   & > h1 {
-    font-size: 3.2vmin;
+    font-size: ${(props) => props.theme.fontLarge};
     letter-spacing: 2px;
-    @media only screen and (max-width: 37.5em) {
-      font-size: 4.5vmin;
-    }
   }
 `;
 
@@ -87,15 +68,11 @@ const Form = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1vh;
-  font-size: 2vmin;
+  gap: 1rem;
+  font-size: ${(props) => props.theme.fontMedium};
   @media only screen and (max-width: 37.5em) {
-    & label {
-      font-size: 3.5vmin;
-    }
-
-    & button {
-      font-size: 3vmin;
+    & > input {
+      width: 50%;
     }
   }
 `;
@@ -105,29 +82,19 @@ const BottomTextWrapper = styled.span`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  @media only screen and (max-width: 37.5em) {
-    margin-top: 5vh;
-  }
 `;
 const SmallText = styled.aside`
   display: inline-block;
-  font-size: 1.6vmin;
-  padding: 0.5vh 1vw;
-  @media only screen and (max-width: 37.5em) {
-    font-size: 3vmin;
-  }
+  padding: 0.5rem;
 `;
 
 const LinkElement = styled(Link)`
-  font-size: 2.4vmin;
+  font-size: ${(props) => props.theme.fontMediumLarge};
   color: ${({ theme }) => theme.primaryColor};
   transition: 0.4s;
   &:hover {
     color: ${({ theme }) => theme.secondaryColorLight};
     letter-spacing: 2px;
-  }
-  @media only screen and (max-width: 37.5em) {
-    font-size: 3.5vmin;
   }
 `;
 //~~~~~~~~~~~~~~~~~~~Component
@@ -195,7 +162,7 @@ const Signup = (): JSX.Element => {
     }
   };
   return (
-    <Wrapper>
+    <FeatureFlexWrapper props={Children} justifyContent="center">
       {authenticated ? (
         <Redirect to="/" />
       ) : (
@@ -232,7 +199,7 @@ const Signup = (): JSX.Element => {
                 reactRef={confirmPasswordRef}
               />
               <br />
-              <SubmitButton value="Sign Up" width="30%" />
+              <SubmitButton value="Sign Up" width="30%" fontSize="1.2rem" />
               {!isErrorsEmpty && <ErrorList width="90%" errors={errors} />}
             </Form>
           )}
@@ -242,7 +209,7 @@ const Signup = (): JSX.Element => {
           </BottomTextWrapper>
         </Content>
       )}
-    </Wrapper>
+    </FeatureFlexWrapper>
   );
 };
 

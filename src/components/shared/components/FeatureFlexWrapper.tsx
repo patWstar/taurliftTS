@@ -22,7 +22,7 @@ const Wrapper = styled.section<FeatureFlexWrapperProps>`
   height: 100%;
   display: flex;
   width: 60vw;
-  min-height: 490px;
+  min-height: 400px;
   max-width: 1180px;
   padding: 2rem;
   background: ${(props) =>
@@ -36,6 +36,7 @@ const Wrapper = styled.section<FeatureFlexWrapperProps>`
 
   @media only screen and (max-width: 37.5em) {
     padding: 0;
+    justify-content: center;
   }
 `;
 

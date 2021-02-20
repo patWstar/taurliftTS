@@ -1,3 +1,18 @@
+html {
+  box-sizing: border-box;
+  font-size: 100%;
+}
+@media only screen and (max-width: 62.5em) {
+  html {
+    font-size: 75%;
+  }
+}
+
+@media only screen and (max-width: 37.5em) {
+  html {
+    font-size: 50%;
+  }
+}
 *,
 *::after,
 *::before {
@@ -13,17 +28,6 @@ button {
   background-color: transparent;
   color: inherit;
   cursor: pointer;
-}
-
-html {
-  overflow: hidden;
-  /* background: linear-gradient(to right, #005aa7, #fffde4); */
-
-  font-size: 100%;
-
-  @media (max-width: 62.5em) {
-    font-size: 75%;
-  }
 }
 
 body {
