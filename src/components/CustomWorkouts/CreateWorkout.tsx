@@ -15,7 +15,7 @@ import { selectUserID } from "redux/Slices/UserSlice";
 import refreshLocalToken from "util/refreshLocalToken";
 import { validateExercise } from "util/validators";
 
-//Criteria
+//Criteria - random values, just to check if they are working
 const validCriteria: ValidCriteria = {
   workoutName: {
     min: 1,
