@@ -8,6 +8,7 @@ import FormTextInput from "components/shared/components/FormTextInput";
 import { BMIValidator } from "util/validators";
 import ErrorList from "components/shared/components/ErrorList";
 
+//Criteria
 const inputsCriteria: InputsCriteria = {
   userHeightCriteria: {
     min: 1,
