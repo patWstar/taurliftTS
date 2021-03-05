@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
+//Visual for red text in the form of a list
 interface errorListProps {
   errors?: string[];
   width: string;
@@ -17,7 +17,7 @@ const Errors = styled.ul<ulProps>`
   list-style: none;
 `;
 
-const errorList = ({ errors, width }: errorListProps): JSX.Element => (
+const ErrorList = ({ errors, width }: errorListProps): JSX.Element => (
   <Errors width={width}>
     {errors?.map((error, index) => (
       <li key={index}>{error}</li>
@@ -25,4 +25,4 @@ const errorList = ({ errors, width }: errorListProps): JSX.Element => (
   </Errors>
 );
 
-export default errorList;
+export default ErrorList;
